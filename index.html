@@ -550,45 +550,42 @@
             </div>
 
           </div>
-
-          <!-- Interactive Region Filter/Solo Pills & NEA PSI Band Legend -->
-          <div class="mt-4 pt-4 border-t border-gray-100 flex flex-col xl:flex-row xl:items-center justify-between gap-3 min-w-0">
-            <div class="flex flex-wrap items-center gap-2 min-w-0" id="regionPillsContainer">
-              <span class="text-[11px] font-sans uppercase font-semibold text-gray-400 mr-0.5">Regions:</span>
-              <!-- Populated dynamically by JS -->
-              <button id="btnResetRegions" type="button" class="hidden px-2.5 py-1.5 rounded-full text-xs font-semibold bg-gray-900 text-white hover:bg-gray-700 transition-colors shadow-2xs">
-                Show All
-              </button>
-            </div>
-
-            <!-- NEA PSI Band Legend -->
-            <div class="flex flex-wrap items-center gap-x-3 gap-y-1.5 text-[11px] sm:text-xs text-gray-600">
-              <span class="font-sans uppercase font-semibold text-gray-400 text-[10px] sm:text-[11px]">NEA PSI:</span>
-              <span class="inline-flex items-center gap-1"><span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span>0–50 Good</span>
-              <span class="inline-flex items-center gap-1"><span class="w-2.5 h-2.5 rounded-full bg-sky-500"></span>51–100 Moderate</span>
-              <span class="inline-flex items-center gap-1"><span class="w-2.5 h-2.5 rounded-full bg-amber-500"></span>101–200 Unhealthy</span>
-              <span class="inline-flex items-center gap-1"><span class="w-2.5 h-2.5 rounded-full bg-red-600"></span>201+ Very Unhealthy</span>
-            </div>
-          </div>
         </div>
 
         <!-- MAIN VISUALIZATION STAGE: RADAR CANVAS (8 COLS) + LIVE TELEMETRY SIDEBAR (4 COLS) -->
-        <div class="mt-5 sm:mt-6 grid grid-cols-1 xl:grid-cols-12 gap-5 sm:gap-6 items-stretch min-w-0">
+        <div class="mt-4 sm:mt-5 grid grid-cols-1 xl:grid-cols-12 gap-5 sm:gap-6 items-stretch min-w-0">
 
           <!-- Interactive Radar Chart Container (8 columns on xl) -->
           <div class="xl:col-span-8 bg-white rounded-2xl border border-gray-200 p-3.5 sm:p-6 shadow-2xs flex flex-col justify-between relative min-w-0">
-            <div class="flex flex-wrap items-center justify-between gap-2 mb-2 min-w-0">
-              <div class="min-w-0">
-                <h3 id="radarChartTitle" class="editorial-title text-base sm:text-lg font-bold text-gray-900">
-                  24-Hour Diurnal PSI Clock · October 18
-                </h3>
-                <p id="radarChartSubtitle" class="text-xs text-gray-500">
-                  Clockwise spokes from 01:00 to 00:00 · Rings at 50, 100, 150, 200 &amp; 250 PSI · Tap or drag around dial
-                </p>
+
+            <!-- Prominent Day & Time Counter Bar (Title & Subtitle Block Removed) -->
+            <div class="flex flex-wrap items-center justify-between gap-3 pb-3 mb-2 border-b border-gray-100 min-w-0">
+              <div class="flex items-baseline gap-2.5 sm:gap-3.5 min-w-0">
+                <span id="radarCounterDate" class="editorial-title text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-950 tracking-tight">
+                  Oct 18
+                </span>
+                <span class="text-gray-300 font-light text-xl sm:text-2xl select-none">·</span>
+                <span id="radarCounterHour" class="font-sans text-xl sm:text-2xl lg:text-3xl font-bold text-[#B45309] tabular-nums">
+                  10:00
+                </span>
               </div>
-              <span id="radarModeBadge" class="text-[10px] sm:text-[11px] font-sans font-semibold px-2.5 py-1 rounded-full bg-gray-100 text-gray-700 border border-gray-200 shrink-0">
-                24-HOUR CLOCK RADAR
-              </span>
+
+              <div class="flex items-center gap-2.5 sm:gap-3.5 shrink-0">
+                <!-- Day Progress Bar (Day X of 31) -->
+                <div class="flex flex-col items-end gap-1">
+                  <span id="radarCounterDayOfMonth" class="text-[10px] sm:text-[11px] font-sans font-bold uppercase tracking-wider text-gray-500 tabular-nums">
+                    DAY 18 OF 31
+                  </span>
+                  <div class="w-24 sm:w-32 h-1.5 bg-gray-200 rounded-full overflow-hidden">
+                    <div id="radarCounterProgressBar" class="h-full bg-[#9E1B24] rounded-full transition-all duration-150" style="width: 58.06%;"></div>
+                  </div>
+                </div>
+
+                <!-- Live Peak PSI & NEA Band Pill -->
+                <span id="radarCounterPeakPill" class="px-2.5 sm:px-3 py-1 rounded-full text-[11px] sm:text-xs font-sans font-bold tracking-wide uppercase bg-red-100 text-red-800 border border-red-200 tabular-nums">
+                  230 PSI · Very Unhealthy
+                </span>
+              </div>
             </div>
 
             <!-- Responsive Aspect-Preserving Canvas Wrapper Observed by ResizeObserver -->
@@ -609,10 +606,18 @@
               </div>
             </div>
 
-            <!-- Keyboard & Interaction Hint Footer -->
-            <div class="mt-2 pt-3 border-t border-gray-100 flex flex-wrap items-center justify-between gap-2 text-[11px] text-gray-400 font-sans">
-              <span class="hidden sm:inline">SHORTCUTS: ← / → Hours · ↑ / ↓ Days · Spacebar Play/Pause</span>
-              <span>Tap or drag across any spoke on the clock to inspect &amp; select that hour</span>
+            <!-- Relocated Regions Color Legend Below Radar Graphic -->
+            <div class="mt-3 pt-3.5 border-t border-gray-100 flex flex-wrap items-center justify-between gap-2.5 min-w-0">
+              <div class="flex flex-wrap items-center gap-1.5 sm:gap-2 min-w-0" id="regionPillsContainer">
+                <span class="text-[11px] font-sans uppercase font-semibold text-gray-400 mr-0.5">Regions:</span>
+                <!-- Populated dynamically by JS -->
+                <button id="btnResetRegions" type="button" class="hidden px-2.5 py-1.5 rounded-full text-xs font-semibold bg-gray-900 text-white hover:bg-gray-700 transition-colors shadow-2xs">
+                  Show All
+                </button>
+              </div>
+              <span class="text-[10px] sm:text-[11px] text-gray-400 font-sans">
+                Click to toggle · Double-click to solo
+              </span>
             </div>
           </div>
 
@@ -656,11 +661,21 @@
               <div>
                 <div class="flex items-center justify-between mb-3">
                   <h3 class="editorial-title text-sm font-bold text-gray-900">5-Region PSI Breakdown</h3>
-                  <span class="text-[11px] font-sans text-gray-400">PSI · Δ Prev Hr</span>
+                  <div class="flex items-center gap-2 text-[11px] font-sans">
+                    <span class="text-[#9E1B24] font-semibold">--- 100 PSI</span>
+                    <span class="text-gray-300">·</span>
+                    <span class="text-gray-400">PSI · Δ Prev Hr</span>
+                  </div>
                 </div>
 
-                <div id="regionalCardsList" class="space-y-2.5">
-                  <!-- Populated dynamically by JS -->
+                <!-- Relative Wrapper with Continuous Vertical Dashed 100 PSI Threshold Line (40% of 250 PSI scale) -->
+                <div class="relative">
+                  <div aria-hidden="true" class="pointer-events-none absolute top-0 bottom-0 z-10 flex flex-col items-center" style="left: 40%; transform: translateX(-50%);">
+                    <div class="h-full border-l-[1.5px] border-dashed border-[#9E1B24]/60"></div>
+                  </div>
+                  <div id="regionalCardsList" class="space-y-2.5 relative z-0">
+                    <!-- Populated dynamically by JS -->
+                  </div>
                 </div>
               </div>
 
@@ -1506,16 +1521,15 @@
       document.getElementById("hourSliderReadout").textContent = hour12Str;
       document.getElementById("daySliderReadout").textContent = dayStr;
 
-      // Update Radar Titles
-      if (state.viewMode === "clock") {
-        document.getElementById("radarChartTitle").textContent = `24-Hour Diurnal PSI Clock · October ${state.day}`;
-        document.getElementById("radarChartSubtitle").textContent = "Clockwise spokes from 01:00 to 00:00 · Rings at 50, 100, 150, 200 & 250 PSI · Tap or drag around dial";
-        document.getElementById("radarModeBadge").textContent = "24-HOUR CLOCK RADAR";
-      } else {
-        document.getElementById("radarChartTitle").textContent = `5-Region Geographical Compass · October ${state.day} at ${hourStr}`;
-        document.getElementById("radarChartSubtitle").textContent = "Active hour (amber) vs. daily mean (solid slate) and daily peak envelope (dashed)";
-        document.getElementById("radarModeBadge").textContent = "5-REGION COMPASS";
-      }
+      // Update Prominent Day & Time Counter Bar over Radar
+      document.getElementById("radarCounterDate").textContent = dayStr;
+      document.getElementById("radarCounterHour").textContent = hourStr;
+      document.getElementById("radarCounterDayOfMonth").textContent = `DAY ${String(state.day).padStart(2, "0")} OF 31`;
+      document.getElementById("radarCounterProgressBar").style.width = `${((state.day / 31) * 100).toFixed(2)}%`;
+
+      const counterPeakPill = document.getElementById("radarCounterPeakPill");
+      counterPeakPill.textContent = `${maxPsi} PSI · ${nea.label}`;
+      counterPeakPill.className = `px-2.5 sm:px-3 py-1 rounded-full text-[11px] sm:text-xs font-sans font-bold tracking-wide uppercase border tabular-nums ${nea.pillBg} ${nea.pillText} ${nea.pillBorder}`;
 
       // Update KPI Summary Card
       document.getElementById("kpiDate").textContent = dayStr;
@@ -1528,29 +1542,30 @@
       statusPill.textContent = nea.label;
       statusPill.className = `px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full text-[11px] sm:text-xs font-bold tracking-wide uppercase border shrink-0 ${nea.pillBg} ${nea.pillText} ${nea.pillBorder}`;
 
-      // Update 5-Region Breakdown Cards
+      // Update 5-Region Breakdown Cards (250 PSI scale so 100 PSI sits at exact 40% line)
       const listEl = document.getElementById("regionalCardsList");
       listEl.innerHTML = REGIONS.map((reg, idx) => {
         const val = current[idx];
         const delta = prev ? val - prev[idx] : 0;
         const deltaStr = delta > 0 ? `+${delta}` : (delta < 0 ? `${delta}` : "0");
         const deltaColor = delta > 0 ? "text-red-600" : (delta < 0 ? "text-emerald-600" : "text-gray-400");
-        const pct = Math.min(100, Math.round((val / 250) * 100));
+        const pct = Math.min(100, (val / 250) * 100);
         const isHidden = !state.visibleRegions[idx];
+        const exceeds100 = val > 100;
 
         return `
           <div class="p-2.5 sm:p-3 rounded-xl border border-gray-100 bg-gray-50/75 transition-opacity ${isHidden ? "opacity-40" : ""}">
-            <div class="flex items-center justify-between mb-1.5">
+            <div class="flex items-center justify-between mb-1.5 relative z-20">
               <div class="flex items-center gap-2">
                 <span class="w-2.5 h-2.5 rounded-full shrink-0" style="background-color: ${reg.color}"></span>
                 <span class="text-sm font-semibold text-gray-800">${reg.name}</span>
               </div>
               <div class="flex items-baseline gap-2.5 font-sans">
-                <span class="text-base font-bold text-gray-950 tabular-nums">${val}</span>
+                <span class="text-base font-bold ${exceeds100 ? "text-gray-950" : "text-gray-700"} tabular-nums">${val}</span>
                 <span class="text-xs font-semibold ${deltaColor} tabular-nums w-8 text-right">${deltaStr}</span>
               </div>
             </div>
-            <div class="w-full h-1.5 bg-gray-200/80 rounded-full overflow-hidden">
+            <div class="relative w-full h-2 bg-gray-200/80 rounded-full overflow-hidden">
               <div class="h-full rounded-full transition-all duration-150" style="width: ${pct}%; background-color: ${reg.color}"></div>
             </div>
           </div>
