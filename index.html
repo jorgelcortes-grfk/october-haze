@@ -1,9 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>A Month in the Smog: Tracking Singapore’s October Haze Hour by Hour — The Business Times</title>
+
   <!-- Google Fonts: Libre Caslon Text (Headlines & Titles) and Public Sans (Story Copy, UI & Data Labels) -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
@@ -17,7 +23,7 @@
           },
           colors: {
             bt: {
-              crimson: '#991B1B',
+              crimson: '#9E1B24',
               terracotta: '#B45309',
               ink: '#111827',
             }
@@ -26,13 +32,19 @@
       }
     };
   </script>
+
   <style>
-    /* Clean editorial white canvas & Public Sans story/UI base */
+    /* Global box-sizing & zero-horizontal-overflow safety */
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+
     html, body {
+      max-width: 100%;
+      overflow-x: hidden;
       background-color: #FFFFFF;
       color: #111827;
       font-family: 'Public Sans', -apple-system, BlinkMacSystemFont, sans-serif;
-      overflow-x: hidden;
       -webkit-font-smoothing: antialiased;
     }
 
@@ -46,28 +58,16 @@
 
     .bt-wordmark {
       font-weight: 700;
-      letter-spacing: 0.04em;
+      letter-spacing: 0.03em;
+      font-size: clamp(0.95rem, 2.5vw, 1.35rem);
+      line-height: 1.1;
     }
 
     /* Editorial Headline Fluid Scale */
     .editorial-headline {
-      font-size: clamp(2.15rem, 4.4vw, 3.55rem);
-      line-height: 1.13;
+      font-size: clamp(1.85rem, 4.5vw, 3.35rem);
+      line-height: 1.14;
       letter-spacing: -0.015em;
-    }
-
-    /* Explicit 50% Page Width Constraint for Analytical Story Paragraphs */
-    .editorial-50-col {
-      width: 50%;
-      margin-left: auto;
-      margin-right: auto;
-      font-family: 'Public Sans', -apple-system, BlinkMacSystemFont, sans-serif;
-    }
-
-    @media (max-width: 900px) {
-      .editorial-50-col {
-        width: 90%;
-      }
     }
 
     /* Custom range slider styling for crisp journalistic precision */
@@ -87,17 +87,18 @@
     input[type="range"].editorial-slider::-webkit-slider-thumb {
       -webkit-appearance: none;
       appearance: none;
-      width: 18px;
-      height: 18px;
+      width: 20px;
+      height: 20px;
       border-radius: 50%;
       background: #111827;
       border: 2.5px solid #FFFFFF;
       box-shadow: 0 2px 6px rgba(17, 24, 39, 0.35);
-      margin-top: -6px;
+      margin-top: -7px;
       transition: transform 0.15s ease, background-color 0.15s ease;
     }
 
-    input[type="range"].editorial-slider::-webkit-slider-thumb:hover {
+    input[type="range"].editorial-slider::-webkit-slider-thumb:hover,
+    input[type="range"].editorial-slider::-webkit-slider-thumb:active {
       transform: scale(1.15);
       background: #B45309;
     }
@@ -109,8 +110,8 @@
     }
 
     input[type="range"].editorial-slider::-moz-range-thumb {
-      width: 18px;
-      height: 18px;
+      width: 20px;
+      height: 20px;
       border-radius: 50%;
       background: #111827;
       border: 2.5px solid #FFFFFF;
@@ -121,11 +122,11 @@
     /* Subtle drifting haze wisps in hero */
     @keyframes driftSlow {
       0%, 100% { transform: translateX(0px); }
-      50% { transform: translateX(-24px); }
+      50% { transform: translateX(-28px); }
     }
     @keyframes driftReverse {
       0%, 100% { transform: translateX(0px); }
-      50% { transform: translateX(22px); }
+      50% { transform: translateX(26px); }
     }
     .haze-wisp-a { animation: driftSlow 20s ease-in-out infinite; }
     .haze-wisp-b { animation: driftReverse 26s ease-in-out infinite; }
@@ -139,78 +140,78 @@
 <body class="bg-white text-gray-900 selection:bg-amber-100 selection:text-amber-950">
 
   <!-- ========================================================================
-       1. TOP EDITORIAL HEADER BAR (BUSINESS TIMES STYLE)
+       1. RESPONSIVE TOP EDITORIAL HEADER BAR (THE BUSINESS TIMES MASTHEAD)
        ======================================================================== -->
-  <nav aria-label="The Business Times Editorial Header" class="sticky top-0 z-50 w-full h-[62px] bg-white/95 backdrop-blur-md border-b border-[#E5E7EB] transition-shadow">
-    <div class="w-full max-w-[1600px] h-full mx-auto px-4 sm:px-6 lg:px-10 flex items-center justify-between gap-3">
+  <nav aria-label="The Business Times Editorial Header" class="sticky top-0 z-50 w-full h-[56px] sm:h-[62px] bg-white/95 backdrop-blur-md border-b border-[#E5E7EB]">
+    <div class="w-full max-w-[1600px] h-full mx-auto px-3 sm:px-6 lg:px-10 flex items-center justify-between gap-2 min-w-0">
 
-      <!-- Left Side: Authentic THE BUSINESS TIMES Masthead Logo + Interactive Kicker -->
-      <div class="flex items-center gap-3 sm:gap-4 min-w-0">
-        <a href="https://www.businesstimes.com.sg" target="_blank" rel="noopener noreferrer" class="group inline-flex items-center gap-2.5 focus:outline-none" aria-label="The Business Times Home">
-          <!-- Crisp BT Monogram Emblem with Crimson Accent -->
-          <span class="inline-flex items-center justify-center w-8 h-8 rounded-[4px] bg-[#111827] text-white font-serif font-bold text-sm tracking-tight border-b-[3px] border-[#991B1B] group-hover:bg-[#991B1B] transition-colors shrink-0">
+      <!-- Left Side: Crimson BT Monogram Badge + THE BUSINESS TIMES Wordmark -->
+      <div class="flex items-center gap-2 sm:gap-3.5 min-w-0">
+        <a href="https://www.businesstimes.com.sg" target="_blank" rel="noopener noreferrer" class="group inline-flex items-center gap-2 sm:gap-2.5 focus:outline-none min-w-0" aria-label="The Business Times Home">
+          <!-- Crimson Accent Badge (#9E1B24) -->
+          <span class="inline-flex items-center justify-center w-7 h-7 sm:w-8 sm:h-8 rounded-[4px] bg-[#9E1B24] text-white font-serif font-bold text-xs sm:text-sm tracking-tight group-hover:bg-[#111827] transition-colors shrink-0">
             BT
           </span>
-          <!-- Authentic Serif Masthead Wordmark -->
-          <span class="bt-wordmark text-[15px] sm:text-[19px] md:text-[21px] uppercase truncate">
+          <!-- Libre Caslon Text Wordmark -->
+          <span class="bt-wordmark uppercase whitespace-nowrap truncate">
             THE BUSINESS TIMES
           </span>
         </a>
 
-        <!-- Subtle Vertical Divider & Interactive Special Report Kicker -->
-        <span class="hidden md:inline-block h-5 w-[1px] bg-gray-300" aria-hidden="true"></span>
-        <div class="hidden md:inline-flex items-center gap-2 text-[11px] font-sans font-bold uppercase tracking-[0.12em] text-[#991B1B]">
+        <!-- Vertical Divider & Rubric (Hidden below 640px) -->
+        <span class="hidden sm:inline-block h-5 w-[1px] bg-gray-300 shrink-0" aria-hidden="true"></span>
+        <div class="hidden sm:inline-flex items-center gap-1.5 text-[10px] lg:text-[11px] font-sans font-bold uppercase tracking-[0.12em] text-[#9E1B24] whitespace-nowrap shrink-0">
           <span class="w-1.5 h-1.5 rounded-full bg-[#B45309]"></span>
           <span>INTERACTIVE · SPECIAL REPORT</span>
         </div>
       </div>
 
-      <!-- Right Side: Monochrome Social Sharing Icon Buttons (34px x 34px) -->
-      <div class="flex items-center gap-1.5 sm:gap-2 shrink-0" role="group" aria-label="Share this interactive story">
+      <!-- Right Side: Compact Monochrome Social Sharing Icon Buttons -->
+      <div class="flex items-center gap-0.5 sm:gap-1.5 shrink-0" role="group" aria-label="Share this interactive story">
         <!-- Facebook -->
         <button type="button" data-share="facebook" title="Share on Facebook" aria-label="Share on Facebook"
-          class="share-btn w-[34px] h-[34px] rounded-full flex items-center justify-center text-[#1F2937] hover:text-[#B45309] hover:bg-[#F3F4F6] border border-transparent hover:border-gray-200 transition-colors">
-          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+          class="share-btn w-7 h-7 sm:w-8 sm:h-8 rounded-full flex items-center justify-center text-[#1F2937] hover:text-[#B45309] hover:bg-[#F3F4F6] border border-transparent hover:border-gray-200 transition-colors">
+          <svg class="w-3.5 h-3.5 sm:w-4 sm:h-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
             <path d="M13.5 21v-8.2h2.75l.41-3.2H13.5V7.56c0-.93.26-1.56 1.59-1.56h1.7V3.14A22.8 22.8 0 0014.32 3c-2.45 0-4.12 1.49-4.12 4.24v2.36H7.43v3.2h2.77V21h3.3z"/>
           </svg>
         </button>
 
         <!-- X / Twitter -->
         <button type="button" data-share="twitter" title="Share on X (Twitter)" aria-label="Share on X (Twitter)"
-          class="share-btn w-[34px] h-[34px] rounded-full flex items-center justify-center text-[#1F2937] hover:text-[#B45309] hover:bg-[#F3F4F6] border border-transparent hover:border-gray-200 transition-colors">
-          <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+          class="share-btn w-7 h-7 sm:w-8 sm:h-8 rounded-full flex items-center justify-center text-[#1F2937] hover:text-[#B45309] hover:bg-[#F3F4F6] border border-transparent hover:border-gray-200 transition-colors">
+          <svg class="w-3 h-3 sm:w-3.5 sm:h-3.5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
             <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
           </svg>
         </button>
 
         <!-- LinkedIn -->
         <button type="button" data-share="linkedin" title="Share on LinkedIn" aria-label="Share on LinkedIn"
-          class="share-btn w-[34px] h-[34px] rounded-full flex items-center justify-center text-[#1F2937] hover:text-[#B45309] hover:bg-[#F3F4F6] border border-transparent hover:border-gray-200 transition-colors">
-          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+          class="share-btn w-7 h-7 sm:w-8 sm:h-8 rounded-full flex items-center justify-center text-[#1F2937] hover:text-[#B45309] hover:bg-[#F3F4F6] border border-transparent hover:border-gray-200 transition-colors">
+          <svg class="w-3.5 h-3.5 sm:w-4 sm:h-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
             <path d="M6.94 5a2 2 0 11-4-.002 2 2 0 014 .002zM7 8.48H3V21h4V8.48zm6.32 0H9.34V21h3.94v-6.57c0-3.66 4.77-4 4.77 0V21H22v-7.93c0-6.17-7.06-5.94-8.72-2.91l.04-1.68z"/>
           </svg>
         </button>
 
         <!-- WhatsApp -->
         <button type="button" data-share="whatsapp" title="Share via WhatsApp" aria-label="Share via WhatsApp"
-          class="share-btn w-[34px] h-[34px] rounded-full flex items-center justify-center text-[#1F2937] hover:text-[#B45309] hover:bg-[#F3F4F6] border border-transparent hover:border-gray-200 transition-colors">
-          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+          class="share-btn w-7 h-7 sm:w-8 sm:h-8 rounded-full flex items-center justify-center text-[#1F2937] hover:text-[#B45309] hover:bg-[#F3F4F6] border border-transparent hover:border-gray-200 transition-colors">
+          <svg class="w-3.5 h-3.5 sm:w-4 sm:h-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
             <path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91C21.95 6.45 17.5 2 12.04 2zm5.82 14.01c-.24.68-1.41 1.3-1.95 1.38-.5.08-1.13.11-1.82-.11-.42-.13-.96-.31-1.65-.61-2.9-1.25-4.79-4.18-4.94-4.37-.14-.19-1.18-1.57-1.18-3 0-1.43.75-2.13 1.01-2.42.27-.29.58-.36.77-.36.19 0 .39 0 .56.01.18.01.42-.07.66.5.24.58.82 2.01.89 2.15.07.15.12.32.02.51-.1.19-.15.31-.29.48-.15.17-.31.38-.44.51-.15.14-.3.3-.13.59.17.29.76 1.25 1.63 2.02 1.12.99 2.06 1.3 2.35 1.45.29.14.46.12.63-.07.17-.19.73-.85.92-1.14.19-.29.39-.24.66-.14.27.1 1.7.8 1.99.95.29.14.48.22.55.34.07.12.07.69-.17 1.37z"/>
           </svg>
         </button>
 
         <!-- Email -->
         <button type="button" data-share="email" title="Share via Email" aria-label="Share via Email"
-          class="share-btn w-[34px] h-[34px] rounded-full flex items-center justify-center text-[#1F2937] hover:text-[#B45309] hover:bg-[#F3F4F6] border border-transparent hover:border-gray-200 transition-colors">
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.9" viewBox="0 0 24 24" aria-hidden="true">
+          class="share-btn w-7 h-7 sm:w-8 sm:h-8 rounded-full flex items-center justify-center text-[#1F2937] hover:text-[#B45309] hover:bg-[#F3F4F6] border border-transparent hover:border-gray-200 transition-colors">
+          <svg class="w-3.5 h-3.5 sm:w-4 sm:h-4" fill="none" stroke="currentColor" stroke-width="1.9" viewBox="0 0 24 24" aria-hidden="true">
             <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"/>
           </svg>
         </button>
 
         <!-- Copy Link -->
         <button type="button" data-share="copy" title="Copy page link" aria-label="Copy page link"
-          class="share-btn w-[34px] h-[34px] rounded-full flex items-center justify-center text-[#1F2937] hover:text-[#B45309] hover:bg-[#F3F4F6] border border-transparent hover:border-gray-200 transition-colors">
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.9" viewBox="0 0 24 24" aria-hidden="true">
+          class="share-btn w-7 h-7 sm:w-8 sm:h-8 rounded-full flex items-center justify-center text-[#1F2937] hover:text-[#B45309] hover:bg-[#F3F4F6] border border-transparent hover:border-gray-200 transition-colors">
+          <svg class="w-3.5 h-3.5 sm:w-4 sm:h-4" fill="none" stroke="currentColor" stroke-width="1.9" viewBox="0 0 24 24" aria-hidden="true">
             <path stroke-linecap="round" stroke-linejoin="round" d="M13.19 8.688a4.5 4.5 0 011.242 7.244l-4.5 4.5a4.5 4.5 0 01-6.364-6.364l1.757-1.757m13.35-.622l1.757-1.757a4.5 4.5 0 00-6.364-6.364l-4.5 4.5a4.5 4.5 0 001.242 7.244"/>
           </svg>
         </button>
@@ -220,7 +221,7 @@
 
   <!-- Toast Notification for Copy Link Action -->
   <div id="copyToast" role="status" aria-live="polite"
-    class="fixed top-[74px] right-4 sm:right-8 z-50 pointer-events-none opacity-0 translate-y-1 transition-all duration-200 flex items-center gap-2 px-4 py-2.5 rounded-lg bg-[#111827] text-white text-xs font-mono shadow-lg border border-gray-700">
+    class="fixed top-[66px] right-3 sm:right-8 z-50 pointer-events-none opacity-0 translate-y-1 transition-all duration-200 flex items-center gap-2 px-3.5 py-2 rounded-lg bg-[#111827] text-white text-xs font-sans shadow-lg border border-gray-700">
     <svg class="w-4 h-4 text-amber-400 shrink-0" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
       <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/>
     </svg>
@@ -228,15 +229,45 @@
   </div>
 
   <!-- ========================================================================
-       2. FULL-WIDTH ATMOSPHERIC HERO IMAGE (100vw, 480px)
+       2. RESPONSIVE FULL-WIDTH SVG HERO ILLUSTRATION
        ======================================================================== -->
-  <header class="relative w-full h-[440px] sm:h-[490px] lg:h-[520px] overflow-hidden bg-amber-950 select-none">
-    <!-- Multi-layered Canvas Singapore Skyline in Transboundary Haze -->
-    <canvas id="heroSkylineCanvas" class="absolute inset-0 w-full h-full block"></canvas>
-
-    <!-- Subtle SVG Drifting Haze Particle Wisps & Supertrees Vector Accents -->
-    <svg class="absolute inset-0 w-full h-full pointer-events-none" viewBox="0 0 1440 520" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
+  <header class="relative w-full h-[240px] sm:h-[340px] md:h-[440px] lg:h-[520px] overflow-hidden bg-amber-950 select-none">
+    <!-- Full-Bleed Responsive SVG Marina Bay Singapore Skyline in Transboundary Haze -->
+    <svg class="absolute inset-0 w-full h-full block" viewBox="0 0 1600 540" preserveAspectRatio="xMidYMax slice" role="img" aria-label="Illustration of Singapore Marina Bay skyline shrouded in October transboundary haze">
       <defs>
+        <!-- Sky Atmospheric Haze Gradient -->
+        <linearGradient id="hazeSkyGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stop-color="#78350F" />
+          <stop offset="28%" stop-color="#B45309" />
+          <stop offset="56%" stop-color="#D97706" />
+          <stop offset="82%" stop-color="#FBBF24" />
+          <stop offset="100%" stop-color="#FEF3C7" />
+        </linearGradient>
+
+        <!-- Diffused Sun Glow -->
+        <radialGradient id="hazeSunGlow" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="#FFFBEB" stop-opacity="0.96" />
+          <stop offset="24%" stop-color="#FEF08A" stop-opacity="0.72" />
+          <stop offset="55%" stop-color="#F59E0B" stop-opacity="0.28" />
+          <stop offset="100%" stop-color="#D97706" stop-opacity="0" />
+        </radialGradient>
+
+        <!-- Midground Mist Veil -->
+        <linearGradient id="midMistGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stop-color="#FDE68A" stop-opacity="0.06" />
+          <stop offset="60%" stop-color="#FEF3C7" stop-opacity="0.38" />
+          <stop offset="100%" stop-color="#FEF3C7" stop-opacity="0.58" />
+        </linearGradient>
+
+        <!-- Marina Bay Water Reflection into Pure White (#FFFFFF) -->
+        <linearGradient id="waterFadeGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stop-color="#92400E" stop-opacity="0.52" />
+          <stop offset="40%" stop-color="#FDE68A" stop-opacity="0.68" />
+          <stop offset="82%" stop-color="#FFFFFF" stop-opacity="0.95" />
+          <stop offset="100%" stop-color="#FFFFFF" stop-opacity="1" />
+        </linearGradient>
+
+        <!-- Drifting Wisp Gradients -->
         <linearGradient id="wispGrad1" x1="0%" y1="0%" x2="100%" y2="0%">
           <stop offset="0%" stop-color="#FEF3C7" stop-opacity="0" />
           <stop offset="50%" stop-color="#FEF3C7" stop-opacity="0.34" />
@@ -249,64 +280,132 @@
         </linearGradient>
       </defs>
 
-      <!-- Drifting Atmospheric Haze Bands -->
-      <g class="haze-wisp-a">
-        <ellipse cx="420" cy="240" rx="460" ry="26" fill="url(#wispGrad1)" />
-        <ellipse cx="1060" cy="195" rx="410" ry="22" fill="url(#wispGrad2)" />
-      </g>
-      <g class="haze-wisp-b">
-        <ellipse cx="780" cy="295" rx="540" ry="30" fill="url(#wispGrad1)" />
-        <ellipse cx="240" cy="325" rx="340" ry="20" fill="url(#wispGrad2)" />
+      <!-- Sky Backdrop -->
+      <rect width="1600" height="540" fill="url(#hazeSkyGrad)" />
+
+      <!-- Diffused Sun Orb -->
+      <circle cx="1075" cy="185" r="245" fill="url(#hazeSunGlow)" />
+
+      <!-- Distant Shrouded Horizon Ridge -->
+      <g fill="rgba(120, 53, 15, 0.28)">
+        <rect x="60" y="388" width="38" height="32" />
+        <rect x="112" y="378" width="44" height="42" />
+        <rect x="172" y="384" width="36" height="36" />
+        <rect x="225" y="372" width="48" height="48" />
+        <rect x="1230" y="376" width="42" height="44" />
+        <rect x="1288" y="368" width="52" height="52" />
+        <rect x="1358" y="380" width="40" height="40" />
+        <rect x="1415" y="385" width="46" height="35" />
       </g>
 
-      <!-- Gardens by the Bay Supertrees Silhouette Cluster (Left Waterfront) -->
-      <g fill="rgba(41, 17, 4, 0.72)" transform="translate(155, 398)">
-        <!-- Supertree 1 -->
-        <path d="M-4,0 L-2,-44 L-22,-54 L22,-54 L2,-44 L4,0 Z" />
-        <ellipse cx="0" cy="-54" rx="26" ry="5" />
-        <!-- Supertree 2 (Taller) -->
-        <path d="M36,0 L39,-62 L12,-75 L68,-75 L41,-62 L44,0 Z" />
-        <ellipse cx="40" cy="-75" rx="33" ry="6" />
-        <!-- Supertree 3 -->
-        <path d="M82,0 L84,-48 L64,-58 L104,-58 L86,-48 L88,0 Z" />
-        <ellipse cx="84" cy="-58" rx="24" ry="4.5" />
+      <!-- Midground Financial District & Marina Bay Financial Centre Towers -->
+      <g fill="rgba(69, 26, 3, 0.56)">
+        <rect x="370" y="305" width="38" height="115" />
+        <polygon points="422,420 422,282 454,268 454,420" />
+        <polygon points="470,420 470,256 492,238 514,256 514,420" />
+        <rect x="530" y="232" width="42" height="188" />
+        <rect x="586" y="262" width="34" height="158" />
+        <polygon points="635,420 635,216 658,196 681,216 681,420" />
+        <polygon points="696,420 696,246 738,232 738,420" />
+        <rect x="752" y="268" width="36" height="152" />
+        <rect x="1030" y="286" width="38" height="134" />
+        <polygon points="1084,420 1084,264 1126,250 1126,420" />
+        <rect x="1144" y="298" width="34" height="122" />
+      </g>
+
+      <!-- Haze Veil Layer -->
+      <rect x="0" y="195" width="1600" height="225" fill="url(#midMistGrad)" />
+
+      <!-- Drifting Atmospheric Haze Bands -->
+      <g class="haze-wisp-a">
+        <ellipse cx="470" cy="245" rx="480" ry="26" fill="url(#wispGrad1)" />
+        <ellipse cx="1140" cy="200" rx="420" ry="22" fill="url(#wispGrad2)" />
+      </g>
+      <g class="haze-wisp-b">
+        <ellipse cx="820" cy="300" rx="560" ry="30" fill="url(#wispGrad1)" />
+        <ellipse cx="260" cy="330" rx="350" ry="20" fill="url(#wispGrad2)" />
+      </g>
+
+      <!-- Gardens by the Bay Supertrees Cluster (Left Waterfront) -->
+      <g fill="rgba(41, 17, 4, 0.76)" transform="translate(275, 420)">
+        <path d="M-4,0 L-2,-48 L-24,-58 L24,-58 L2,-48 L4,0 Z" />
+        <ellipse cx="0" cy="-58" rx="28" ry="5.5" />
+        <path d="M40,0 L43,-68 L14,-82 L74,-82 L45,-68 L48,0 Z" />
+        <ellipse cx="44" cy="-82" rx="36" ry="6.5" />
+        <path d="M90,0 L92,-52 L70,-62 L114,-62 L94,-52 L96,0 Z" />
+        <ellipse cx="92" cy="-62" rx="26" ry="5" />
+      </g>
+
+      <!-- ArtScience Museum Lotus Silhouette -->
+      <g fill="rgba(41, 17, 4, 0.82)" transform="translate(755, 420)">
+        <path d="M0,0 Q-20,-34 -27,-39 Q-7,-22 5,-44 Q14,-22 29,-37 Q22,-24 18,0 Z" />
+      </g>
+
+      <!-- Iconic Marina Bay Sands 3-Tower + SkyPark Silhouette -->
+      <g fill="rgba(41, 17, 4, 0.84)" transform="translate(825, 420)">
+        <!-- Tower 1 -->
+        <polygon points="0,0 5,-162 21,-162 26,0" />
+        <!-- Tower 2 -->
+        <polygon points="40,0 45,-162 61,-162 66,0" />
+        <!-- Tower 3 -->
+        <polygon points="80,0 85,-162 101,-162 106,0" />
+        <!-- Cantilevered SkyPark Deck -->
+        <path d="M-18,-162 Q52,-157 166,-174 L161,-182 Q52,-167 -14,-171 Z" />
+      </g>
+
+      <!-- Singapore Flyer Observation Wheel Silhouette -->
+      <g transform="translate(1055, 336)" stroke="rgba(41, 17, 4, 0.78)" fill="none">
+        <circle cx="0" cy="0" r="62" stroke-width="3" />
+        <circle cx="0" cy="0" r="53" stroke-width="1.4" />
+        <line x1="0" y1="0" x2="-22" y2="84" stroke-width="3" />
+        <line x1="0" y1="0" x2="22" y2="84" stroke-width="3" />
+      </g>
+
+      <!-- Marina Bay Water Reflection & Smooth Fade into #FFFFFF -->
+      <rect x="0" y="420" width="1600" height="120" fill="url(#waterFadeGrad)" />
+      <g stroke="rgba(255, 255, 255, 0.42)" stroke-width="1.4">
+        <line x1="820" y1="432" x2="960" y2="432" />
+        <line x1="760" y1="444" x2="995" y2="444" />
+        <line x1="840" y1="458" x2="940" y2="458" />
+        <line x1="1010" y1="438" x2="1110" y2="438" />
+        <line x1="270" y1="436" x2="395" y2="436" />
       </g>
     </svg>
 
     <!-- Bottom Linear Gradient Fade into Pure White (#FFFFFF) -->
-    <div class="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-b from-transparent via-white/75 to-[#FFFFFF] pointer-events-none"></div>
+    <div class="absolute inset-x-0 bottom-0 h-20 sm:h-28 bg-gradient-to-b from-transparent via-white/75 to-[#FFFFFF] pointer-events-none"></div>
 
-    <!-- Subtle Photo / Illustration Credit Caption -->
-    <div class="relative z-10 h-full max-w-[1600px] mx-auto px-4 sm:px-8 pb-3 flex items-end justify-between gap-4">
-      <span class="text-[10px] sm:text-[11px] font-mono uppercase tracking-widest text-gray-600 bg-white/85 backdrop-blur-xs px-2.5 py-1 rounded border border-gray-200/70">
-        SINGAPORE SKYLINE IN HAZE CONDITIONS • DATA: NATIONAL ENVIRONMENT AGENCY (NEA)
+    <!-- Subtle Caption Overlay -->
+    <div class="relative z-10 h-full max-w-[1600px] mx-auto px-3 sm:px-6 lg:px-10 pb-2.5 sm:pb-3 flex items-end justify-between gap-2">
+      <span class="text-[9px] sm:text-[11px] font-sans uppercase tracking-wider text-gray-700 bg-white/85 backdrop-blur-xs px-2 sm:px-2.5 py-1 rounded border border-gray-200/80 truncate">
+        SINGAPORE SKYLINE IN HAZE CONDITIONS · DATA: NEA
       </span>
-      <span class="hidden md:inline-block text-[11px] font-mono text-gray-500">
+      <span class="hidden md:inline-block text-[11px] font-sans text-gray-600 shrink-0">
         OCT 01 – OCT 31 · 744 HOURLY OBSERVATIONS
       </span>
     </div>
   </header>
 
   <!-- ========================================================================
-       3. EDITORIAL HEADER, DECK & TWO PARAGRAPHS AT 50% PAGE WIDTH (#FFFFFF)
+       3. EDITORIAL HEADER, DECK & TWO PARAGRAPHS (50% WIDTH ON DESKTOP)
        ======================================================================== -->
-  <main class="bg-[#FFFFFF] pt-4 sm:pt-8 pb-20">
-    <!-- Rubric, Editorial Headline & Introduction Deck -->
-    <section class="max-w-4xl mx-auto px-5 sm:px-8 text-center">
-      <div class="inline-flex items-center gap-2 text-xs font-sans font-bold uppercase tracking-[0.16em] text-[#991B1B] mb-3.5">
+  <main class="bg-[#FFFFFF] pt-3 sm:pt-7 pb-16 sm:pb-20">
+    <!-- Rubric, Headline & Introduction Deck -->
+    <section class="max-w-4xl mx-auto px-4 sm:px-8 text-center">
+      <div class="inline-flex items-center gap-2 text-[11px] sm:text-xs font-sans font-bold uppercase tracking-[0.16em] text-[#9E1B24] mb-3">
         <span>AIR QUALITY &amp; URBAN ENVIRONMENT</span>
       </div>
 
-      <h1 class="editorial-headline font-bold mb-6">
+      <h1 class="editorial-headline font-bold mb-5 sm:mb-6">
         A Month in the Smog: Tracking Singapore’s October Haze Hour by Hour
       </h1>
 
-      <p class="font-sans text-[1.15rem] sm:text-[1.3rem] text-[#374151] font-normal leading-[1.6] max-w-[720px] mx-auto mb-8">
+      <p class="font-sans text-[1.05rem] sm:text-[1.2rem] md:text-[1.3rem] text-[#374151] font-normal leading-[1.62] max-w-[720px] mx-auto mb-7 sm:mb-8">
         A 31-day, 744-hour reconstruction of Singapore’s 24-hour Pollutant Standards Index (PSI) across the North, South, East, West, and Central regions—revealing how transboundary smoke built, peaked, and finally cleared from October 1 to October 31.
       </p>
 
       <!-- Editorial Byline & Dataset Telemetry Strip -->
-      <div class="flex flex-wrap items-center justify-center gap-x-5 gap-y-2 py-3.5 border-y border-gray-200 text-xs text-gray-500 font-mono">
+      <div class="flex flex-wrap items-center justify-center gap-x-4 sm:gap-x-5 gap-y-1.5 py-3 border-y border-gray-200 text-[11px] sm:text-xs text-gray-500 font-sans">
         <span class="font-semibold text-gray-800">THE BUSINESS TIMES GRAPHICS DESK</span>
         <span class="hidden sm:inline text-gray-300">|</span>
         <span>31 DAYS × 24 HOURS × 5 REGIONS</span>
@@ -315,8 +414,8 @@
       </div>
     </section>
 
-    <!-- Two Analytical Paragraphs Explicitly Constrained to 50% Page Width on Desktop -->
-    <article class="editorial-50-col mt-10 sm:mt-12 mb-14 sm:mb-16 space-y-6 text-[#1F2937] font-sans text-[1.0625rem] sm:text-[1.125rem] leading-[1.8]">
+    <!-- Two Analytical Story Paragraphs: 50% Page Width on Desktop, Adaptive on Mobile/Tablet -->
+    <article class="w-[92%] sm:w-[85%] md:w-[70%] lg:w-[50%] max-w-[760px] mx-auto mt-8 sm:mt-12 mb-12 sm:mb-16 space-y-5 sm:space-y-6 text-[#1F2937] font-sans text-[1.02rem] sm:text-[1.1rem] leading-[1.78]">
       <p>
         October opened in the Moderate band (<strong class="font-semibold text-gray-900">59–94 PSI</strong>) on October 1 before building into a sustained multi-day episode in mid-October. During the acute <strong class="font-semibold text-gray-900">October 14–18</strong> surge, all five regions crossed decisively into the Unhealthy range (<strong class="font-semibold text-gray-900">&gt;100 PSI</strong>) while Western and Central Singapore breached the Very Unhealthy threshold (<strong class="font-semibold text-gray-900">200+ PSI</strong>)—culminating in a month-high <strong class="font-semibold text-red-700">230 PSI in the West at 10:00 on October 18</strong>, shortly after the Central region reached <strong class="font-semibold text-amber-800">229 PSI</strong> on October 16.
       </p>
@@ -326,63 +425,63 @@
     </article>
 
     <!-- ======================================================================
-         4. FULL-WIDTH RESPONSIVE INTERACTIVE RADAR GRAPHIC (width: 100%)
+         4. FULL-WIDTH RESPONSIVE INTERACTIVE RADAR GRAPHIC
          ====================================================================== -->
-    <section aria-label="Interactive Singapore October Haze Radar Visualization" class="w-full border-y border-gray-200 bg-slate-50/80 py-8 sm:py-12">
-      <div class="w-full max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-10">
+    <section aria-label="Interactive Singapore October Haze Radar Visualization" class="w-full border-y border-gray-200 bg-slate-50/80 py-6 sm:py-11">
+      <div class="w-full max-w-[1600px] mx-auto px-3 sm:px-6 lg:px-10 min-w-0">
 
         <!-- Visualization Header & Geometry Mode Controls -->
-        <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-4 pb-6 border-b border-gray-200">
-          <div>
-            <div class="flex items-center gap-2 text-xs font-mono uppercase tracking-wider text-[#991B1B] font-semibold mb-1">
+        <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-4 pb-5 border-b border-gray-200 min-w-0">
+          <div class="min-w-0">
+            <div class="flex flex-wrap items-center gap-1.5 sm:gap-2 text-[11px] sm:text-xs font-sans uppercase tracking-wider text-[#9E1B24] font-semibold mb-1">
               <span>Interactive Radar Graphic</span>
               <span>•</span>
-              <span id="headerSubtitleDate">Oct 18 · 10:00 AM (Hr 10)</span>
+              <span id="headerSubtitleDate">Oct 18 · 10:00 AM (10:00)</span>
             </div>
-            <h2 class="font-serif text-2xl sm:text-3xl font-bold text-gray-900">
+            <h2 class="editorial-title text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900">
               Hourly, Daily &amp; Regional PSI Evolution Radar
             </h2>
           </div>
 
           <!-- Radar Geometry & Comparison Controls -->
-          <div class="flex flex-wrap items-center gap-2.5">
-            <!-- View Toggle: 24-Hour Clock Radar vs 5-Region Compass -->
-            <div class="inline-flex rounded-xl bg-white p-1 border border-gray-200 shadow-2xs" role="group" aria-label="Radar Geometry Mode">
-              <button id="btnModeClock" type="button" class="px-3.5 py-2 rounded-lg text-xs sm:text-sm font-semibold transition-all bg-gray-900 text-white shadow-2xs">
+          <div class="flex flex-wrap items-center gap-2 min-w-0">
+            <!-- View Toggle: 24-Hour Clock Radar vs 5-Region Geographical Compass -->
+            <div class="inline-flex rounded-xl bg-white p-1 border border-gray-200 shadow-2xs max-w-full" role="group" aria-label="Radar Geometry Mode">
+              <button id="btnModeClock" type="button" class="px-2.5 sm:px-3.5 py-2 rounded-lg text-xs sm:text-sm font-semibold transition-all bg-gray-900 text-white shadow-2xs">
                 24-Hour Clock Radar
               </button>
-              <button id="btnModeCompass" type="button" class="px-3.5 py-2 rounded-lg text-xs sm:text-sm font-semibold transition-all text-gray-600 hover:text-gray-900">
+              <button id="btnModeCompass" type="button" class="px-2.5 sm:px-3.5 py-2 rounded-lg text-xs sm:text-sm font-semibold transition-all text-gray-600 hover:text-gray-900">
                 5-Region Compass
               </button>
             </div>
 
-            <!-- Progressive Sweep vs Full 24h Day Shape Toggle -->
-            <button id="btnProgressiveMode" type="button" class="px-3.5 py-2.5 rounded-xl bg-white border border-gray-200 text-xs sm:text-sm font-medium text-gray-700 hover:bg-gray-100 transition-all flex items-center gap-2 shadow-2xs" title="Toggle between Full 24h Day Shape and Progressive Sweep from 01:00 to selected hour">
-              <span id="progressiveDot" class="w-2 h-2 rounded-full bg-gray-300"></span>
-              <span id="progressiveLabel">Full 24h Day Shape</span>
+            <!-- Drawing Mode: Full 24h vs Progressive Sweep -->
+            <button id="btnProgressiveMode" type="button" class="px-3 py-2.5 rounded-xl bg-white border border-gray-200 text-xs sm:text-sm font-medium text-gray-700 hover:bg-gray-100 transition-all flex items-center gap-2 shadow-2xs" title="Toggle between Full 24h Day Shape and Progressive Sweep from 01:00 to selected hour">
+              <span id="progressiveDot" class="w-2 h-2 rounded-full bg-gray-300 shrink-0"></span>
+              <span id="progressiveLabel">Full 24h</span>
             </button>
 
             <!-- Ghost Comparison Selector -->
-            <div class="inline-flex items-center rounded-xl bg-white border border-gray-200 px-2.5 py-1.5 shadow-2xs">
-              <label for="ghostSelect" class="text-xs font-mono uppercase text-gray-500 mr-2">Ghost:</label>
+            <div class="inline-flex items-center rounded-xl bg-white border border-gray-200 px-2.5 py-2 shadow-2xs">
+              <label for="ghostSelect" class="text-[11px] font-sans uppercase font-semibold text-gray-500 mr-1.5">Ghost:</label>
               <select id="ghostSelect" class="text-xs sm:text-sm font-medium text-gray-800 bg-transparent focus:outline-none cursor-pointer">
                 <option value="none">None</option>
-                <option value="peak18" selected>Oct 18 Peak Day</option>
+                <option value="peak18" selected>Oct 18 Peak</option>
                 <option value="prevDay">Previous Day</option>
               </select>
             </div>
           </div>
         </div>
 
-        <!-- Playback Deck, Day/Hour Sliders & Region Filter Pills -->
-        <div class="mt-6 bg-white rounded-2xl border border-gray-200 p-4 sm:p-5 shadow-2xs">
-          <div class="grid grid-cols-1 lg:grid-cols-12 gap-5 items-center">
+        <!-- Adaptive Playback Deck, Day/Hour Sliders & Region Filter Pills -->
+        <div class="mt-5 bg-white rounded-2xl border border-gray-200 p-3.5 sm:p-5 shadow-2xs min-w-0">
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-4 sm:gap-5 items-center">
 
             <!-- Play / Pause, Step, Speed & Scope Controls (4 cols) -->
-            <div class="lg:col-span-4 flex flex-wrap items-center gap-2">
-              <button id="btnPlayPause" type="button" class="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-[#B45309] hover:bg-amber-800 active:scale-[0.99] text-white font-semibold text-sm shadow-2xs transition-all min-w-[110px]">
-                <svg id="iconPlay" class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M6.3 2.841A1.5 1.5 0 004 4.11V15.89a1.5 1.5 0 002.3 1.269l9.344-5.89a1.5 1.5 0 000-2.538L6.3 2.84z"/></svg>
-                <svg id="iconPause" class="w-4 h-4 hidden" fill="currentColor" viewBox="0 0 20 20"><path d="M5.75 3a.75.75 0 00-.75.75v12.5c0 .414.336.75.75.75h1.5a.75.75 0 00.75-.75V3.75A.75.75 0 007.25 3h-1.5zM12.75 3a.75.75 0 00-.75.75v12.5c0 .414.336.75.75.75h1.5a.75.75 0 00.75-.75V3.75a.75.75 0 00-.75-.75h-1.5z"/></svg>
+            <div class="lg:col-span-4 flex flex-wrap items-center gap-2 min-w-0">
+              <button id="btnPlayPause" type="button" class="inline-flex items-center justify-center gap-1.5 px-3.5 py-2.5 rounded-xl bg-[#B45309] hover:bg-amber-800 active:scale-[0.99] text-white font-semibold text-xs sm:text-sm shadow-2xs transition-all min-w-[96px]">
+                <svg id="iconPlay" class="w-4 h-4 shrink-0" fill="currentColor" viewBox="0 0 20 20"><path d="M6.3 2.841A1.5 1.5 0 004 4.11V15.89a1.5 1.5 0 002.3 1.269l9.344-5.89a1.5 1.5 0 000-2.538L6.3 2.84z"/></svg>
+                <svg id="iconPause" class="w-4 h-4 hidden shrink-0" fill="currentColor" viewBox="0 0 20 20"><path d="M5.75 3a.75.75 0 00-.75.75v12.5c0 .414.336.75.75.75h1.5a.75.75 0 00.75-.75V3.75A.75.75 0 007.25 3h-1.5zM12.75 3a.75.75 0 00-.75.75v12.5c0 .414.336.75.75.75h1.5a.75.75 0 00.75-.75V3.75a.75.75 0 00-.75-.75h-1.5z"/></svg>
                 <span id="playLabel">Play</span>
               </button>
 
@@ -397,26 +496,26 @@
               </div>
 
               <!-- Speed Selector (1x, 2x, 4x) -->
-              <div class="inline-flex rounded-xl border border-gray-200 bg-gray-50 p-0.5 text-xs font-mono">
+              <div class="inline-flex rounded-xl border border-gray-200 bg-gray-50 p-0.5 text-xs font-sans">
                 <button type="button" data-speed="1" class="speed-btn px-2.5 py-1.5 rounded-lg bg-white text-gray-900 font-semibold shadow-2xs">1x</button>
                 <button type="button" data-speed="2" class="speed-btn px-2.5 py-1.5 rounded-lg text-gray-600 hover:text-gray-900">2x</button>
                 <button type="button" data-speed="4" class="speed-btn px-2.5 py-1.5 rounded-lg text-gray-600 hover:text-gray-900">4x</button>
               </div>
 
-              <!-- Playback Scope Toggle: Full Month Oct 1–31 vs Single Day Loop -->
-              <button id="btnLoopScope" type="button" class="px-3 py-2 rounded-xl border border-gray-200 bg-gray-50 hover:bg-gray-100 text-xs font-medium text-gray-700 transition-colors" title="Toggle between advancing through Oct 1–31 or looping the selected day">
-                Scope: <strong id="loopScopeLabel" class="text-gray-900">Oct 1–31</strong>
+              <!-- Playback Scope Toggle: Full Month vs Single Day -->
+              <button id="btnLoopScope" type="button" class="px-2.5 py-2 rounded-xl border border-gray-200 bg-gray-50 hover:bg-gray-100 text-xs font-medium text-gray-700 transition-colors" title="Toggle between Full Month (Oct 1–31) and Single Day Loop">
+                <strong id="loopScopeLabel" class="text-gray-900">Full Month</strong>
               </button>
             </div>
 
-            <!-- Hour Slider (01:00 to 00:00) (4 cols) -->
-            <div class="lg:col-span-4 flex flex-col gap-1.5">
-              <div class="flex items-center justify-between text-xs">
+            <!-- Hour Scrubber (01:00 to 00:00) (4 cols) -->
+            <div class="lg:col-span-4 flex flex-col gap-1.5 min-w-0">
+              <div class="flex items-center justify-between text-xs gap-2">
                 <span class="font-semibold text-gray-700">Hour of Day</span>
-                <span id="hourSliderReadout" class="font-mono font-bold text-gray-950 bg-gray-100 px-2 py-0.5 rounded-md">10:00 AM (10:00)</span>
+                <span id="hourSliderReadout" class="font-sans font-bold text-gray-950 bg-gray-100 px-2 py-0.5 rounded-md tabular-nums">10:00 AM (10:00)</span>
               </div>
               <input id="hourSlider" type="range" min="0" max="23" value="9" class="editorial-slider w-full" aria-label="Select hour from 01:00 to 00:00" />
-              <div class="flex justify-between text-[10px] font-mono text-gray-400">
+              <div class="flex justify-between text-[10px] font-sans text-gray-400 tabular-nums">
                 <span>01:00</span>
                 <span>06:00</span>
                 <span>12:00</span>
@@ -425,23 +524,23 @@
               </div>
             </div>
 
-            <!-- Day Slider (Oct 01 to Oct 31) + Prev/Next Day Buttons (4 cols) -->
-            <div class="lg:col-span-4 flex flex-col gap-1.5">
-              <div class="flex items-center justify-between text-xs">
+            <!-- Day Selector (Oct 01 to Oct 31) + Prev/Next Day Buttons (4 cols) -->
+            <div class="lg:col-span-4 flex flex-col gap-1.5 min-w-0">
+              <div class="flex items-center justify-between text-xs gap-2">
                 <div class="flex items-center gap-1.5">
                   <span class="font-semibold text-gray-700">October Date</span>
                   <div class="inline-flex rounded-md border border-gray-200 bg-gray-50">
-                    <button id="btnPrevDay" type="button" class="px-1.5 py-0.5 text-gray-600 hover:text-gray-900 hover:bg-white rounded-l-md" title="Previous Day (Up Arrow)" aria-label="Previous Day">−</button>
-                    <button id="btnNextDay" type="button" class="px-1.5 py-0.5 text-gray-600 hover:text-gray-900 hover:bg-white rounded-r-md" title="Next Day (Down Arrow)" aria-label="Next Day">+</button>
+                    <button id="btnPrevDay" type="button" class="px-2 py-0.5 text-gray-600 hover:text-gray-900 hover:bg-white rounded-l-md font-bold" title="Previous Day (Up Arrow)" aria-label="Previous Day">‹</button>
+                    <button id="btnNextDay" type="button" class="px-2 py-0.5 text-gray-600 hover:text-gray-900 hover:bg-white rounded-r-md font-bold" title="Next Day (Down Arrow)" aria-label="Next Day">›</button>
                   </div>
                 </div>
                 <div class="flex items-center gap-2">
-                  <button id="btnJumpPeak" type="button" class="text-[11px] font-mono text-[#991B1B] hover:underline underline-offset-2 font-medium">Oct 18 Peak</button>
-                  <span id="daySliderReadout" class="font-mono font-bold text-gray-950 bg-amber-50 border border-amber-200 px-2 py-0.5 rounded-md">Oct 18</span>
+                  <button id="btnJumpPeak" type="button" class="text-[11px] font-sans text-[#9E1B24] hover:underline underline-offset-2 font-semibold">Oct 18 Peak</button>
+                  <span id="daySliderReadout" class="font-sans font-bold text-gray-950 bg-amber-50 border border-amber-200 px-2 py-0.5 rounded-md tabular-nums">Oct 18</span>
                 </div>
               </div>
               <input id="daySlider" type="range" min="1" max="31" value="18" class="editorial-slider w-full" aria-label="Select day from October 1 to October 31" />
-              <div class="flex justify-between text-[10px] font-mono text-gray-400">
+              <div class="flex justify-between text-[10px] font-sans text-gray-400 tabular-nums">
                 <span>Oct 01</span>
                 <span>Oct 08</span>
                 <span>Oct 16</span>
@@ -453,108 +552,111 @@
           </div>
 
           <!-- Interactive Region Filter/Solo Pills & NEA PSI Band Legend -->
-          <div class="mt-4 pt-4 border-t border-gray-100 flex flex-col xl:flex-row xl:items-center justify-between gap-3">
-            <div class="flex flex-wrap items-center gap-2" id="regionPillsContainer">
-              <span class="text-xs font-mono uppercase text-gray-400 mr-1">Regions (Click toggle · Double-click solo):</span>
+          <div class="mt-4 pt-4 border-t border-gray-100 flex flex-col xl:flex-row xl:items-center justify-between gap-3 min-w-0">
+            <div class="flex flex-wrap items-center gap-2 min-w-0" id="regionPillsContainer">
+              <span class="text-[11px] font-sans uppercase font-semibold text-gray-400 mr-0.5">Regions:</span>
               <!-- Populated dynamically by JS -->
+              <button id="btnResetRegions" type="button" class="hidden px-2.5 py-1.5 rounded-full text-xs font-semibold bg-gray-900 text-white hover:bg-gray-700 transition-colors shadow-2xs">
+                Show All
+              </button>
             </div>
 
             <!-- NEA PSI Band Legend -->
-            <div class="flex flex-wrap items-center gap-3 text-xs text-gray-600">
-              <span class="font-mono uppercase text-gray-400 text-[11px]">NEA PSI Bands:</span>
-              <span class="inline-flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span>0–50 Good</span>
-              <span class="inline-flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-sky-500"></span>51–100 Moderate</span>
-              <span class="inline-flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-amber-500"></span>101–200 Unhealthy</span>
-              <span class="inline-flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-red-600"></span>201–300 Very Unhealthy</span>
+            <div class="flex flex-wrap items-center gap-x-3 gap-y-1.5 text-[11px] sm:text-xs text-gray-600">
+              <span class="font-sans uppercase font-semibold text-gray-400 text-[10px] sm:text-[11px]">NEA PSI:</span>
+              <span class="inline-flex items-center gap-1"><span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span>0–50 Good</span>
+              <span class="inline-flex items-center gap-1"><span class="w-2.5 h-2.5 rounded-full bg-sky-500"></span>51–100 Moderate</span>
+              <span class="inline-flex items-center gap-1"><span class="w-2.5 h-2.5 rounded-full bg-amber-500"></span>101–200 Unhealthy</span>
+              <span class="inline-flex items-center gap-1"><span class="w-2.5 h-2.5 rounded-full bg-red-600"></span>201+ Very Unhealthy</span>
             </div>
           </div>
         </div>
 
         <!-- MAIN VISUALIZATION STAGE: RADAR CANVAS (8 COLS) + LIVE TELEMETRY SIDEBAR (4 COLS) -->
-        <div class="mt-6 grid grid-cols-1 xl:grid-cols-12 gap-6 items-stretch">
+        <div class="mt-5 sm:mt-6 grid grid-cols-1 xl:grid-cols-12 gap-5 sm:gap-6 items-stretch min-w-0">
 
           <!-- Interactive Radar Chart Container (8 columns on xl) -->
-          <div class="xl:col-span-8 bg-white rounded-2xl border border-gray-200 p-4 sm:p-6 shadow-2xs flex flex-col justify-between relative">
-            <div class="flex flex-wrap items-center justify-between gap-2 mb-2">
-              <div>
+          <div class="xl:col-span-8 bg-white rounded-2xl border border-gray-200 p-3.5 sm:p-6 shadow-2xs flex flex-col justify-between relative min-w-0">
+            <div class="flex flex-wrap items-center justify-between gap-2 mb-2 min-w-0">
+              <div class="min-w-0">
                 <h3 id="radarChartTitle" class="editorial-title text-base sm:text-lg font-bold text-gray-900">
                   24-Hour Diurnal PSI Clock · October 18
                 </h3>
                 <p id="radarChartSubtitle" class="text-xs text-gray-500">
-                  Clockwise spokes from 01:00 to 00:00 · Rings at 50, 100, 150, 200 &amp; 250 PSI · Hover or tap any spoke
+                  Clockwise spokes from 01:00 to 00:00 · Rings at 50, 100, 150, 200 &amp; 250 PSI · Tap or drag around dial
                 </p>
               </div>
-              <span id="radarModeBadge" class="text-[11px] font-mono px-2.5 py-1 rounded-full bg-gray-100 text-gray-700 border border-gray-200">
+              <span id="radarModeBadge" class="text-[10px] sm:text-[11px] font-sans font-semibold px-2.5 py-1 rounded-full bg-gray-100 text-gray-700 border border-gray-200 shrink-0">
                 24-HOUR CLOCK RADAR
               </span>
             </div>
 
-            <!-- Responsive Aspect-Preserving Canvas Wrapper -->
-            <div id="radarCanvasWrapper" class="relative w-full h-[380px] sm:h-[500px] lg:h-[560px] flex items-center justify-center touch-pan-y">
+            <!-- Responsive Aspect-Preserving Canvas Wrapper Observed by ResizeObserver -->
+            <div id="radarCanvasWrapper" class="relative w-full h-[320px] sm:h-[460px] md:h-[520px] lg:h-[560px] flex items-center justify-center touch-none min-w-0">
               <canvas id="radarCanvas" class="block w-full h-full cursor-crosshair"></canvas>
 
               <!-- Floating Interactive Tooltip -->
-              <div id="radarTooltip" class="hidden pointer-events-none absolute z-30 w-60 rounded-xl bg-gray-950/95 backdrop-blur-md text-white p-3.5 shadow-xl border border-gray-800 text-xs transition-opacity duration-75">
-                <div class="flex items-center justify-between border-b border-gray-800 pb-2 mb-2">
-                  <span id="ttHeader" class="font-mono font-bold text-amber-300">Oct 18 · 10:00</span>
+              <div id="radarTooltip" class="hidden pointer-events-none absolute z-30 w-52 sm:w-60 rounded-xl bg-gray-950/95 backdrop-blur-md text-white p-3 sm:p-3.5 shadow-xl border border-gray-800 text-xs transition-opacity duration-75">
+                <div class="flex items-center justify-between border-b border-gray-800 pb-1.5 mb-1.5 gap-2">
+                  <span id="ttHeader" class="font-sans font-bold text-amber-300">Oct 18 · 10:00</span>
                   <span id="ttStatus" class="px-1.5 py-0.5 rounded text-[10px] font-semibold bg-red-500/20 text-red-300">Very Unhealthy</span>
                 </div>
-                <div id="ttOverall" class="flex items-center justify-between text-[11px] font-mono text-gray-400 pb-1.5 mb-1.5 border-b border-gray-800/80">
+                <div id="ttOverall" class="flex items-center justify-between text-[11px] font-sans text-gray-400 pb-1.5 mb-1.5 border-b border-gray-800/80">
                   <span>Overall Singapore</span>
-                  <span id="ttRangeVal" class="text-white font-semibold">130–230</span>
+                  <span id="ttRangeVal" class="text-white font-semibold tabular-nums">130–230</span>
                 </div>
-                <div id="ttRows" class="space-y-1.5 font-mono"></div>
+                <div id="ttRows" class="space-y-1 font-sans"></div>
               </div>
             </div>
 
             <!-- Keyboard & Interaction Hint Footer -->
-            <div class="mt-2 pt-3 border-t border-gray-100 flex flex-wrap items-center justify-between gap-2 text-[11px] text-gray-400 font-mono">
-              <span>SHORTCUTS: ← / → Hours · ↑ / ↓ Days · Spacebar Play/Pause</span>
-              <span>Tap or click any spoke on the clock to jump to that hour</span>
+            <div class="mt-2 pt-3 border-t border-gray-100 flex flex-wrap items-center justify-between gap-2 text-[11px] text-gray-400 font-sans">
+              <span class="hidden sm:inline">SHORTCUTS: ← / → Hours · ↑ / ↓ Days · Spacebar Play/Pause</span>
+              <span>Tap or drag across any spoke on the clock to inspect &amp; select that hour</span>
             </div>
           </div>
 
           <!-- Live Regional KPI Readout & Breakdown Table Sidebar (4 columns on xl) -->
-          <div class="xl:col-span-4 flex flex-col gap-5">
+          <div class="xl:col-span-4 flex flex-col gap-5 min-w-0">
 
             <!-- Active Observation KPI Card -->
-            <div class="bg-white rounded-2xl border border-gray-200 p-5 shadow-2xs">
+            <div class="bg-white rounded-2xl border border-gray-200 p-4 sm:p-5 shadow-2xs min-w-0">
               <div class="flex items-start justify-between gap-3">
                 <div>
-                  <span class="text-xs font-mono uppercase tracking-wider text-gray-400">Active Observation</span>
+                  <span class="text-[11px] font-sans uppercase tracking-wider text-gray-400 font-semibold">Active Observation</span>
                   <div class="mt-1 flex items-baseline gap-2.5">
-                    <span id="kpiDate" class="font-serif text-2xl sm:text-3xl font-bold text-gray-950">Oct 18</span>
-                    <span id="kpiHour" class="font-mono text-lg sm:text-xl font-semibold text-[#B45309]">10:00</span>
+                    <span id="kpiDate" class="editorial-title text-2xl sm:text-3xl font-bold text-gray-950">Oct 18</span>
+                    <span id="kpiHour" class="font-sans text-lg sm:text-xl font-bold text-[#B45309] tabular-nums">10:00</span>
                   </div>
                 </div>
-                <span id="kpiStatusPill" class="px-3 py-1.5 rounded-full text-xs font-bold tracking-wide uppercase bg-red-100 text-red-800 border border-red-200">
+                <span id="kpiStatusPill" class="px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full text-[11px] sm:text-xs font-bold tracking-wide uppercase bg-red-100 text-red-800 border border-red-200 shrink-0">
                   Very Unhealthy
                 </span>
               </div>
 
               <!-- Overall Singapore Range, Highest Region & 5-Area Mean -->
-              <div class="mt-4 pt-4 border-t border-gray-100 grid grid-cols-3 gap-2.5 text-center">
-                <div class="bg-gray-50 rounded-xl p-2.5">
-                  <div class="text-[10px] font-mono uppercase text-gray-400">Overall Range</div>
-                  <div id="kpiRange" class="font-mono text-sm sm:text-base font-bold text-gray-900 tabular-nums mt-0.5">130–230</div>
+              <div class="mt-4 pt-4 border-t border-gray-100 grid grid-cols-3 gap-2 text-center">
+                <div class="bg-gray-50 rounded-xl p-2 sm:p-2.5 min-w-0">
+                  <div class="text-[10px] font-sans uppercase font-semibold text-gray-400 truncate">Overall Range</div>
+                  <div id="kpiRange" class="font-sans text-xs sm:text-base font-bold text-gray-900 tabular-nums mt-0.5">130–230</div>
                 </div>
-                <div class="bg-gray-50 rounded-xl p-2.5">
-                  <div class="text-[10px] font-mono uppercase text-gray-400">Highest Area</div>
-                  <div id="kpiHighestRegion" class="font-mono text-sm sm:text-base font-bold text-[#991B1B] tabular-nums mt-0.5">West (230)</div>
+                <div class="bg-gray-50 rounded-xl p-2 sm:p-2.5 min-w-0">
+                  <div class="text-[10px] font-sans uppercase font-semibold text-gray-400 truncate">Highest Area</div>
+                  <div id="kpiHighestRegion" class="font-sans text-xs sm:text-base font-bold text-[#9E1B24] tabular-nums mt-0.5 truncate">West (230)</div>
                 </div>
-                <div class="bg-gray-50 rounded-xl p-2.5">
-                  <div class="text-[10px] font-mono uppercase text-gray-400">5-Area Mean</div>
-                  <div id="kpiMean" class="font-mono text-sm sm:text-base font-bold text-gray-900 tabular-nums mt-0.5">187.0</div>
+                <div class="bg-gray-50 rounded-xl p-2 sm:p-2.5 min-w-0">
+                  <div class="text-[10px] font-sans uppercase font-semibold text-gray-400 truncate">5-Area Mean</div>
+                  <div id="kpiMean" class="font-sans text-xs sm:text-base font-bold text-gray-900 tabular-nums mt-0.5">187.0</div>
                 </div>
               </div>
             </div>
 
             <!-- 5-Region Breakdown Table Card -->
-            <div class="bg-white rounded-2xl border border-gray-200 p-5 shadow-2xs flex-1 flex flex-col justify-between">
+            <div class="bg-white rounded-2xl border border-gray-200 p-4 sm:p-5 shadow-2xs flex-1 flex flex-col justify-between min-w-0">
               <div>
                 <div class="flex items-center justify-between mb-3">
                   <h3 class="editorial-title text-sm font-bold text-gray-900">5-Region PSI Breakdown</h3>
-                  <span class="text-[11px] font-mono text-gray-400">PSI · Δ Prev Hr</span>
+                  <span class="text-[11px] font-sans text-gray-400">PSI · Δ Prev Hr</span>
                 </div>
 
                 <div id="regionalCardsList" class="space-y-2.5">
@@ -563,7 +665,7 @@
               </div>
 
               <!-- Daily Context Micro-Insight -->
-              <div id="dailyInsightBox" class="mt-5 p-3.5 rounded-xl bg-amber-50/75 border border-amber-200/80 text-xs text-gray-700 leading-relaxed">
+              <div id="dailyInsightBox" class="mt-4 sm:mt-5 p-3.5 rounded-xl bg-amber-50/75 border border-amber-200/80 text-xs text-gray-700 leading-relaxed">
                 <!-- Populated dynamically by JS -->
               </div>
             </div>
@@ -572,24 +674,24 @@
         </div>
 
         <!-- 31-DAY OVERVIEW SCRUBBER STRIP (OCT 01 – OCT 31) -->
-        <div class="mt-6 bg-white rounded-2xl border border-gray-200 p-4 sm:p-5 shadow-2xs">
+        <div class="mt-5 sm:mt-6 bg-white rounded-2xl border border-gray-200 p-3.5 sm:p-5 shadow-2xs min-w-0">
           <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
             <div>
               <h3 class="editorial-title text-sm sm:text-base font-bold text-gray-900">
                 October 1–31 Daily Peak &amp; Mean PSI Overview Strip
               </h3>
               <p class="text-xs text-gray-500">
-                Click or drag across any day bar (color-coded by NEA band) to jump directly to that date
+                Tap or drag across any day bar (color-coded by NEA band) to jump directly to that date
               </p>
             </div>
-            <div class="flex flex-wrap items-center gap-4 text-[11px] font-mono text-gray-500">
+            <div class="flex flex-wrap items-center gap-3 sm:gap-4 text-[11px] font-sans text-gray-500">
               <span class="inline-flex items-center gap-1.5"><span class="w-3 h-2 rounded-2xs bg-amber-500 inline-block"></span>Daily Peak PSI</span>
               <span class="inline-flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-gray-900 inline-block"></span>Daily Mean PSI</span>
-              <span class="text-[#991B1B] font-semibold">--- 100 PSI Unhealthy Threshold</span>
+              <span class="text-[#9E1B24] font-semibold">--- 100 PSI Threshold</span>
             </div>
           </div>
 
-          <div id="dailyStripContainer" class="relative w-full h-[118px] select-none touch-none">
+          <div id="dailyStripContainer" class="relative w-full h-[112px] sm:h-[124px] select-none touch-none min-w-0">
             <canvas id="dailyStripCanvas" class="block w-full h-full cursor-pointer"></canvas>
           </div>
         </div>
@@ -598,18 +700,18 @@
     </section>
 
     <!-- Editorial Methodology Footer -->
-    <footer class="max-w-5xl mx-auto px-5 sm:px-8 pt-10 text-xs text-gray-400 flex flex-col sm:flex-row items-center justify-between gap-4">
+    <footer class="max-w-5xl mx-auto px-4 sm:px-8 pt-8 sm:pt-10 text-xs text-gray-400 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
       <div>
         <span class="font-semibold text-gray-700">Source &amp; Methodology:</span> National Environment Agency (NEA) historical 24-hour Pollutant Standards Index (PSI) telemetry across Singapore’s five meteorological regions (October 1–31).
       </div>
-      <div class="font-mono text-gray-500 shrink-0">
+      <div class="font-sans text-gray-500 shrink-0">
         NEA Scale: 0–50 Good · 51–100 Moderate · 101–200 Unhealthy · 201–300 Very Unhealthy
       </div>
     </footer>
   </main>
 
   <!-- ========================================================================
-       EMBEDDED DATASET & INTERACTIVE ENGINE
+       EMBEDDED DATASET & RESPONSIVE INTERACTIVE ENGINE
        ======================================================================== -->
   <script>
     "use strict";
@@ -623,7 +725,6 @@
 
     /**
      * Colorblind-safe editorial regional palette
-     * North: Teal (#0D9488), South: Cobalt (#2563EB), East: Amber (#D97706), West: Crimson (#DC2626), Central: Violet (#7C3AED)
      */
     const REGIONS = [
       { id: 0, key: "north",   name: "North",   color: "#0D9488", monthAvg: "95.1"  },
@@ -689,14 +790,14 @@
       day: 18,               // 1..31 (Defaults to dramatic Oct 18 Peak)
       hourIdx: 9,            // 0..23 (9 => 10:00 AM, exact moment of 230 PSI peak)
       viewMode: "clock",     // "clock" (24h radar) | "compass" (5-region compass radar)
-      progressive: false,    // false = Full 24h Day Shape, true = Progressive Sweep (01:00 -> Selected Hour)
+      progressive: false,    // false = Full 24h, true = Progressive Sweep (01:00 -> Selected Hour)
       ghostMode: "peak18",   // "none" | "peak18" | "prevDay"
       visibleRegions: [true, true, true, true, true],
       isolatedRegion: null,  // null or 0..4 when hovering a region pill
       hoveredHourIdx: null,  // hovered spoke on 24h clock
       isPlaying: false,
       speed: 1,              // 1, 2, 4
-      loopSingleDay: false,  // false = advance across Oct 1..31, true = loop current day
+      loopSingleDay: false,  // false = Full Month Oct 1–31, true = Single Day Loop
       lastTickTime: 0,
       isDraggingStrip: false
     };
@@ -820,204 +921,17 @@
     }
 
     /* ==========================================================================
-       1. HERO ATMOSPHERIC SINGAPORE SKYLINE ILLUSTRATION (CANVAS)
+       INTERACTIVE RADAR VISUALIZATION RENDERER (24H CLOCK & 5-REGION COMPASS)
        ========================================================================== */
-    function renderHeroSkyline() {
-      const canvas = document.getElementById("heroSkylineCanvas");
-      if (!canvas) return;
-      const dpr = Math.min(window.devicePixelRatio || 1, 2);
-      const rect = canvas.getBoundingClientRect();
-      if (rect.width === 0 || rect.height === 0) return;
-
-      canvas.width = Math.round(rect.width * dpr);
-      canvas.height = Math.round(rect.height * dpr);
-      const ctx = canvas.getContext("2d");
-      ctx.scale(dpr, dpr);
-
-      const w = rect.width;
-      const h = rect.height;
-
-      // 1. Warm Golden-Amber Transboundary Haze Sky Gradient
-      const skyGrad = ctx.createLinearGradient(0, 0, 0, h);
-      skyGrad.addColorStop(0.00, "#78350F"); // Deep amber-ochre zenith
-      skyGrad.addColorStop(0.26, "#B45309"); // Burnt ochre smog
-      skyGrad.addColorStop(0.54, "#D97706"); // Warm golden particulate haze
-      skyGrad.addColorStop(0.80, "#FBBF24"); // Diffused sun glow
-      skyGrad.addColorStop(1.00, "#FEF3C7"); // Pale horizon mist
-      ctx.fillStyle = skyGrad;
-      ctx.fillRect(0, 0, w, h);
-
-      // 2. Hazy Burnt-Ochre / Pale Amber Sun Disc
-      const sunX = w * 0.67;
-      const sunY = h * 0.34;
-      const sunRadius = Math.min(w, h) * 0.25;
-      const sunGlow = ctx.createRadialGradient(sunX, sunY, sunRadius * 0.06, sunX, sunY, sunRadius * 1.95);
-      sunGlow.addColorStop(0.0, "rgba(255, 251, 235, 0.94)");
-      sunGlow.addColorStop(0.20, "rgba(254, 240, 138, 0.68)");
-      sunGlow.addColorStop(0.52, "rgba(245, 158, 11, 0.26)");
-      sunGlow.addColorStop(1.0, "rgba(217, 119, 6, 0)");
-      ctx.fillStyle = sunGlow;
-      ctx.beginPath();
-      ctx.arc(sunX, sunY, sunRadius * 1.95, 0, Math.PI * 2);
-      ctx.fill();
-
-      // 3. Distant Shrouded Horizon Ridge
-      const horizonY = h * 0.76;
-      ctx.fillStyle = "rgba(120, 53, 15, 0.30)";
-      ctx.beginPath();
-      ctx.moveTo(0, horizonY);
-      const bgStep = Math.max(24, w / 36);
-      for (let x = 0; x <= w + bgStep; x += bgStep) {
-        const bHeight = 26 + Math.sin(x * 0.015) * 18 + Math.cos(x * 0.043) * 14;
-        ctx.rect(x, horizonY - bHeight, bgStep * 0.78, bHeight);
-      }
-      ctx.fill();
-
-      // 4. Midground Financial District & Marina Bay Towers Silhouette
-      ctx.fillStyle = "rgba(69, 26, 3, 0.56)";
-      const center = w * 0.48;
-      const scale = Math.min(w / 1100, h / 460);
-
-      function drawTower(offsetX, width, height, crownType = "flat") {
-        const bx = center + offsetX * scale;
-        const bw = width * scale;
-        const bh = height * scale;
-        const by = horizonY - bh;
-
-        ctx.beginPath();
-        if (crownType === "spire") {
-          ctx.moveTo(bx, horizonY);
-          ctx.lineTo(bx, by + 16 * scale);
-          ctx.lineTo(bx + bw * 0.5, by);
-          ctx.lineTo(bx + bw, by + 16 * scale);
-          ctx.lineTo(bx + bw, horizonY);
-        } else if (crownType === "slant") {
-          ctx.moveTo(bx, horizonY);
-          ctx.lineTo(bx, by + 14 * scale);
-          ctx.lineTo(bx + bw, by);
-          ctx.lineTo(bx + bw, horizonY);
-        } else {
-          ctx.rect(bx, by, bw, bh);
-        }
-        ctx.closePath();
-        ctx.fill();
-      }
-
-      // Raffles Place & Marina Bay Financial Centre Towers
-      drawTower(-380, 34, 105, "flat");
-      drawTower(-335, 28, 132, "slant");
-      drawTower(-290, 40, 158, "spire");
-      drawTower(-235, 36, 175, "flat");
-      drawTower(-185, 30, 148, "flat");
-      drawTower(-140, 42, 195, "spire");
-      drawTower(-85,  38, 168, "slant");
-      drawTower(-35,  32, 142, "flat");
-      drawTower(210,  34, 128, "flat");
-      drawTower(260,  38, 150, "slant");
-      drawTower(315,  30, 112, "flat");
-
-      // 5. Haze Veil Between Midground & Iconic Foreground Landmarks
-      const midMist = ctx.createLinearGradient(0, horizonY - 190 * scale, 0, horizonY + 15);
-      midMist.addColorStop(0, "rgba(253, 230, 138, 0.08)");
-      midMist.addColorStop(0.6, "rgba(254, 243, 199, 0.36)");
-      midMist.addColorStop(1, "rgba(254, 243, 199, 0.52)");
-      ctx.fillStyle = midMist;
-      ctx.fillRect(0, horizonY - 210 * scale, w, 225 * scale);
-
-      // 6. Iconic Marina Bay Sands 3-Tower + SkyPark Silhouette
-      ctx.fillStyle = "rgba(41, 17, 4, 0.80)";
-      const mbsBaseX = center + 25 * scale;
-      const mbsH = 148 * scale;
-      const legW = 19 * scale;
-      const legGap = 36 * scale;
-
-      for (let i = 0; i < 3; i++) {
-        const lx = mbsBaseX + i * legGap;
-        ctx.beginPath();
-        ctx.moveTo(lx, horizonY);
-        ctx.lineTo(lx + 4 * scale, horizonY - mbsH);
-        ctx.lineTo(lx + legW - 4 * scale, horizonY - mbsH);
-        ctx.lineTo(lx + legW, horizonY);
-        ctx.closePath();
-        ctx.fill();
-      }
-
-      // SkyPark Cantilevered Deck
-      ctx.beginPath();
-      const deckY = horizonY - mbsH - 8 * scale;
-      const deckW = legGap * 2 + legW + 46 * scale;
-      const deckX = mbsBaseX - 16 * scale;
-      ctx.moveTo(deckX, deckY + 8 * scale);
-      ctx.quadraticCurveTo(deckX + deckW * 0.5, deckY + 12 * scale, deckX + deckW + 14 * scale, deckY - 3 * scale);
-      ctx.lineTo(deckX + deckW + 10 * scale, deckY - 10 * scale);
-      ctx.quadraticCurveTo(deckX + deckW * 0.5, deckY + 3 * scale, deckX - 4 * scale, deckY);
-      ctx.closePath();
-      ctx.fill();
-
-      // ArtScience Museum Lotus Silhouette
-      const lotusX = center - 38 * scale;
-      ctx.beginPath();
-      ctx.moveTo(lotusX, horizonY);
-      ctx.quadraticCurveTo(lotusX - 18 * scale, horizonY - 32 * scale, lotusX - 24 * scale, horizonY - 36 * scale);
-      ctx.quadraticCurveTo(lotusX - 6 * scale, horizonY - 20 * scale, lotusX + 4 * scale, horizonY - 40 * scale);
-      ctx.quadraticCurveTo(lotusX + 12 * scale, horizonY - 20 * scale, lotusX + 26 * scale, horizonY - 34 * scale);
-      ctx.quadraticCurveTo(lotusX + 20 * scale, horizonY - 22 * scale, lotusX + 16 * scale, horizonY);
-      ctx.closePath();
-      ctx.fill();
-
-      // Singapore Flyer Observation Wheel Silhouette
-      const flyerX = center + 215 * scale;
-      const flyerY = horizonY - 78 * scale;
-      const flyerR = 56 * scale;
-      ctx.strokeStyle = "rgba(41, 17, 4, 0.74)";
-      ctx.lineWidth = Math.max(1.5, 2.5 * scale);
-      ctx.beginPath();
-      ctx.arc(flyerX, flyerY, flyerR, 0, Math.PI * 2);
-      ctx.stroke();
-      ctx.lineWidth = Math.max(1, 1.2 * scale);
-      ctx.beginPath();
-      ctx.arc(flyerX, flyerY, flyerR * 0.86, 0, Math.PI * 2);
-      ctx.stroke();
-      ctx.lineWidth = Math.max(1.5, 2.6 * scale);
-      ctx.beginPath();
-      ctx.moveTo(flyerX, flyerY);
-      ctx.lineTo(flyerX - 20 * scale, horizonY);
-      ctx.moveTo(flyerX, flyerY);
-      ctx.lineTo(flyerX + 20 * scale, horizonY);
-      ctx.stroke();
-
-      // 7. Marina Bay Water Reflection & Smooth White Editorial Fade
-      const waterGrad = ctx.createLinearGradient(0, horizonY, 0, h);
-      waterGrad.addColorStop(0.0, "rgba(180, 83, 9, 0.45)");
-      waterGrad.addColorStop(0.45, "rgba(253, 230, 138, 0.65)");
-      waterGrad.addColorStop(1.0, "#FFFFFF");
-      ctx.fillStyle = waterGrad;
-      ctx.fillRect(0, horizonY, w, h - horizonY);
-
-      ctx.strokeStyle = "rgba(255, 255, 255, 0.35)";
-      ctx.lineWidth = 1;
-      for (let i = 0; i < 14; i++) {
-        const ry = horizonY + 8 + i * ((h - horizonY) / 16);
-        const rw = (40 + (i * 29) % 140) * scale;
-        const rx = sunX - rw * 0.5 + Math.sin(i * 2.1) * 35;
-        ctx.beginPath();
-        ctx.moveTo(rx, ry);
-        ctx.lineTo(rx + rw, ry);
-        ctx.stroke();
-      }
-    }
-
-    /* ==========================================================================
-       2. INTERACTIVE RADAR VISUALIZATION RENDERER (24H CLOCK & 5-REGION COMPASS)
-       ========================================================================== */
+    const radarCanvasWrapper = document.getElementById("radarCanvasWrapper");
     const radarCanvas = document.getElementById("radarCanvas");
     const radarTooltip = document.getElementById("radarTooltip");
     let radarGeometryCache = null;
 
     function renderRadarChart() {
-      if (!radarCanvas) return;
+      if (!radarCanvas || !radarCanvasWrapper) return;
       const dpr = Math.min(window.devicePixelRatio || 1, 2);
-      const rect = radarCanvas.getBoundingClientRect();
+      const rect = radarCanvasWrapper.getBoundingClientRect();
       if (rect.width === 0 || rect.height === 0) return;
 
       radarCanvas.width = Math.round(rect.width * dpr);
@@ -1032,8 +946,12 @@
 
       const cx = w / 2;
       const cy = h / 2;
-      const outerMargin = w < 520 ? 44 : 62;
-      const maxRadius = Math.max(90, Math.min(cx, cy) - outerMargin);
+      const isCompact = w < 520;
+      const minDim = Math.min(w, h);
+
+      // Compact outer margin on < 520px so the radar disc fills ~88% of canvas width
+      const outerMargin = isCompact ? Math.max(28, minDim * 0.06) : Math.max(54, minDim * 0.11);
+      const maxRadius = Math.max(76, Math.min(cx, cy) - outerMargin);
       const maxPSI = 250; // Dataset peaks at 230 PSI; 250 provides clean 50-unit rings
 
       const psiToRadius = (psi) => Math.max(0, Math.min(1.05, psi / maxPSI)) * maxRadius;
@@ -1055,6 +973,7 @@
 
       // Concentric PSI Grid Rings (50, 100, 150, 200, 250)
       const ringValues = [50, 100, 150, 200, 250];
+      const ringFontSize = isCompact ? 9 : 10;
       ringValues.forEach((val) => {
         const r = psiToRadius(val);
         ctx.beginPath();
@@ -1079,7 +998,7 @@
         const labelAngle = -Math.PI / 2 + (Math.PI / 24);
         const lx = cx + Math.cos(labelAngle) * r;
         const ly = cy + Math.sin(labelAngle) * r;
-        ctx.font = "600 10px 'Public Sans', sans-serif";
+        ctx.font = `600 ${ringFontSize}px 'Public Sans', sans-serif`;
         ctx.fillStyle = val === 100 ? "#B45309" : (val === 200 ? "#991B1B" : "#6B7280");
         ctx.textAlign = "left";
         ctx.textBaseline = "middle";
@@ -1087,16 +1006,16 @@
       });
 
       if (state.viewMode === "clock") {
-        render24HourClockRadar(ctx, cx, cy, maxRadius, psiToRadius);
+        render24HourClockRadar(ctx, cx, cy, maxRadius, psiToRadius, isCompact);
       } else {
-        render5RegionCompassRadar(ctx, cx, cy, maxRadius, psiToRadius);
+        render5RegionCompassRadar(ctx, cx, cy, maxRadius, psiToRadius, isCompact);
       }
     }
 
     /**
      * PRIMARY VIEW: 24-Hour Clock Radar (24 hourly spokes clockwise from 01:00 to 00:00)
      */
-    function render24HourClockRadar(ctx, cx, cy, maxRadius, psiToRadius) {
+    function render24HourClockRadar(ctx, cx, cy, maxRadius, psiToRadius, isCompact) {
       const spokeCount = 24;
       // Spoke 0 = 01:00 at -75°, Spoke 11 = 12:00 at bottom (+90°), Spoke 23 = 00:00 at 12 o'clock top (-90°)
       const getSpokeAngle = (idx) => -Math.PI / 2 + ((idx + 1) / spokeCount) * (Math.PI * 2);
@@ -1117,7 +1036,7 @@
         const angle = getSpokeAngle(i);
         const cosA = Math.cos(angle);
         const sinA = Math.sin(angle);
-        const isMajor = (i + 1) % 3 === 0;
+        const isEvery3Hours = (i + 1) % 3 === 0; // 03:00, 06:00, 09:00, 12:00, 15:00, 18:00, 21:00, 00:00
         const isActive = i === activeHour;
         const isHovered = i === state.hoveredHourIdx;
 
@@ -1126,27 +1045,28 @@
         ctx.lineTo(cx + cosA * maxRadius, cy + sinA * maxRadius);
         if (isActive) {
           ctx.strokeStyle = "rgba(180, 83, 9, 0.85)";
-          ctx.lineWidth = 2.2;
+          ctx.lineWidth = isCompact ? 1.8 : 2.2;
         } else if (isHovered) {
           ctx.strokeStyle = "rgba(17, 24, 39, 0.55)";
-          ctx.lineWidth = 1.6;
+          ctx.lineWidth = 1.5;
         } else {
-          ctx.strokeStyle = isMajor ? "rgba(107, 114, 128, 0.34)" : "rgba(156, 163, 175, 0.20)";
-          ctx.lineWidth = isMajor ? 1.1 : 0.8;
+          ctx.strokeStyle = isEvery3Hours ? "rgba(107, 114, 128, 0.36)" : "rgba(156, 163, 175, 0.20)";
+          ctx.lineWidth = isEvery3Hours ? 1.1 : 0.8;
         }
         ctx.stroke();
 
-        // Outer Hour Label
-        const labelRadius = maxRadius + (cx * 2 < 460 ? 18 : 25);
+        // Outer Hour Label: every 3 hours on mobile (< 520px) to avoid collision; all 24 hours on larger screens
+        const labelRadius = maxRadius + (isCompact ? 15 : 25);
         const lx = cx + cosA * labelRadius;
         const ly = cy + sinA * labelRadius;
 
-        const showLabel = cx * 2 >= 460 || (i % 2 === 1) || isActive || isHovered;
+        const showLabel = !isCompact || isEvery3Hours;
         if (showLabel) {
+          const fontSize = isCompact ? 9.5 : 10.5;
           ctx.font = (isActive || isHovered)
-            ? "700 11px 'Public Sans', sans-serif"
-            : (isMajor ? "600 10.5px 'Public Sans', sans-serif" : "400 9.5px 'Public Sans', sans-serif");
-          ctx.fillStyle = isActive ? "#991B1B" : (isHovered ? "#111827" : (isMajor ? "#374151" : "#9CA3AF"));
+            ? `700 ${fontSize + 0.5}px 'Public Sans', sans-serif`
+            : (isEvery3Hours ? `600 ${fontSize}px 'Public Sans', sans-serif` : `400 ${fontSize - 0.5}px 'Public Sans', sans-serif`);
+          ctx.fillStyle = isActive ? "#9E1B24" : (isHovered ? "#111827" : (isEvery3Hours ? "#374151" : "#9CA3AF"));
           ctx.textAlign = "center";
           ctx.textBaseline = "middle";
           ctx.fillText(HOUR_LABELS[i], lx, ly);
@@ -1215,7 +1135,7 @@
         }
 
         ctx.strokeStyle = hexToRgba(reg.color, strokeAlpha);
-        ctx.lineWidth = state.isolatedRegion === rIdx ? 3 : 2;
+        ctx.lineWidth = state.isolatedRegion === rIdx ? 2.8 : (isCompact ? 1.7 : 2);
         ctx.lineJoin = "round";
         ctx.stroke();
 
@@ -1230,10 +1150,10 @@
             const isHighlighted = hIdx === inspectedHour;
 
             ctx.beginPath();
-            ctx.arc(px, py, isHighlighted ? 5.5 : 2.3, 0, Math.PI * 2);
+            ctx.arc(px, py, isHighlighted ? (isCompact ? 4.5 : 5.5) : (isCompact ? 1.8 : 2.3), 0, Math.PI * 2);
             ctx.fillStyle = isHighlighted ? reg.color : "#FFFFFF";
             ctx.fill();
-            ctx.lineWidth = isHighlighted ? 2 : 1.5;
+            ctx.lineWidth = isHighlighted ? 2 : 1.4;
             ctx.strokeStyle = isHighlighted ? "#FFFFFF" : reg.color;
             ctx.stroke();
           }
@@ -1247,14 +1167,14 @@
       ctx.moveTo(cx, cy);
       ctx.lineTo(cx + Math.cos(beamAngle) * maxRadius, cy + Math.sin(beamAngle) * maxRadius);
       ctx.strokeStyle = "rgba(180, 83, 9, 0.28)";
-      ctx.lineWidth = 8;
+      ctx.lineWidth = isCompact ? 6 : 8;
       ctx.lineCap = "round";
       ctx.stroke();
       ctx.restore();
 
       // Center Hub Dot
       ctx.beginPath();
-      ctx.arc(cx, cy, 4.5, 0, Math.PI * 2);
+      ctx.arc(cx, cy, isCompact ? 3.5 : 4.5, 0, Math.PI * 2);
       ctx.fillStyle = "#111827";
       ctx.fill();
     }
@@ -1262,7 +1182,7 @@
     /**
      * SECONDARY VIEW: 5-Region Geographical Compass Radar (North, East, South, West, Central)
      */
-    function render5RegionCompassRadar(ctx, cx, cy, maxRadius, psiToRadius) {
+    function render5RegionCompassRadar(ctx, cx, cy, maxRadius, psiToRadius, isCompact) {
       const axisOrder = [
         { regIdx: 0, label: "NORTH",   angle: -Math.PI / 2 },
         { regIdx: 2, label: "EAST",    angle: -Math.PI / 2 + (2 * Math.PI) / 5 },
@@ -1304,11 +1224,11 @@
         ctx.lineWidth = 1.2;
         ctx.stroke();
 
-        const labelR = maxRadius + 28;
+        const labelR = maxRadius + (isCompact ? 18 : 28);
         const lx = cx + cosA * labelR;
         const ly = cy + sinA * labelR;
 
-        ctx.font = "700 12px 'Public Sans', sans-serif";
+        ctx.font = `700 ${isCompact ? 9.5 : 11.5}px 'Public Sans', sans-serif`;
         ctx.fillStyle = reg.color;
         ctx.textAlign = "center";
         ctx.textBaseline = "middle";
@@ -1360,7 +1280,7 @@
       ctx.fillStyle = "rgba(180, 83, 9, 0.22)";
       ctx.fill();
       ctx.strokeStyle = "#B45309";
-      ctx.lineWidth = 2.8;
+      ctx.lineWidth = isCompact ? 2.2 : 2.8;
       ctx.stroke();
 
       // Vertex markers colored by region
@@ -1371,10 +1291,10 @@
         const py = cy + Math.sin(axis.angle) * r;
 
         ctx.beginPath();
-        ctx.arc(px, py, 6.5, 0, Math.PI * 2);
+        ctx.arc(px, py, isCompact ? 5 : 6.5, 0, Math.PI * 2);
         ctx.fillStyle = reg.color;
         ctx.fill();
-        ctx.lineWidth = 2.2;
+        ctx.lineWidth = 2;
         ctx.strokeStyle = "#FFFFFF";
         ctx.stroke();
       });
@@ -1390,14 +1310,15 @@
     }
 
     /* ==========================================================================
-       3. 31-DAY OVERVIEW SCRUBBER STRIP (OCT 01 – OCT 31)
+       31-DAY OVERVIEW SCRUBBER STRIP (OCT 01 – OCT 31)
        ========================================================================== */
+    const dailyStripContainer = document.getElementById("dailyStripContainer");
     const dailyStripCanvas = document.getElementById("dailyStripCanvas");
 
     function renderDailyStrip() {
-      if (!dailyStripCanvas) return;
+      if (!dailyStripCanvas || !dailyStripContainer) return;
       const dpr = Math.min(window.devicePixelRatio || 1, 2);
-      const rect = dailyStripCanvas.getBoundingClientRect();
+      const rect = dailyStripContainer.getBoundingClientRect();
       if (rect.width === 0 || rect.height === 0) return;
 
       dailyStripCanvas.width = Math.round(rect.width * dpr);
@@ -1409,8 +1330,8 @@
       const h = rect.height;
       ctx.clearRect(0, 0, w, h);
 
-      const padLeft = 8;
-      const padRight = 8;
+      const padLeft = 6;
+      const padRight = 6;
       const padTop = 10;
       const padBottom = 22;
       const plotW = w - padLeft - padRight;
@@ -1424,14 +1345,16 @@
       ctx.beginPath();
       ctx.moveTo(padLeft, y100);
       ctx.lineTo(w - padRight, y100);
-      ctx.strokeStyle = "rgba(153, 27, 27, 0.35)";
+      ctx.strokeStyle = "rgba(158, 27, 36, 0.35)";
       ctx.lineWidth = 1;
       ctx.setLineDash([4, 3]);
       ctx.stroke();
       ctx.setLineDash([]);
 
       const colW = plotW / 31;
-      const barW = Math.max(4, colW * 0.64);
+      const barW = Math.max(3.5, colW * 0.64);
+      const isCompact = w < 640;
+      const mobileMilestoneDays = new Set([1, 5, 10, 15, 20, 25, 31]);
 
       DAILY_STATS.forEach((stat, idx) => {
         const xCenter = padLeft + colW * (idx + 0.5);
@@ -1441,7 +1364,7 @@
         if (isSelected) {
           ctx.fillStyle = "rgba(180, 83, 9, 0.14)";
           ctx.beginPath();
-          ctx.roundRect(padLeft + colW * idx + 1, 2, colW - 2, h - 4, 6);
+          ctx.roundRect(padLeft + colW * idx + 1, 2, Math.max(4, colW - 2), h - 4, 5);
           ctx.fill();
         }
 
@@ -1450,7 +1373,7 @@
 
         // Color-coded by NEA Band
         ctx.fillStyle = isSelected
-          ? "#991B1B"
+          ? "#9E1B24"
           : (stat.peak > 200 ? "rgba(220, 38, 38, 0.78)" : (stat.peak > 100 ? "rgba(245, 158, 11, 0.68)" : "rgba(14, 165, 233, 0.60)"));
         ctx.beginPath();
         ctx.roundRect(xBar, yPeak, barW, peakH, [3, 3, 0, 0]);
@@ -1459,37 +1382,43 @@
         // Daily Mean Dot
         const yMean = yForPsi(stat.mean);
         ctx.beginPath();
-        ctx.arc(xCenter, yMean, isSelected ? 3.6 : 2.2, 0, Math.PI * 2);
+        ctx.arc(xCenter, yMean, isSelected ? 3.5 : (isCompact ? 1.8 : 2.2), 0, Math.PI * 2);
         ctx.fillStyle = isSelected ? "#111827" : "#374151";
         ctx.fill();
 
-        const showDayLabel = w >= 680 || stat.day === 1 || stat.day % 5 === 0 || stat.day === 31 || isSelected;
+        // Adaptive day labels: 1, 5, 10, 15, 20, 25, 31 on mobile; all days on wide desktop
+        const showDayLabel = !isCompact
+          ? (w >= 960 || stat.day % 2 === 1 || stat.day === 31 || isSelected)
+          : mobileMilestoneDays.has(stat.day);
+
         if (showDayLabel) {
-          ctx.font = isSelected ? "700 10.5px 'Public Sans', sans-serif" : "500 9.5px 'Public Sans', sans-serif";
-          ctx.fillStyle = isSelected ? "#991B1B" : "#6B7280";
+          ctx.font = isSelected ? "700 10px 'Public Sans', sans-serif" : "500 9.5px 'Public Sans', sans-serif";
+          ctx.fillStyle = isSelected ? "#9E1B24" : "#6B7280";
           ctx.textAlign = "center";
           ctx.textBaseline = "bottom";
-          ctx.fillText(String(stat.day).padStart(2, "0"), xCenter, h - 3);
+          const labelStr = isCompact ? String(stat.day) : String(stat.day).padStart(2, "0");
+          ctx.fillText(labelStr, xCenter, h - 3);
         }
       });
     }
 
     /* ==========================================================================
-       4. SYNCHRONIZED UI UPDATES (KPI CARDS, REGION PILLS, BREAKDOWN TABLE)
+       SYNCHRONIZED UI UPDATES (KPI CARDS, REGION PILLS, BREAKDOWN TABLE)
        ========================================================================== */
     function initRegionPills() {
       const container = document.getElementById("regionPillsContainer");
+      const resetBtn = document.getElementById("btnResetRegions");
       if (!container) return;
 
       REGIONS.forEach((reg, idx) => {
         const btn = document.createElement("button");
         btn.type = "button";
         btn.dataset.regionIdx = String(idx);
-        btn.className = "region-pill inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-semibold border transition-all bg-white border-gray-200 text-gray-800 hover:border-gray-400 shadow-2xs";
+        btn.className = "region-pill inline-flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-3 py-1.5 rounded-full text-xs font-semibold border transition-all bg-white border-gray-200 text-gray-800 hover:border-gray-400 shadow-2xs";
         btn.innerHTML = `
           <span class="w-2.5 h-2.5 rounded-full shrink-0" style="background-color: ${reg.color}"></span>
           <span>${reg.name}</span>
-          <span class="font-mono text-[10px] text-gray-400">avg ${reg.monthAvg}</span>
+          <span class="font-sans text-[10px] text-gray-400 hidden sm:inline">avg ${reg.monthAvg}</span>
         `;
 
         // Single click: toggle region visibility
@@ -1525,12 +1454,22 @@
           renderRadarChart();
         });
 
-        container.appendChild(btn);
+        container.insertBefore(btn, resetBtn);
+      });
+
+      resetBtn.addEventListener("click", () => {
+        state.visibleRegions = [true, true, true, true, true];
+        state.isolatedRegion = null;
+        updateRegionPillsVisuals();
+        updateAllUI();
       });
     }
 
     function updateRegionPillsVisuals() {
       const pills = document.querySelectorAll(".region-pill");
+      const anyHidden = state.visibleRegions.some((v) => !v);
+      const resetBtn = document.getElementById("btnResetRegions");
+
       pills.forEach((pill, idx) => {
         if (state.visibleRegions[idx]) {
           pill.classList.remove("opacity-40", "line-through", "bg-gray-100");
@@ -1540,6 +1479,11 @@
           pill.classList.remove("bg-white");
         }
       });
+
+      if (resetBtn) {
+        if (anyHidden) resetBtn.classList.remove("hidden");
+        else resetBtn.classList.add("hidden");
+      }
     }
 
     function updateAllUI() {
@@ -1565,7 +1509,7 @@
       // Update Radar Titles
       if (state.viewMode === "clock") {
         document.getElementById("radarChartTitle").textContent = `24-Hour Diurnal PSI Clock · October ${state.day}`;
-        document.getElementById("radarChartSubtitle").textContent = "Clockwise spokes from 01:00 to 00:00 · Rings at 50, 100, 150, 200 & 250 PSI · Hover or tap any spoke";
+        document.getElementById("radarChartSubtitle").textContent = "Clockwise spokes from 01:00 to 00:00 · Rings at 50, 100, 150, 200 & 250 PSI · Tap or drag around dial";
         document.getElementById("radarModeBadge").textContent = "24-HOUR CLOCK RADAR";
       } else {
         document.getElementById("radarChartTitle").textContent = `5-Region Geographical Compass · October ${state.day} at ${hourStr}`;
@@ -1582,7 +1526,7 @@
 
       const statusPill = document.getElementById("kpiStatusPill");
       statusPill.textContent = nea.label;
-      statusPill.className = `px-3 py-1.5 rounded-full text-xs font-bold tracking-wide uppercase border ${nea.pillBg} ${nea.pillText} ${nea.pillBorder}`;
+      statusPill.className = `px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full text-[11px] sm:text-xs font-bold tracking-wide uppercase border shrink-0 ${nea.pillBg} ${nea.pillText} ${nea.pillBorder}`;
 
       // Update 5-Region Breakdown Cards
       const listEl = document.getElementById("regionalCardsList");
@@ -1595,13 +1539,13 @@
         const isHidden = !state.visibleRegions[idx];
 
         return `
-          <div class="p-3 rounded-xl border border-gray-100 bg-gray-50/75 transition-opacity ${isHidden ? "opacity-40" : ""}">
+          <div class="p-2.5 sm:p-3 rounded-xl border border-gray-100 bg-gray-50/75 transition-opacity ${isHidden ? "opacity-40" : ""}">
             <div class="flex items-center justify-between mb-1.5">
               <div class="flex items-center gap-2">
-                <span class="w-2.5 h-2.5 rounded-full" style="background-color: ${reg.color}"></span>
+                <span class="w-2.5 h-2.5 rounded-full shrink-0" style="background-color: ${reg.color}"></span>
                 <span class="text-sm font-semibold text-gray-800">${reg.name}</span>
               </div>
-              <div class="flex items-baseline gap-2.5 font-mono">
+              <div class="flex items-baseline gap-2.5 font-sans">
                 <span class="text-base font-bold text-gray-950 tabular-nums">${val}</span>
                 <span class="text-xs font-semibold ${deltaColor} tabular-nums w-8 text-right">${deltaStr}</span>
               </div>
@@ -1627,13 +1571,10 @@
     }
 
     /* ==========================================================================
-       5. INTERACTIVE POINTER / TOUCH HIT-TESTING & TOOLTIP
+       INTERACTIVE POINTER & TOUCH HIT-TESTING ON RADAR CANVAS
        ========================================================================== */
-    function handleRadarPointerMove(clientX, clientY) {
-      if (!radarGeometryCache || radarGeometryCache.mode !== "clock") {
-        radarTooltip.classList.add("hidden");
-        return;
-      }
+    function inspectRadarAtPointer(clientX, clientY, commitSelection = false) {
+      if (!radarGeometryCache) return;
 
       const rect = radarCanvas.getBoundingClientRect();
       const x = clientX - rect.left;
@@ -1642,91 +1583,137 @@
       const dy = y - radarGeometryCache.cy;
       const dist = Math.hypot(dx, dy);
 
-      if (dist > radarGeometryCache.maxRadius + 28 || dist < 10) {
-        if (state.hoveredHourIdx !== null) {
-          state.hoveredHourIdx = null;
+      if (radarGeometryCache.mode === "clock") {
+        if (dist > radarGeometryCache.maxRadius + 30 || dist < 8) {
+          if (state.hoveredHourIdx !== null) {
+            state.hoveredHourIdx = null;
+            renderRadarChart();
+          }
+          radarTooltip.classList.add("hidden");
+          return;
+        }
+
+        let theta = Math.atan2(dy, dx) + Math.PI / 2;
+        if (theta < 0) theta += Math.PI * 2;
+
+        const rawStep = Math.round((theta / (Math.PI * 2)) * 24);
+        const spokeIdx = (rawStep === 0 ? 23 : rawStep - 1) % 24;
+
+        if (commitSelection && state.hourIdx !== spokeIdx) {
+          state.hourIdx = spokeIdx;
+          state.hoveredHourIdx = spokeIdx;
+          updateAllUI();
+        } else if (state.hoveredHourIdx !== spokeIdx) {
+          state.hoveredHourIdx = spokeIdx;
           renderRadarChart();
         }
-        radarTooltip.classList.add("hidden");
-        return;
+
+        const vals = HAZE_DATA[state.day - 1][1][spokeIdx];
+        const maxVal = Math.max(...vals);
+        const minVal = Math.min(...vals);
+        const cat = getNeaCategory(maxVal);
+
+        document.getElementById("ttHeader").textContent = `Oct ${String(state.day).padStart(2, "0")} · ${HOUR_LABELS[spokeIdx]}`;
+        document.getElementById("ttStatus").textContent = cat.label;
+        document.getElementById("ttRangeVal").textContent = `${minVal}–${maxVal}`;
+
+        document.getElementById("ttRows").innerHTML = REGIONS.map((reg, rIdx) => `
+          <div class="flex items-center justify-between ${state.visibleRegions[rIdx] ? "" : "opacity-40"}">
+            <span class="flex items-center gap-1.5 text-gray-300">
+              <span class="w-2 h-2 rounded-full" style="background:${reg.color}"></span>
+              ${reg.name}
+            </span>
+            <span class="font-bold text-white tabular-nums">${vals[rIdx]}</span>
+          </div>
+        `).join("");
+
+        radarTooltip.classList.remove("hidden");
+        const ttW = radarTooltip.offsetWidth || 220;
+        const ttH = radarTooltip.offsetHeight || 180;
+        let leftPos = x + 14;
+        let topPos = y - 20;
+        if (leftPos + ttW > rect.width - 6) leftPos = Math.max(6, x - ttW - 14);
+        if (topPos + ttH > rect.height - 6) topPos = rect.height - ttH - 6;
+        if (topPos < 6) topPos = 6;
+
+        radarTooltip.style.left = `${leftPos}px`;
+        radarTooltip.style.top = `${topPos}px`;
+      } else if (radarGeometryCache.mode === "compass") {
+        if (dist > radarGeometryCache.maxRadius + 30 || dist < 8) {
+          radarTooltip.classList.add("hidden");
+          return;
+        }
+        const vals = HAZE_DATA[state.day - 1][1][state.hourIdx];
+        const maxVal = Math.max(...vals);
+        const minVal = Math.min(...vals);
+        const cat = getNeaCategory(maxVal);
+
+        document.getElementById("ttHeader").textContent = `Oct ${String(state.day).padStart(2, "0")} · ${HOUR_LABELS[state.hourIdx]}`;
+        document.getElementById("ttStatus").textContent = cat.label;
+        document.getElementById("ttRangeVal").textContent = `${minVal}–${maxVal}`;
+        document.getElementById("ttRows").innerHTML = REGIONS.map((reg, rIdx) => `
+          <div class="flex items-center justify-between">
+            <span class="flex items-center gap-1.5 text-gray-300">
+              <span class="w-2 h-2 rounded-full" style="background:${reg.color}"></span>
+              ${reg.name}
+            </span>
+            <span class="font-bold text-white tabular-nums">${vals[rIdx]}</span>
+          </div>
+        `).join("");
+
+        radarTooltip.classList.remove("hidden");
+        const ttW = radarTooltip.offsetWidth || 220;
+        const ttH = radarTooltip.offsetHeight || 180;
+        let leftPos = x + 14;
+        let topPos = y - 20;
+        if (leftPos + ttW > rect.width - 6) leftPos = Math.max(6, x - ttW - 14);
+        if (topPos + ttH > rect.height - 6) topPos = rect.height - ttH - 6;
+        if (topPos < 6) topPos = 6;
+
+        radarTooltip.style.left = `${leftPos}px`;
+        radarTooltip.style.top = `${topPos}px`;
       }
-
-      let theta = Math.atan2(dy, dx) + Math.PI / 2;
-      if (theta < 0) theta += Math.PI * 2;
-
-      const rawStep = Math.round((theta / (Math.PI * 2)) * 24);
-      const spokeIdx = (rawStep === 0 ? 23 : rawStep - 1) % 24;
-
-      if (state.hoveredHourIdx !== spokeIdx) {
-        state.hoveredHourIdx = spokeIdx;
-        renderRadarChart();
-      }
-
-      const vals = HAZE_DATA[state.day - 1][1][spokeIdx];
-      const maxVal = Math.max(...vals);
-      const minVal = Math.min(...vals);
-      const cat = getNeaCategory(maxVal);
-
-      document.getElementById("ttHeader").textContent = `Oct ${String(state.day).padStart(2, "0")} · ${HOUR_LABELS[spokeIdx]}`;
-      document.getElementById("ttStatus").textContent = cat.label;
-      document.getElementById("ttRangeVal").textContent = `${minVal}–${maxVal}`;
-
-      document.getElementById("ttRows").innerHTML = REGIONS.map((reg, rIdx) => `
-        <div class="flex items-center justify-between ${state.visibleRegions[rIdx] ? "" : "opacity-40"}">
-          <span class="flex items-center gap-1.5 text-gray-300">
-            <span class="w-2 h-2 rounded-full" style="background:${reg.color}"></span>
-            ${reg.name}
-          </span>
-          <span class="font-bold text-white tabular-nums">${vals[rIdx]}</span>
-        </div>
-      `).join("");
-
-      radarTooltip.classList.remove("hidden");
-      const ttW = 240;
-      const ttH = 190;
-      let leftPos = x + 16;
-      let topPos = y - 20;
-      if (leftPos + ttW > rect.width) leftPos = x - ttW - 16;
-      if (topPos + ttH > rect.height) topPos = rect.height - ttH - 8;
-      if (topPos < 8) topPos = 8;
-
-      radarTooltip.style.left = `${leftPos}px`;
-      radarTooltip.style.top = `${topPos}px`;
     }
 
-    radarCanvas.addEventListener("mousemove", (e) => handleRadarPointerMove(e.clientX, e.clientY));
+    // Mouse Events
+    radarCanvas.addEventListener("mousemove", (e) => inspectRadarAtPointer(e.clientX, e.clientY, false));
     radarCanvas.addEventListener("mouseleave", () => {
       state.hoveredHourIdx = null;
       radarTooltip.classList.add("hidden");
       renderRadarChart();
     });
-
     radarCanvas.addEventListener("click", (e) => {
-      handleRadarPointerMove(e.clientX, e.clientY);
-      if (state.hoveredHourIdx !== null) {
-        stopPlayback();
-        state.hourIdx = state.hoveredHourIdx;
-        updateAllUI();
-      }
+      stopPlayback();
+      inspectRadarAtPointer(e.clientX, e.clientY, true);
     });
 
+    // Touch Events (Tap & Drag scrubbing around the radar dial)
     radarCanvas.addEventListener("touchstart", (e) => {
       if (e.touches.length > 0) {
+        stopPlayback();
         const t = e.touches[0];
-        handleRadarPointerMove(t.clientX, t.clientY);
-        if (state.hoveredHourIdx !== null) {
-          stopPlayback();
-          state.hourIdx = state.hoveredHourIdx;
-          updateAllUI();
-        }
+        inspectRadarAtPointer(t.clientX, t.clientY, true);
       }
     }, { passive: true });
 
+    radarCanvas.addEventListener("touchmove", (e) => {
+      if (e.touches.length > 0) {
+        e.preventDefault();
+        const t = e.touches[0];
+        inspectRadarAtPointer(t.clientX, t.clientY, true);
+      }
+    }, { passive: false });
+
+    radarCanvas.addEventListener("touchend", () => {
+      state.hoveredHourIdx = null;
+      renderRadarChart();
+    }, { passive: true });
+
     /* ==========================================================================
-       6. DAILY TIMELINE STRIP POINTER / TOUCH SCRUBBING
+       DAILY TIMELINE STRIP POINTER / TOUCH SCRUBBING
        ========================================================================== */
     function selectDayFromStripX(clientX) {
-      const rect = dailyStripCanvas.getBoundingClientRect();
+      const rect = dailyStripContainer.getBoundingClientRect();
       const relX = Math.max(0, Math.min(rect.width - 1, clientX - rect.left));
       const day = Math.min(31, Math.max(1, Math.floor((relX / rect.width) * 31) + 1));
       if (day !== state.day) {
@@ -1751,12 +1738,16 @@
       stopPlayback();
       if (e.touches.length > 0) selectDayFromStripX(e.touches[0].clientX);
     }, { passive: true });
+
     dailyStripCanvas.addEventListener("touchmove", (e) => {
-      if (e.touches.length > 0) selectDayFromStripX(e.touches[0].clientX);
-    }, { passive: true });
+      if (e.touches.length > 0) {
+        e.preventDefault();
+        selectDayFromStripX(e.touches[0].clientX);
+      }
+    }, { passive: false });
 
     /* ==========================================================================
-       7. PLAYBACK ENGINE & UI EVENT LISTENERS
+       PLAYBACK ENGINE & UI EVENT LISTENERS
        ========================================================================== */
     function startPlayback() {
       state.isPlaying = true;
@@ -1849,7 +1840,7 @@
 
     document.getElementById("btnLoopScope").addEventListener("click", () => {
       state.loopSingleDay = !state.loopSingleDay;
-      document.getElementById("loopScopeLabel").textContent = state.loopSingleDay ? "Single Day Loop" : "Oct 1–31";
+      document.getElementById("loopScopeLabel").textContent = state.loopSingleDay ? "Single Day" : "Full Month";
     });
 
     document.getElementById("hourSlider").addEventListener("input", (e) => {
@@ -1877,16 +1868,17 @@
 
     btnModeClock.addEventListener("click", () => {
       state.viewMode = "clock";
-      btnModeClock.className = "px-3.5 py-2 rounded-lg text-xs sm:text-sm font-semibold transition-all bg-gray-900 text-white shadow-2xs";
-      btnModeCompass.className = "px-3.5 py-2 rounded-lg text-xs sm:text-sm font-semibold transition-all text-gray-600 hover:text-gray-900";
+      btnModeClock.className = "px-2.5 sm:px-3.5 py-2 rounded-lg text-xs sm:text-sm font-semibold transition-all bg-gray-900 text-white shadow-2xs";
+      btnModeCompass.className = "px-2.5 sm:px-3.5 py-2 rounded-lg text-xs sm:text-sm font-semibold transition-all text-gray-600 hover:text-gray-900";
       document.getElementById("btnProgressiveMode").classList.remove("hidden");
+      radarTooltip.classList.add("hidden");
       updateAllUI();
     });
 
     btnModeCompass.addEventListener("click", () => {
       state.viewMode = "compass";
-      btnModeCompass.className = "px-3.5 py-2 rounded-lg text-xs sm:text-sm font-semibold transition-all bg-gray-900 text-white shadow-2xs";
-      btnModeClock.className = "px-3.5 py-2 rounded-lg text-xs sm:text-sm font-semibold transition-all text-gray-600 hover:text-gray-900";
+      btnModeCompass.className = "px-2.5 sm:px-3.5 py-2 rounded-lg text-xs sm:text-sm font-semibold transition-all bg-gray-900 text-white shadow-2xs";
+      btnModeClock.className = "px-2.5 sm:px-3.5 py-2 rounded-lg text-xs sm:text-sm font-semibold transition-all text-gray-600 hover:text-gray-900";
       document.getElementById("btnProgressiveMode").classList.add("hidden");
       radarTooltip.classList.add("hidden");
       updateAllUI();
@@ -1902,12 +1894,12 @@
         dot.classList.remove("bg-gray-300");
         dot.classList.add("bg-[#B45309]");
         btn.classList.add("border-amber-400", "bg-amber-50/60");
-        label.textContent = "Progressive Sweep (01:00 → Hr)";
+        label.textContent = "Progressive Sweep";
       } else {
         dot.classList.add("bg-gray-300");
         dot.classList.remove("bg-[#B45309]");
         btn.classList.remove("border-amber-400", "bg-amber-50/60");
-        label.textContent = "Full 24h Day Shape";
+        label.textContent = "Full 24h";
       }
       renderRadarChart();
     });
@@ -1946,21 +1938,24 @@
       }
     });
 
-    // Responsive Resize Observer
-    let resizeTimer = null;
-    window.addEventListener("resize", () => {
-      clearTimeout(resizeTimer);
-      resizeTimer = setTimeout(() => {
-        renderHeroSkyline();
+    // Dynamic ResizeObserver for Responsive Canvas Re-rendering
+    if (typeof ResizeObserver !== "undefined") {
+      const observer = new ResizeObserver(() => {
         renderRadarChart();
         renderDailyStrip();
-      }, 60);
-    });
+      });
+      if (radarCanvasWrapper) observer.observe(radarCanvasWrapper);
+      if (dailyStripContainer) observer.observe(dailyStripContainer);
+    } else {
+      window.addEventListener("resize", () => {
+        renderRadarChart();
+        renderDailyStrip();
+      });
+    }
 
     // Initialize on Window Load
     window.onload = function () {
       initRegionPills();
-      renderHeroSkyline();
       updateAllUI();
       requestAnimationFrame(animationLoop);
     };
