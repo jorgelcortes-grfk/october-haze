@@ -1,0 +1,1969 @@
+<!DOCTYPE html>
+<html lang="en">
+  <!-- Google Fonts: Libre Caslon Text (Headlines & Titles) and Public Sans (Story Copy, UI & Data Labels) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            serif: ['"Libre Caslon Text"', 'Georgia', 'serif'],
+            sans: ['"Public Sans"', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+            mono: ['"Public Sans"', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+          },
+          colors: {
+            bt: {
+              crimson: '#991B1B',
+              terracotta: '#B45309',
+              ink: '#111827',
+            }
+          }
+        }
+      }
+    };
+  </script>
+  <style>
+    /* Clean editorial white canvas & Public Sans story/UI base */
+    html, body {
+      background-color: #FFFFFF;
+      color: #111827;
+      font-family: 'Public Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Libre Caslon Text strictly for Masthead, Headlines & Section Titles */
+    .bt-wordmark,
+    .editorial-headline,
+    .editorial-title {
+      font-family: 'Libre Caslon Text', Georgia, serif;
+      color: #111827;
+    }
+
+    .bt-wordmark {
+      font-weight: 700;
+      letter-spacing: 0.04em;
+    }
+
+    /* Editorial Headline Fluid Scale */
+    .editorial-headline {
+      font-size: clamp(2.15rem, 4.4vw, 3.55rem);
+      line-height: 1.13;
+      letter-spacing: -0.015em;
+    }
+
+    /* Explicit 50% Page Width Constraint for Analytical Story Paragraphs */
+    .editorial-50-col {
+      width: 50%;
+      margin-left: auto;
+      margin-right: auto;
+      font-family: 'Public Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    @media (max-width: 900px) {
+      .editorial-50-col {
+        width: 90%;
+      }
+    }
+
+    /* Custom range slider styling for crisp journalistic precision */
+    input[type="range"].editorial-slider {
+      -webkit-appearance: none;
+      appearance: none;
+      background: transparent;
+      cursor: pointer;
+    }
+
+    input[type="range"].editorial-slider::-webkit-slider-runnable-track {
+      height: 6px;
+      border-radius: 999px;
+      background: #E5E7EB;
+    }
+
+    input[type="range"].editorial-slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: #111827;
+      border: 2.5px solid #FFFFFF;
+      box-shadow: 0 2px 6px rgba(17, 24, 39, 0.35);
+      margin-top: -6px;
+      transition: transform 0.15s ease, background-color 0.15s ease;
+    }
+
+    input[type="range"].editorial-slider::-webkit-slider-thumb:hover {
+      transform: scale(1.15);
+      background: #B45309;
+    }
+
+    input[type="range"].editorial-slider::-moz-range-track {
+      height: 6px;
+      border-radius: 999px;
+      background: #E5E7EB;
+    }
+
+    input[type="range"].editorial-slider::-moz-range-thumb {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: #111827;
+      border: 2.5px solid #FFFFFF;
+      box-shadow: 0 2px 6px rgba(17, 24, 39, 0.35);
+      transition: transform 0.15s ease, background-color 0.15s ease;
+    }
+
+    /* Subtle drifting haze wisps in hero */
+    @keyframes driftSlow {
+      0%, 100% { transform: translateX(0px); }
+      50% { transform: translateX(-24px); }
+    }
+    @keyframes driftReverse {
+      0%, 100% { transform: translateX(0px); }
+      50% { transform: translateX(22px); }
+    }
+    .haze-wisp-a { animation: driftSlow 20s ease-in-out infinite; }
+    .haze-wisp-b { animation: driftReverse 26s ease-in-out infinite; }
+
+    /* Tabular numerals for stable metric updates */
+    .tabular-nums {
+      font-variant-numeric: tabular-nums;
+    }
+  </style>
+</head>
+<body class="bg-white text-gray-900 selection:bg-amber-100 selection:text-amber-950">
+
+  <!-- ========================================================================
+       1. TOP EDITORIAL HEADER BAR (BUSINESS TIMES STYLE)
+       ======================================================================== -->
+  <nav aria-label="The Business Times Editorial Header" class="sticky top-0 z-50 w-full h-[62px] bg-white/95 backdrop-blur-md border-b border-[#E5E7EB] transition-shadow">
+    <div class="w-full max-w-[1600px] h-full mx-auto px-4 sm:px-6 lg:px-10 flex items-center justify-between gap-3">
+
+      <!-- Left Side: Authentic THE BUSINESS TIMES Masthead Logo + Interactive Kicker -->
+      <div class="flex items-center gap-3 sm:gap-4 min-w-0">
+        <a href="https://www.businesstimes.com.sg" target="_blank" rel="noopener noreferrer" class="group inline-flex items-center gap-2.5 focus:outline-none" aria-label="The Business Times Home">
+          <!-- Crisp BT Monogram Emblem with Crimson Accent -->
+          <span class="inline-flex items-center justify-center w-8 h-8 rounded-[4px] bg-[#111827] text-white font-serif font-bold text-sm tracking-tight border-b-[3px] border-[#991B1B] group-hover:bg-[#991B1B] transition-colors shrink-0">
+            BT
+          </span>
+          <!-- Authentic Serif Masthead Wordmark -->
+          <span class="bt-wordmark text-[15px] sm:text-[19px] md:text-[21px] uppercase truncate">
+            THE BUSINESS TIMES
+          </span>
+        </a>
+
+        <!-- Subtle Vertical Divider & Interactive Special Report Kicker -->
+        <span class="hidden md:inline-block h-5 w-[1px] bg-gray-300" aria-hidden="true"></span>
+        <div class="hidden md:inline-flex items-center gap-2 text-[11px] font-sans font-bold uppercase tracking-[0.12em] text-[#991B1B]">
+          <span class="w-1.5 h-1.5 rounded-full bg-[#B45309]"></span>
+          <span>INTERACTIVE · SPECIAL REPORT</span>
+        </div>
+      </div>
+
+      <!-- Right Side: Monochrome Social Sharing Icon Buttons (34px x 34px) -->
+      <div class="flex items-center gap-1.5 sm:gap-2 shrink-0" role="group" aria-label="Share this interactive story">
+        <!-- Facebook -->
+        <button type="button" data-share="facebook" title="Share on Facebook" aria-label="Share on Facebook"
+          class="share-btn w-[34px] h-[34px] rounded-full flex items-center justify-center text-[#1F2937] hover:text-[#B45309] hover:bg-[#F3F4F6] border border-transparent hover:border-gray-200 transition-colors">
+          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M13.5 21v-8.2h2.75l.41-3.2H13.5V7.56c0-.93.26-1.56 1.59-1.56h1.7V3.14A22.8 22.8 0 0014.32 3c-2.45 0-4.12 1.49-4.12 4.24v2.36H7.43v3.2h2.77V21h3.3z"/>
+          </svg>
+        </button>
+
+        <!-- X / Twitter -->
+        <button type="button" data-share="twitter" title="Share on X (Twitter)" aria-label="Share on X (Twitter)"
+          class="share-btn w-[34px] h-[34px] rounded-full flex items-center justify-center text-[#1F2937] hover:text-[#B45309] hover:bg-[#F3F4F6] border border-transparent hover:border-gray-200 transition-colors">
+          <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+          </svg>
+        </button>
+
+        <!-- LinkedIn -->
+        <button type="button" data-share="linkedin" title="Share on LinkedIn" aria-label="Share on LinkedIn"
+          class="share-btn w-[34px] h-[34px] rounded-full flex items-center justify-center text-[#1F2937] hover:text-[#B45309] hover:bg-[#F3F4F6] border border-transparent hover:border-gray-200 transition-colors">
+          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M6.94 5a2 2 0 11-4-.002 2 2 0 014 .002zM7 8.48H3V21h4V8.48zm6.32 0H9.34V21h3.94v-6.57c0-3.66 4.77-4 4.77 0V21H22v-7.93c0-6.17-7.06-5.94-8.72-2.91l.04-1.68z"/>
+          </svg>
+        </button>
+
+        <!-- WhatsApp -->
+        <button type="button" data-share="whatsapp" title="Share via WhatsApp" aria-label="Share via WhatsApp"
+          class="share-btn w-[34px] h-[34px] rounded-full flex items-center justify-center text-[#1F2937] hover:text-[#B45309] hover:bg-[#F3F4F6] border border-transparent hover:border-gray-200 transition-colors">
+          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91C21.95 6.45 17.5 2 12.04 2zm5.82 14.01c-.24.68-1.41 1.3-1.95 1.38-.5.08-1.13.11-1.82-.11-.42-.13-.96-.31-1.65-.61-2.9-1.25-4.79-4.18-4.94-4.37-.14-.19-1.18-1.57-1.18-3 0-1.43.75-2.13 1.01-2.42.27-.29.58-.36.77-.36.19 0 .39 0 .56.01.18.01.42-.07.66.5.24.58.82 2.01.89 2.15.07.15.12.32.02.51-.1.19-.15.31-.29.48-.15.17-.31.38-.44.51-.15.14-.3.3-.13.59.17.29.76 1.25 1.63 2.02 1.12.99 2.06 1.3 2.35 1.45.29.14.46.12.63-.07.17-.19.73-.85.92-1.14.19-.29.39-.24.66-.14.27.1 1.7.8 1.99.95.29.14.48.22.55.34.07.12.07.69-.17 1.37z"/>
+          </svg>
+        </button>
+
+        <!-- Email -->
+        <button type="button" data-share="email" title="Share via Email" aria-label="Share via Email"
+          class="share-btn w-[34px] h-[34px] rounded-full flex items-center justify-center text-[#1F2937] hover:text-[#B45309] hover:bg-[#F3F4F6] border border-transparent hover:border-gray-200 transition-colors">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.9" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"/>
+          </svg>
+        </button>
+
+        <!-- Copy Link -->
+        <button type="button" data-share="copy" title="Copy page link" aria-label="Copy page link"
+          class="share-btn w-[34px] h-[34px] rounded-full flex items-center justify-center text-[#1F2937] hover:text-[#B45309] hover:bg-[#F3F4F6] border border-transparent hover:border-gray-200 transition-colors">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.9" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M13.19 8.688a4.5 4.5 0 011.242 7.244l-4.5 4.5a4.5 4.5 0 01-6.364-6.364l1.757-1.757m13.35-.622l1.757-1.757a4.5 4.5 0 00-6.364-6.364l-4.5 4.5a4.5 4.5 0 001.242 7.244"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Toast Notification for Copy Link Action -->
+  <div id="copyToast" role="status" aria-live="polite"
+    class="fixed top-[74px] right-4 sm:right-8 z-50 pointer-events-none opacity-0 translate-y-1 transition-all duration-200 flex items-center gap-2 px-4 py-2.5 rounded-lg bg-[#111827] text-white text-xs font-mono shadow-lg border border-gray-700">
+    <svg class="w-4 h-4 text-amber-400 shrink-0" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/>
+    </svg>
+    <span>Link copied to clipboard</span>
+  </div>
+
+  <!-- ========================================================================
+       2. FULL-WIDTH ATMOSPHERIC HERO IMAGE (100vw, 480px)
+       ======================================================================== -->
+  <header class="relative w-full h-[440px] sm:h-[490px] lg:h-[520px] overflow-hidden bg-amber-950 select-none">
+    <!-- Multi-layered Canvas Singapore Skyline in Transboundary Haze -->
+    <canvas id="heroSkylineCanvas" class="absolute inset-0 w-full h-full block"></canvas>
+
+    <!-- Subtle SVG Drifting Haze Particle Wisps & Supertrees Vector Accents -->
+    <svg class="absolute inset-0 w-full h-full pointer-events-none" viewBox="0 0 1440 520" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
+      <defs>
+        <linearGradient id="wispGrad1" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#FEF3C7" stop-opacity="0" />
+          <stop offset="50%" stop-color="#FEF3C7" stop-opacity="0.34" />
+          <stop offset="100%" stop-color="#FEF3C7" stop-opacity="0" />
+        </linearGradient>
+        <linearGradient id="wispGrad2" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#FDE68A" stop-opacity="0" />
+          <stop offset="50%" stop-color="#FDE68A" stop-opacity="0.28" />
+          <stop offset="100%" stop-color="#FDE68A" stop-opacity="0" />
+        </linearGradient>
+      </defs>
+
+      <!-- Drifting Atmospheric Haze Bands -->
+      <g class="haze-wisp-a">
+        <ellipse cx="420" cy="240" rx="460" ry="26" fill="url(#wispGrad1)" />
+        <ellipse cx="1060" cy="195" rx="410" ry="22" fill="url(#wispGrad2)" />
+      </g>
+      <g class="haze-wisp-b">
+        <ellipse cx="780" cy="295" rx="540" ry="30" fill="url(#wispGrad1)" />
+        <ellipse cx="240" cy="325" rx="340" ry="20" fill="url(#wispGrad2)" />
+      </g>
+
+      <!-- Gardens by the Bay Supertrees Silhouette Cluster (Left Waterfront) -->
+      <g fill="rgba(41, 17, 4, 0.72)" transform="translate(155, 398)">
+        <!-- Supertree 1 -->
+        <path d="M-4,0 L-2,-44 L-22,-54 L22,-54 L2,-44 L4,0 Z" />
+        <ellipse cx="0" cy="-54" rx="26" ry="5" />
+        <!-- Supertree 2 (Taller) -->
+        <path d="M36,0 L39,-62 L12,-75 L68,-75 L41,-62 L44,0 Z" />
+        <ellipse cx="40" cy="-75" rx="33" ry="6" />
+        <!-- Supertree 3 -->
+        <path d="M82,0 L84,-48 L64,-58 L104,-58 L86,-48 L88,0 Z" />
+        <ellipse cx="84" cy="-58" rx="24" ry="4.5" />
+      </g>
+    </svg>
+
+    <!-- Bottom Linear Gradient Fade into Pure White (#FFFFFF) -->
+    <div class="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-b from-transparent via-white/75 to-[#FFFFFF] pointer-events-none"></div>
+
+    <!-- Subtle Photo / Illustration Credit Caption -->
+    <div class="relative z-10 h-full max-w-[1600px] mx-auto px-4 sm:px-8 pb-3 flex items-end justify-between gap-4">
+      <span class="text-[10px] sm:text-[11px] font-mono uppercase tracking-widest text-gray-600 bg-white/85 backdrop-blur-xs px-2.5 py-1 rounded border border-gray-200/70">
+        SINGAPORE SKYLINE IN HAZE CONDITIONS • DATA: NATIONAL ENVIRONMENT AGENCY (NEA)
+      </span>
+      <span class="hidden md:inline-block text-[11px] font-mono text-gray-500">
+        OCT 01 – OCT 31 · 744 HOURLY OBSERVATIONS
+      </span>
+    </div>
+  </header>
+
+  <!-- ========================================================================
+       3. EDITORIAL HEADER, DECK & TWO PARAGRAPHS AT 50% PAGE WIDTH (#FFFFFF)
+       ======================================================================== -->
+  <main class="bg-[#FFFFFF] pt-4 sm:pt-8 pb-20">
+    <!-- Rubric, Editorial Headline & Introduction Deck -->
+    <section class="max-w-4xl mx-auto px-5 sm:px-8 text-center">
+      <div class="inline-flex items-center gap-2 text-xs font-sans font-bold uppercase tracking-[0.16em] text-[#991B1B] mb-3.5">
+        <span>AIR QUALITY &amp; URBAN ENVIRONMENT</span>
+      </div>
+
+      <h1 class="editorial-headline font-bold mb-6">
+        A Month in the Smog: Tracking Singapore’s October Haze Hour by Hour
+      </h1>
+
+      <p class="font-sans text-[1.15rem] sm:text-[1.3rem] text-[#374151] font-normal leading-[1.6] max-w-[720px] mx-auto mb-8">
+        A 31-day, 744-hour reconstruction of Singapore’s 24-hour Pollutant Standards Index (PSI) across the North, South, East, West, and Central regions—revealing how transboundary smoke built, peaked, and finally cleared from October 1 to October 31.
+      </p>
+
+      <!-- Editorial Byline & Dataset Telemetry Strip -->
+      <div class="flex flex-wrap items-center justify-center gap-x-5 gap-y-2 py-3.5 border-y border-gray-200 text-xs text-gray-500 font-mono">
+        <span class="font-semibold text-gray-800">THE BUSINESS TIMES GRAPHICS DESK</span>
+        <span class="hidden sm:inline text-gray-300">|</span>
+        <span>31 DAYS × 24 HOURS × 5 REGIONS</span>
+        <span class="hidden sm:inline text-gray-300">|</span>
+        <span class="text-amber-800 font-semibold">PEAK: 230 PSI (WEST · OCT 18, 10:00)</span>
+      </div>
+    </section>
+
+    <!-- Two Analytical Paragraphs Explicitly Constrained to 50% Page Width on Desktop -->
+    <article class="editorial-50-col mt-10 sm:mt-12 mb-14 sm:mb-16 space-y-6 text-[#1F2937] font-sans text-[1.0625rem] sm:text-[1.125rem] leading-[1.8]">
+      <p>
+        October opened in the Moderate band (<strong class="font-semibold text-gray-900">59–94 PSI</strong>) on October 1 before building into a sustained multi-day episode in mid-October. During the acute <strong class="font-semibold text-gray-900">October 14–18</strong> surge, all five regions crossed decisively into the Unhealthy range (<strong class="font-semibold text-gray-900">&gt;100 PSI</strong>) while Western and Central Singapore breached the Very Unhealthy threshold (<strong class="font-semibold text-gray-900">200+ PSI</strong>)—culminating in a month-high <strong class="font-semibold text-red-700">230 PSI in the West at 10:00 on October 18</strong>, shortly after the Central region reached <strong class="font-semibold text-amber-800">229 PSI</strong> on October 16.
+      </p>
+      <p>
+        Prevailing winds and diurnal atmospheric mixing created a marked spatial gradient across the island throughout the month. The <strong class="font-semibold text-gray-900">West (124.9 monthly mean)</strong> and <strong class="font-semibold text-gray-900">Central (121.9)</strong> sectors bore the heaviest sustained particulate burden, whereas the <strong class="font-semibold text-gray-900">North (95.1 mean)</strong> consistently registered the lowest exposure. Cleaner regional airflow returned in the final week of October, bringing readings across every district back into Moderate territory and dropping to a month-low <strong class="font-semibold text-teal-700">55 PSI in the East on October 30</strong>.
+      </p>
+    </article>
+
+    <!-- ======================================================================
+         4. FULL-WIDTH RESPONSIVE INTERACTIVE RADAR GRAPHIC (width: 100%)
+         ====================================================================== -->
+    <section aria-label="Interactive Singapore October Haze Radar Visualization" class="w-full border-y border-gray-200 bg-slate-50/80 py-8 sm:py-12">
+      <div class="w-full max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-10">
+
+        <!-- Visualization Header & Geometry Mode Controls -->
+        <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-4 pb-6 border-b border-gray-200">
+          <div>
+            <div class="flex items-center gap-2 text-xs font-mono uppercase tracking-wider text-[#991B1B] font-semibold mb-1">
+              <span>Interactive Radar Graphic</span>
+              <span>•</span>
+              <span id="headerSubtitleDate">Oct 18 · 10:00 AM (Hr 10)</span>
+            </div>
+            <h2 class="font-serif text-2xl sm:text-3xl font-bold text-gray-900">
+              Hourly, Daily &amp; Regional PSI Evolution Radar
+            </h2>
+          </div>
+
+          <!-- Radar Geometry & Comparison Controls -->
+          <div class="flex flex-wrap items-center gap-2.5">
+            <!-- View Toggle: 24-Hour Clock Radar vs 5-Region Compass -->
+            <div class="inline-flex rounded-xl bg-white p-1 border border-gray-200 shadow-2xs" role="group" aria-label="Radar Geometry Mode">
+              <button id="btnModeClock" type="button" class="px-3.5 py-2 rounded-lg text-xs sm:text-sm font-semibold transition-all bg-gray-900 text-white shadow-2xs">
+                24-Hour Clock Radar
+              </button>
+              <button id="btnModeCompass" type="button" class="px-3.5 py-2 rounded-lg text-xs sm:text-sm font-semibold transition-all text-gray-600 hover:text-gray-900">
+                5-Region Compass
+              </button>
+            </div>
+
+            <!-- Progressive Sweep vs Full 24h Day Shape Toggle -->
+            <button id="btnProgressiveMode" type="button" class="px-3.5 py-2.5 rounded-xl bg-white border border-gray-200 text-xs sm:text-sm font-medium text-gray-700 hover:bg-gray-100 transition-all flex items-center gap-2 shadow-2xs" title="Toggle between Full 24h Day Shape and Progressive Sweep from 01:00 to selected hour">
+              <span id="progressiveDot" class="w-2 h-2 rounded-full bg-gray-300"></span>
+              <span id="progressiveLabel">Full 24h Day Shape</span>
+            </button>
+
+            <!-- Ghost Comparison Selector -->
+            <div class="inline-flex items-center rounded-xl bg-white border border-gray-200 px-2.5 py-1.5 shadow-2xs">
+              <label for="ghostSelect" class="text-xs font-mono uppercase text-gray-500 mr-2">Ghost:</label>
+              <select id="ghostSelect" class="text-xs sm:text-sm font-medium text-gray-800 bg-transparent focus:outline-none cursor-pointer">
+                <option value="none">None</option>
+                <option value="peak18" selected>Oct 18 Peak Day</option>
+                <option value="prevDay">Previous Day</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- Playback Deck, Day/Hour Sliders & Region Filter Pills -->
+        <div class="mt-6 bg-white rounded-2xl border border-gray-200 p-4 sm:p-5 shadow-2xs">
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-5 items-center">
+
+            <!-- Play / Pause, Step, Speed & Scope Controls (4 cols) -->
+            <div class="lg:col-span-4 flex flex-wrap items-center gap-2">
+              <button id="btnPlayPause" type="button" class="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-[#B45309] hover:bg-amber-800 active:scale-[0.99] text-white font-semibold text-sm shadow-2xs transition-all min-w-[110px]">
+                <svg id="iconPlay" class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M6.3 2.841A1.5 1.5 0 004 4.11V15.89a1.5 1.5 0 002.3 1.269l9.344-5.89a1.5 1.5 0 000-2.538L6.3 2.84z"/></svg>
+                <svg id="iconPause" class="w-4 h-4 hidden" fill="currentColor" viewBox="0 0 20 20"><path d="M5.75 3a.75.75 0 00-.75.75v12.5c0 .414.336.75.75.75h1.5a.75.75 0 00.75-.75V3.75A.75.75 0 007.25 3h-1.5zM12.75 3a.75.75 0 00-.75.75v12.5c0 .414.336.75.75.75h1.5a.75.75 0 00.75-.75V3.75a.75.75 0 00-.75-.75h-1.5z"/></svg>
+                <span id="playLabel">Play</span>
+              </button>
+
+              <!-- Prev / Next Hour Step Buttons -->
+              <div class="inline-flex rounded-xl border border-gray-200 bg-gray-50 p-0.5">
+                <button id="btnPrevHour" type="button" class="p-2 rounded-lg text-gray-600 hover:text-gray-900 hover:bg-white transition-colors" title="Previous Hour (Left Arrow)" aria-label="Previous Hour">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg>
+                </button>
+                <button id="btnNextHour" type="button" class="p-2 rounded-lg text-gray-600 hover:text-gray-900 hover:bg-white transition-colors" title="Next Hour (Right Arrow)" aria-label="Next Hour">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+                </button>
+              </div>
+
+              <!-- Speed Selector (1x, 2x, 4x) -->
+              <div class="inline-flex rounded-xl border border-gray-200 bg-gray-50 p-0.5 text-xs font-mono">
+                <button type="button" data-speed="1" class="speed-btn px-2.5 py-1.5 rounded-lg bg-white text-gray-900 font-semibold shadow-2xs">1x</button>
+                <button type="button" data-speed="2" class="speed-btn px-2.5 py-1.5 rounded-lg text-gray-600 hover:text-gray-900">2x</button>
+                <button type="button" data-speed="4" class="speed-btn px-2.5 py-1.5 rounded-lg text-gray-600 hover:text-gray-900">4x</button>
+              </div>
+
+              <!-- Playback Scope Toggle: Full Month Oct 1–31 vs Single Day Loop -->
+              <button id="btnLoopScope" type="button" class="px-3 py-2 rounded-xl border border-gray-200 bg-gray-50 hover:bg-gray-100 text-xs font-medium text-gray-700 transition-colors" title="Toggle between advancing through Oct 1–31 or looping the selected day">
+                Scope: <strong id="loopScopeLabel" class="text-gray-900">Oct 1–31</strong>
+              </button>
+            </div>
+
+            <!-- Hour Slider (01:00 to 00:00) (4 cols) -->
+            <div class="lg:col-span-4 flex flex-col gap-1.5">
+              <div class="flex items-center justify-between text-xs">
+                <span class="font-semibold text-gray-700">Hour of Day</span>
+                <span id="hourSliderReadout" class="font-mono font-bold text-gray-950 bg-gray-100 px-2 py-0.5 rounded-md">10:00 AM (10:00)</span>
+              </div>
+              <input id="hourSlider" type="range" min="0" max="23" value="9" class="editorial-slider w-full" aria-label="Select hour from 01:00 to 00:00" />
+              <div class="flex justify-between text-[10px] font-mono text-gray-400">
+                <span>01:00</span>
+                <span>06:00</span>
+                <span>12:00</span>
+                <span>18:00</span>
+                <span>00:00</span>
+              </div>
+            </div>
+
+            <!-- Day Slider (Oct 01 to Oct 31) + Prev/Next Day Buttons (4 cols) -->
+            <div class="lg:col-span-4 flex flex-col gap-1.5">
+              <div class="flex items-center justify-between text-xs">
+                <div class="flex items-center gap-1.5">
+                  <span class="font-semibold text-gray-700">October Date</span>
+                  <div class="inline-flex rounded-md border border-gray-200 bg-gray-50">
+                    <button id="btnPrevDay" type="button" class="px-1.5 py-0.5 text-gray-600 hover:text-gray-900 hover:bg-white rounded-l-md" title="Previous Day (Up Arrow)" aria-label="Previous Day">−</button>
+                    <button id="btnNextDay" type="button" class="px-1.5 py-0.5 text-gray-600 hover:text-gray-900 hover:bg-white rounded-r-md" title="Next Day (Down Arrow)" aria-label="Next Day">+</button>
+                  </div>
+                </div>
+                <div class="flex items-center gap-2">
+                  <button id="btnJumpPeak" type="button" class="text-[11px] font-mono text-[#991B1B] hover:underline underline-offset-2 font-medium">Oct 18 Peak</button>
+                  <span id="daySliderReadout" class="font-mono font-bold text-gray-950 bg-amber-50 border border-amber-200 px-2 py-0.5 rounded-md">Oct 18</span>
+                </div>
+              </div>
+              <input id="daySlider" type="range" min="1" max="31" value="18" class="editorial-slider w-full" aria-label="Select day from October 1 to October 31" />
+              <div class="flex justify-between text-[10px] font-mono text-gray-400">
+                <span>Oct 01</span>
+                <span>Oct 08</span>
+                <span>Oct 16</span>
+                <span>Oct 24</span>
+                <span>Oct 31</span>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Interactive Region Filter/Solo Pills & NEA PSI Band Legend -->
+          <div class="mt-4 pt-4 border-t border-gray-100 flex flex-col xl:flex-row xl:items-center justify-between gap-3">
+            <div class="flex flex-wrap items-center gap-2" id="regionPillsContainer">
+              <span class="text-xs font-mono uppercase text-gray-400 mr-1">Regions (Click toggle · Double-click solo):</span>
+              <!-- Populated dynamically by JS -->
+            </div>
+
+            <!-- NEA PSI Band Legend -->
+            <div class="flex flex-wrap items-center gap-3 text-xs text-gray-600">
+              <span class="font-mono uppercase text-gray-400 text-[11px]">NEA PSI Bands:</span>
+              <span class="inline-flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span>0–50 Good</span>
+              <span class="inline-flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-sky-500"></span>51–100 Moderate</span>
+              <span class="inline-flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-amber-500"></span>101–200 Unhealthy</span>
+              <span class="inline-flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-red-600"></span>201–300 Very Unhealthy</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- MAIN VISUALIZATION STAGE: RADAR CANVAS (8 COLS) + LIVE TELEMETRY SIDEBAR (4 COLS) -->
+        <div class="mt-6 grid grid-cols-1 xl:grid-cols-12 gap-6 items-stretch">
+
+          <!-- Interactive Radar Chart Container (8 columns on xl) -->
+          <div class="xl:col-span-8 bg-white rounded-2xl border border-gray-200 p-4 sm:p-6 shadow-2xs flex flex-col justify-between relative">
+            <div class="flex flex-wrap items-center justify-between gap-2 mb-2">
+              <div>
+                <h3 id="radarChartTitle" class="editorial-title text-base sm:text-lg font-bold text-gray-900">
+                  24-Hour Diurnal PSI Clock · October 18
+                </h3>
+                <p id="radarChartSubtitle" class="text-xs text-gray-500">
+                  Clockwise spokes from 01:00 to 00:00 · Rings at 50, 100, 150, 200 &amp; 250 PSI · Hover or tap any spoke
+                </p>
+              </div>
+              <span id="radarModeBadge" class="text-[11px] font-mono px-2.5 py-1 rounded-full bg-gray-100 text-gray-700 border border-gray-200">
+                24-HOUR CLOCK RADAR
+              </span>
+            </div>
+
+            <!-- Responsive Aspect-Preserving Canvas Wrapper -->
+            <div id="radarCanvasWrapper" class="relative w-full h-[380px] sm:h-[500px] lg:h-[560px] flex items-center justify-center touch-pan-y">
+              <canvas id="radarCanvas" class="block w-full h-full cursor-crosshair"></canvas>
+
+              <!-- Floating Interactive Tooltip -->
+              <div id="radarTooltip" class="hidden pointer-events-none absolute z-30 w-60 rounded-xl bg-gray-950/95 backdrop-blur-md text-white p-3.5 shadow-xl border border-gray-800 text-xs transition-opacity duration-75">
+                <div class="flex items-center justify-between border-b border-gray-800 pb-2 mb-2">
+                  <span id="ttHeader" class="font-mono font-bold text-amber-300">Oct 18 · 10:00</span>
+                  <span id="ttStatus" class="px-1.5 py-0.5 rounded text-[10px] font-semibold bg-red-500/20 text-red-300">Very Unhealthy</span>
+                </div>
+                <div id="ttOverall" class="flex items-center justify-between text-[11px] font-mono text-gray-400 pb-1.5 mb-1.5 border-b border-gray-800/80">
+                  <span>Overall Singapore</span>
+                  <span id="ttRangeVal" class="text-white font-semibold">130–230</span>
+                </div>
+                <div id="ttRows" class="space-y-1.5 font-mono"></div>
+              </div>
+            </div>
+
+            <!-- Keyboard & Interaction Hint Footer -->
+            <div class="mt-2 pt-3 border-t border-gray-100 flex flex-wrap items-center justify-between gap-2 text-[11px] text-gray-400 font-mono">
+              <span>SHORTCUTS: ← / → Hours · ↑ / ↓ Days · Spacebar Play/Pause</span>
+              <span>Tap or click any spoke on the clock to jump to that hour</span>
+            </div>
+          </div>
+
+          <!-- Live Regional KPI Readout & Breakdown Table Sidebar (4 columns on xl) -->
+          <div class="xl:col-span-4 flex flex-col gap-5">
+
+            <!-- Active Observation KPI Card -->
+            <div class="bg-white rounded-2xl border border-gray-200 p-5 shadow-2xs">
+              <div class="flex items-start justify-between gap-3">
+                <div>
+                  <span class="text-xs font-mono uppercase tracking-wider text-gray-400">Active Observation</span>
+                  <div class="mt-1 flex items-baseline gap-2.5">
+                    <span id="kpiDate" class="font-serif text-2xl sm:text-3xl font-bold text-gray-950">Oct 18</span>
+                    <span id="kpiHour" class="font-mono text-lg sm:text-xl font-semibold text-[#B45309]">10:00</span>
+                  </div>
+                </div>
+                <span id="kpiStatusPill" class="px-3 py-1.5 rounded-full text-xs font-bold tracking-wide uppercase bg-red-100 text-red-800 border border-red-200">
+                  Very Unhealthy
+                </span>
+              </div>
+
+              <!-- Overall Singapore Range, Highest Region & 5-Area Mean -->
+              <div class="mt-4 pt-4 border-t border-gray-100 grid grid-cols-3 gap-2.5 text-center">
+                <div class="bg-gray-50 rounded-xl p-2.5">
+                  <div class="text-[10px] font-mono uppercase text-gray-400">Overall Range</div>
+                  <div id="kpiRange" class="font-mono text-sm sm:text-base font-bold text-gray-900 tabular-nums mt-0.5">130–230</div>
+                </div>
+                <div class="bg-gray-50 rounded-xl p-2.5">
+                  <div class="text-[10px] font-mono uppercase text-gray-400">Highest Area</div>
+                  <div id="kpiHighestRegion" class="font-mono text-sm sm:text-base font-bold text-[#991B1B] tabular-nums mt-0.5">West (230)</div>
+                </div>
+                <div class="bg-gray-50 rounded-xl p-2.5">
+                  <div class="text-[10px] font-mono uppercase text-gray-400">5-Area Mean</div>
+                  <div id="kpiMean" class="font-mono text-sm sm:text-base font-bold text-gray-900 tabular-nums mt-0.5">187.0</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- 5-Region Breakdown Table Card -->
+            <div class="bg-white rounded-2xl border border-gray-200 p-5 shadow-2xs flex-1 flex flex-col justify-between">
+              <div>
+                <div class="flex items-center justify-between mb-3">
+                  <h3 class="editorial-title text-sm font-bold text-gray-900">5-Region PSI Breakdown</h3>
+                  <span class="text-[11px] font-mono text-gray-400">PSI · Δ Prev Hr</span>
+                </div>
+
+                <div id="regionalCardsList" class="space-y-2.5">
+                  <!-- Populated dynamically by JS -->
+                </div>
+              </div>
+
+              <!-- Daily Context Micro-Insight -->
+              <div id="dailyInsightBox" class="mt-5 p-3.5 rounded-xl bg-amber-50/75 border border-amber-200/80 text-xs text-gray-700 leading-relaxed">
+                <!-- Populated dynamically by JS -->
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- 31-DAY OVERVIEW SCRUBBER STRIP (OCT 01 – OCT 31) -->
+        <div class="mt-6 bg-white rounded-2xl border border-gray-200 p-4 sm:p-5 shadow-2xs">
+          <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
+            <div>
+              <h3 class="editorial-title text-sm sm:text-base font-bold text-gray-900">
+                October 1–31 Daily Peak &amp; Mean PSI Overview Strip
+              </h3>
+              <p class="text-xs text-gray-500">
+                Click or drag across any day bar (color-coded by NEA band) to jump directly to that date
+              </p>
+            </div>
+            <div class="flex flex-wrap items-center gap-4 text-[11px] font-mono text-gray-500">
+              <span class="inline-flex items-center gap-1.5"><span class="w-3 h-2 rounded-2xs bg-amber-500 inline-block"></span>Daily Peak PSI</span>
+              <span class="inline-flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-gray-900 inline-block"></span>Daily Mean PSI</span>
+              <span class="text-[#991B1B] font-semibold">--- 100 PSI Unhealthy Threshold</span>
+            </div>
+          </div>
+
+          <div id="dailyStripContainer" class="relative w-full h-[118px] select-none touch-none">
+            <canvas id="dailyStripCanvas" class="block w-full h-full cursor-pointer"></canvas>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Editorial Methodology Footer -->
+    <footer class="max-w-5xl mx-auto px-5 sm:px-8 pt-10 text-xs text-gray-400 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div>
+        <span class="font-semibold text-gray-700">Source &amp; Methodology:</span> National Environment Agency (NEA) historical 24-hour Pollutant Standards Index (PSI) telemetry across Singapore’s five meteorological regions (October 1–31).
+      </div>
+      <div class="font-mono text-gray-500 shrink-0">
+        NEA Scale: 0–50 Good · 51–100 Moderate · 101–200 Unhealthy · 201–300 Very Unhealthy
+      </div>
+    </footer>
+  </main>
+
+  <!-- ========================================================================
+       EMBEDDED DATASET & INTERACTIVE ENGINE
+       ======================================================================== -->
+  <script>
+    "use strict";
+
+    /**
+     * Complete, exact 31-day × 24-hour × 5-region Singapore October 24-hour PSI dataset (compact_data.json).
+     * Tuple format per hour: [North, South, East, West, Central]
+     * Hours index 0..23 correspond to 01:00..00:00 (midnight).
+     */
+    const HAZE_DATA = [[1,[[78,87,93,93,94],[77,84,91,90,91],[75,81,89,88,89],[73,79,86,86,87],[71,76,85,84,85],[70,76,83,82,84],[68,75,82,80,83],[66,73,80,77,82],[65,71,79,75,81],[63,70,77,73,79],[62,68,76,71,78],[62,67,76,70,78],[61,68,74,68,76],[61,68,74,66,75],[60,67,73,64,73],[59,67,73,62,72],[60,68,73,63,73],[60,69,74,63,74],[60,70,74,63,74],[60,71,75,64,75],[60,72,76,65,75],[60,73,76,64,75],[60,73,76,64,76],[60,73,76,65,76]]],[2,[[60,72,75,65,76],[60,72,75,65,76],[61,72,75,65,76],[61,72,74,65,75],[61,72,74,66,76],[61,73,73,66,76],[61,73,73,66,76],[61,73,73,66,75],[61,72,72,66,75],[60,72,71,66,75],[60,73,71,66,74],[60,73,70,65,73],[60,73,70,65,73],[60,73,70,66,74],[61,74,72,67,75],[62,74,73,69,77],[63,75,74,70,79],[64,76,75,72,81],[65,76,77,74,83],[67,76,78,75,85],[68,77,78,76,87],[70,77,79,78,89],[71,77,80,80,91],[71,78,80,82,92]]],[3,[[72,78,81,83,93],[72,78,82,84,93],[72,79,83,85,94],[72,79,84,87,95],[72,79,85,88,95],[73,79,86,88,96],[73,80,88,89,96],[73,81,89,89,97],[74,83,91,89,98],[75,85,92,90,99],[76,86,94,91,102],[77,87,95,92,104],[77,87,96,93,105],[78,87,96,94,105],[79,86,96,94,105],[79,85,95,93,105],[79,84,95,93,104],[78,84,94,92,103],[77,84,94,92,103],[77,83,94,91,102],[76,82,93,90,102],[76,82,93,90,101],[76,83,93,89,100],[76,83,94,89,100]]],[4,[[76,83,94,88,102],[76,83,94,88,102],[77,83,93,87,103],[77,83,93,87,102],[78,83,92,86,102],[77,82,91,87,102],[78,81,90,87,102],[78,80,89,87,102],[78,78,87,88,100],[78,76,86,88,99],[77,75,84,87,97],[76,73,82,86,95],[75,72,81,85,94],[75,71,81,84,93],[75,71,81,84,93],[75,72,81,84,94],[76,73,82,84,96],[77,74,82,84,97],[78,75,82,84,98],[78,75,82,84,99],[78,76,82,83,101],[79,75,83,84,101],[79,75,83,86,99],[79,77,82,88,100]]],[5,[[80,79,83,90,102],[82,82,85,92,104],[83,84,87,94,105],[83,85,89,96,106],[83,86,90,99,108],[84,87,90,102,110],[85,87,91,103,111],[85,87,91,104,113],[85,88,92,105,114],[85,88,92,106,115],[86,89,93,107,116],[86,90,94,108,117],[87,91,96,110,118],[88,92,96,112,119],[90,93,97,114,120],[92,93,99,117,121],[93,94,100,118,122],[94,95,101,120,122],[97,97,104,121,124],[100,98,107,123,126],[103,101,109,125,128],[105,103,110,127,130],[106,104,112,126,134],[108,103,114,125,136]]],[6,[[108,100,114,123,135],[107,99,114,122,134],[106,97,113,121,133],[106,96,112,119,133],[107,96,111,118,132],[107,95,112,117,130],[107,95,112,116,129],[107,95,113,115,128],[107,96,113,114,128],[107,97,114,113,128],[108,99,115,113,130],[109,101,116,113,131],[110,101,117,113,133],[111,101,118,114,134],[110,102,118,113,134],[109,102,118,112,135],[109,102,119,112,135],[109,102,119,112,135],[107,101,119,111,134],[104,99,117,111,131],[103,98,118,110,130],[101,97,117,110,130],[100,95,116,110,128],[99,95,115,110,126]]],[7,[[98,95,115,110,126],[98,95,115,111,126],[99,95,116,111,127],[99,96,117,112,128],[99,96,118,114,129],[99,97,118,115,129],[99,97,118,117,130],[99,98,119,118,130],[100,99,120,119,131],[100,100,120,120,132],[100,102,121,122,133],[101,103,123,124,133],[101,105,124,126,132],[102,107,125,129,131],[103,109,127,132,131],[104,110,128,135,132],[105,111,128,137,133],[105,112,129,140,135],[106,113,130,143,136],[107,114,131,145,138],[108,115,131,148,140],[109,117,131,149,141],[109,120,132,150,144],[111,121,132,153,146]]],[8,[[113,123,133,155,148],[114,124,132,158,148],[114,122,131,161,148],[114,120,130,162,148],[114,120,128,162,147],[113,120,128,161,147],[113,120,127,161,146],[113,118,126,161,146],[113,117,125,161,145],[112,114,123,160,143],[112,111,122,159,142],[111,109,119,157,140],[109,108,118,154,140],[106,108,116,151,140],[105,107,115,149,140],[104,106,113,146,139],[102,105,112,143,138],[100,104,110,141,137],[98,105,108,139,137],[97,105,107,138,138],[98,106,107,138,139],[99,107,108,140,139],[99,109,111,142,140],[99,112,115,142,142]]],[9,[[100,115,118,144,144],[102,118,121,145,147],[103,123,123,147,150],[105,127,127,149,152],[107,131,131,152,156],[109,135,134,155,159],[111,139,137,158,163],[113,145,140,161,166],[115,150,143,164,170],[117,154,147,166,173],[119,157,151,168,177],[123,160,155,170,181],[127,162,157,174,184],[130,164,159,177,186],[131,166,161,180,189],[132,167,163,183,191],[134,168,164,186,192],[135,167,166,187,192],[136,166,168,187,192],[135,166,170,186,192],[135,164,169,186,190],[134,161,167,183,189],[134,158,164,180,186],[133,155,162,178,183]]],[10,[[132,152,161,174,181],[130,150,159,172,180],[129,148,158,169,179],[128,147,157,168,178],[127,145,156,166,177],[126,143,156,164,176],[125,141,157,162,176],[125,138,156,161,175],[124,135,156,160,174],[124,135,156,160,174],[123,135,156,161,173],[122,134,154,161,171],[121,132,153,159,170],[120,131,152,157,170],[121,130,152,156,171],[120,130,153,154,170],[119,129,153,153,170],[118,129,152,152,168],[118,128,150,152,168],[119,127,148,152,166],[119,127,147,152,165],[119,126,146,152,164],[119,125,145,152,163],[119,123,144,153,162]]],[11,[[119,122,143,154,160],[119,121,142,154,159],[120,121,142,154,158],[120,121,142,154,157],[119,119,141,153,155],[119,117,140,153,154],[119,116,140,153,153],[118,115,139,153,152],[118,115,138,152,151],[118,115,136,151,149],[117,114,135,150,149],[116,114,135,150,149],[116,115,135,151,149],[115,114,135,152,149],[114,114,134,153,148],[113,114,133,154,147],[113,114,132,154,147],[112,113,131,155,147],[112,113,132,155,146],[110,113,133,155,147],[109,114,133,154,147],[108,115,135,153,146],[108,115,136,152,146],[107,116,137,151,146]]],[12,[[107,118,139,150,147],[107,118,139,149,148],[106,117,139,148,148],[106,116,138,148,148],[105,117,138,148,148],[105,118,137,147,148],[105,118,135,147,147],[104,118,134,147,146],[104,117,133,148,146],[103,115,132,148,145],[103,116,132,147,145],[103,115,133,147,146],[104,115,133,147,147],[106,117,133,148,148],[109,117,135,149,149],[112,117,136,149,151],[114,118,138,151,152],[116,121,139,153,154],[118,122,139,155,155],[120,122,140,157,155],[123,123,141,161,156],[124,122,142,164,157],[125,123,144,166,159],[126,125,144,167,161]]],[13,[[126,127,144,169,162],[126,128,145,170,163],[127,129,145,172,164],[126,131,147,173,164],[126,131,147,173,165],[126,131,148,173,166],[126,134,150,173,167],[127,134,151,173,168],[127,134,154,172,169],[128,134,155,172,170],[129,134,156,174,170],[128,134,155,174,170],[126,133,154,174,168],[124,133,153,173,166],[121,132,151,172,163],[117,131,150,169,160],[115,130,149,165,157],[113,128,148,162,155],[111,126,148,160,153],[110,126,147,159,152],[108,126,146,156,152],[107,126,145,154,152],[106,126,144,153,151],[105,126,144,152,149]]],[14,[[105,125,144,151,147],[105,125,143,150,146],[106,125,143,148,145],[106,124,143,147,144],[106,123,143,146,143],[107,123,142,145,143],[107,122,142,145,142],[107,122,141,145,142],[106,124,139,144,142],[106,125,139,144,142],[106,125,140,143,141],[106,127,142,143,142],[107,131,145,146,144],[110,134,149,153,148],[114,138,154,160,154],[118,143,159,168,160],[121,148,164,175,166],[124,152,169,182,172],[125,157,172,190,178],[126,159,173,197,183],[127,161,174,203,184],[127,161,174,204,184],[127,160,174,205,185],[127,160,174,206,186]]],[15,[[127,160,173,207,186],[127,159,173,207,186],[125,158,172,207,185],[125,158,171,206,185],[125,157,171,206,185],[125,157,171,206,185],[124,157,170,206,184],[125,157,170,207,184],[125,158,171,208,185],[126,161,171,209,189],[127,163,170,211,193],[128,163,170,212,194],[128,162,170,210,194],[127,160,168,203,192],[125,158,165,196,188],[123,156,163,192,187],[122,156,161,188,186],[121,157,160,184,186],[121,157,160,180,185],[123,157,163,175,186],[125,159,167,173,190],[128,162,170,174,194],[130,165,174,176,198],[132,167,176,178,203]]],[16,[[134,168,178,180,206],[136,169,180,182,210],[139,171,183,184,213],[141,173,186,187,216],[143,176,189,190,219],[145,178,192,193,221],[146,180,195,195,224],[148,183,198,197,226],[149,183,200,199,227],[150,183,202,201,226],[151,182,203,201,225],[153,184,205,202,226],[155,185,205,203,226],[155,186,205,204,228],[157,185,205,205,229],[159,183,204,205,229],[160,183,203,205,227],[162,182,203,204,227],[162,183,201,202,225],[159,183,198,200,222],[156,181,195,198,219],[154,179,191,196,215],[152,176,188,194,212],[151,174,186,192,208]]],[17,[[150,171,185,191,205],[148,170,183,190,203],[147,168,182,189,199],[146,166,181,187,196],[145,164,179,185,194],[144,163,176,183,193],[144,161,175,181,191],[143,158,174,179,189],[142,158,175,178,187],[140,156,175,176,185],[139,154,174,176,184],[136,153,173,178,184],[135,153,173,181,185],[135,154,173,185,184],[133,157,174,188,184],[132,160,176,191,185],[131,161,177,193,186],[129,162,178,196,186],[130,162,178,199,186],[131,161,178,202,185],[131,161,178,206,185],[130,163,180,209,185],[129,166,182,212,185],[129,168,182,215,185]]],[18,[[130,169,182,218,185],[130,170,181,221,184],[129,171,180,222,184],[129,172,180,223,185],[129,172,180,225,185],[129,172,181,227,185],[129,173,180,228,185],[129,174,179,228,186],[130,173,178,229,187],[130,173,175,230,187],[128,171,171,230,185],[127,167,167,227,180],[124,163,163,222,175],[122,158,159,216,169],[118,153,154,210,164],[115,148,150,204,158],[112,142,146,197,152],[109,137,142,192,147],[106,133,139,186,143],[105,130,136,181,140],[105,127,132,176,136],[104,123,127,171,133],[104,118,123,166,130],[102,115,120,161,128]]],[19,[[100,113,117,155,126],[98,111,115,150,125],[96,109,113,148,123],[95,107,112,144,121],[93,105,109,141,119],[92,104,107,139,117],[90,102,105,136,115],[88,98,103,134,113],[87,96,101,132,110],[86,94,99,129,108],[86,93,98,126,105],[85,92,97,122,103],[85,90,96,118,103],[85,90,95,115,103],[86,89,94,115,104],[86,88,93,114,104],[87,89,91,114,105],[89,88,91,114,105],[89,88,90,114,106],[87,88,91,114,106],[87,89,92,114,107],[87,90,92,114,109],[86,91,94,115,110],[86,92,96,115,111]]],[20,[[86,93,97,117,111],[86,93,99,118,112],[87,94,99,119,113],[88,95,99,121,114],[88,95,99,122,114],[89,95,99,124,114],[89,95,98,124,114],[89,96,99,125,114],[89,97,98,125,114],[89,98,99,126,115],[89,100,101,128,117],[89,102,102,130,119],[90,103,103,133,121],[89,103,104,136,122],[89,104,105,138,123],[89,104,106,139,123],[87,104,106,140,123],[85,103,106,140,122],[85,103,106,140,122],[85,103,106,141,122],[86,102,106,142,122],[86,100,106,141,122],[86,99,106,140,122],[85,98,105,140,121]]],[21,[[85,97,103,138,121],[85,95,101,137,120],[85,94,99,136,119],[84,93,98,135,118],[83,93,98,134,117],[82,92,97,133,117],[82,91,97,133,116],[83,90,97,132,116],[83,89,97,132,116],[83,89,97,131,116],[82,88,97,131,116],[83,87,97,129,115],[82,87,96,127,113],[81,87,95,125,112],[80,86,93,123,111],[79,86,93,122,110],[80,87,92,122,109],[80,87,92,123,109],[80,87,92,123,108],[80,87,92,124,108],[80,88,91,124,107],[80,88,91,124,106],[79,88,90,123,106],[78,87,89,122,105]]],[22,[[78,87,89,121,103],[77,87,88,119,102],[76,87,88,118,102],[75,86,87,116,100],[75,85,86,114,99],[75,85,85,112,98],[74,85,84,110,97],[74,85,82,108,95],[74,84,82,107,93],[73,82,81,106,92],[73,82,79,104,90],[72,80,79,103,90],[72,79,78,102,89],[72,78,77,101,88],[71,76,77,99,87],[71,75,76,97,85],[71,74,75,96,84],[71,73,74,94,83],[71,72,74,92,82],[71,72,74,89,82],[71,71,73,88,81],[70,71,73,87,80],[70,71,72,87,80],[71,71,72,86,79]]],[23,[[71,70,72,86,80],[71,70,72,86,80],[71,70,72,87,80],[70,69,72,88,80],[69,69,72,88,79],[68,68,71,89,79],[68,67,71,90,79],[67,68,72,90,79],[67,69,71,90,79],[66,70,72,90,79],[66,72,72,92,80],[67,75,74,92,81],[69,77,77,94,83],[72,80,79,96,87],[76,83,82,99,91],[79,85,84,103,95],[83,87,87,106,99],[85,89,89,108,102],[87,91,91,109,105],[89,92,93,110,107],[92,94,95,110,110],[95,95,97,112,112],[96,97,99,116,115],[98,98,103,120,117]]],[24,[[100,102,105,124,119],[103,104,107,128,121],[105,106,109,131,124],[108,108,111,134,126],[110,110,113,137,128],[112,112,115,139,130],[115,115,117,142,133],[117,116,118,144,135],[119,117,120,146,138],[121,118,121,148,140],[124,117,122,150,140],[125,116,122,152,140],[126,114,120,153,139],[125,113,119,153,137],[123,111,118,152,135],[121,110,116,151,132],[118,108,115,151,129],[116,109,114,151,127],[115,108,114,152,126],[115,108,113,153,124],[114,108,113,154,123],[113,108,114,154,121],[113,108,113,152,120],[113,108,113,150,120]]],[25,[[112,107,113,148,119],[112,106,113,146,119],[112,106,113,145,118],[112,106,113,145,117],[112,106,112,144,117],[112,105,112,142,116],[111,104,112,140,115],[109,103,111,138,113],[108,102,110,135,111],[107,100,109,132,109],[104,98,107,129,106],[102,97,107,126,105],[99,97,106,124,104],[98,97,106,121,103],[97,96,105,119,102],[96,96,104,116,101],[95,95,103,112,100],[95,92,102,109,99],[94,91,99,107,97],[92,90,98,105,96],[90,88,96,103,95],[88,87,94,101,93],[86,86,92,98,91],[84,84,91,96,89]]],[26,[[82,81,88,92,86],[80,79,86,89,84],[78,77,83,86,81],[75,76,81,82,79],[73,73,79,79,77],[71,72,78,77,75],[69,71,76,76,73],[68,70,75,74,72],[68,69,74,74,71],[67,68,73,74,70],[67,68,73,74,70],[67,68,72,73,71],[67,67,71,72,71],[66,67,71,72,70],[66,67,71,72,71],[67,66,70,72,71],[67,67,70,73,71],[67,67,71,74,71],[68,66,70,74,70],[68,65,69,73,70],[67,64,68,73,69],[66,63,67,73,68],[65,62,66,72,67],[65,62,65,71,67]]],[27,[[64,62,65,72,67],[64,63,65,72,67],[64,63,64,71,67],[63,63,64,71,67],[63,63,63,71,66],[63,62,62,72,66],[63,62,62,71,66],[63,62,62,71,65],[62,62,62,71,65],[62,62,61,71,65],[61,63,61,72,64],[61,64,61,72,64],[61,64,61,73,64],[62,64,61,74,64],[63,63,62,75,64],[65,63,62,76,64],[65,63,62,76,65],[65,62,62,76,65],[64,63,62,75,65],[64,63,62,75,65],[64,63,63,73,65],[65,64,64,73,66],[67,64,64,73,67],[68,64,66,73,68]]],[28,[[69,65,67,74,69],[70,65,67,74,70],[71,65,68,75,70],[73,65,69,75,71],[73,65,70,76,72],[74,66,71,76,74],[75,66,71,77,75],[76,67,72,77,76],[77,67,73,78,77],[78,67,74,78,78],[78,67,74,79,79],[79,67,74,79,79],[78,67,74,78,79],[78,66,73,78,79],[77,66,73,79,79],[75,66,73,78,79],[73,66,73,78,78],[73,67,73,77,78],[73,67,72,77,77],[74,67,72,77,77],[74,67,72,78,77],[74,68,72,78,77],[73,68,72,78,76],[72,68,72,78,76]]],[29,[[72,67,71,78,76],[72,66,71,78,75],[72,67,72,77,75],[71,67,71,77,74],[72,68,72,77,73],[72,68,72,77,72],[72,68,72,77,71],[72,68,72,77,71],[72,68,72,77,71],[72,69,72,77,71],[72,69,71,78,71],[73,69,71,78,71],[73,69,71,78,71],[73,70,71,78,71],[73,70,70,77,70],[72,70,69,77,69],[72,69,69,77,68],[72,68,68,77,68],[72,68,69,77,68],[71,68,68,77,67],[70,68,68,77,67],[69,67,67,76,67],[69,67,66,75,66],[68,67,65,75,66]]],[30,[[68,66,64,74,65],[67,66,63,73,65],[66,65,62,72,65],[66,64,61,71,65],[65,63,60,70,65],[64,63,59,68,64],[64,62,58,67,64],[63,62,57,66,63],[62,61,56,65,63],[62,60,55,64,61],[60,60,55,62,60],[59,59,55,61,58],[58,59,55,60,57],[58,59,56,59,57],[58,59,56,59,58],[59,60,56,59,59],[59,60,56,59,60],[59,60,56,59,60],[59,60,55,59,61],[59,59,55,58,61],[59,59,55,59,61],[60,59,55,60,61],[60,59,55,61,61],[60,59,55,62,61]]],[31,[[60,59,55,62,62],[60,59,55,62,62],[60,58,55,62,62],[60,58,55,63,61],[60,58,56,64,61],[60,59,56,65,61],[60,59,56,67,61],[60,59,57,68,61],[60,59,57,69,61],[60,58,57,70,61],[60,58,57,71,61],[61,58,57,71,61],[61,57,57,72,62],[61,58,57,73,63],[61,57,58,74,64],[61,58,58,75,64],[61,59,58,75,64],[60,60,58,75,64],[61,60,59,76,64],[61,61,60,77,65],[62,61,60,77,65],[63,62,61,77,66],[63,63,62,77,67],[64,63,63,78,68]]]];
+
+    /**
+     * Colorblind-safe editorial regional palette
+     * North: Teal (#0D9488), South: Cobalt (#2563EB), East: Amber (#D97706), West: Crimson (#DC2626), Central: Violet (#7C3AED)
+     */
+    const REGIONS = [
+      { id: 0, key: "north",   name: "North",   color: "#0D9488", monthAvg: "95.1"  },
+      { id: 1, key: "south",   name: "South",   color: "#2563EB", monthAvg: "109.7" },
+      { id: 2, key: "east",    name: "East",    color: "#D97706", monthAvg: "115.6" },
+      { id: 3, key: "west",    name: "West",    color: "#DC2626", monthAvg: "124.9" },
+      { id: 4, key: "central", name: "Central", color: "#7C3AED", monthAvg: "121.9" }
+    ];
+
+    /**
+     * Hour labels for the 24-hour cycle (index 0 = 01:00, index 23 = 00:00)
+     */
+    const HOUR_LABELS = Array.from({ length: 24 }, (_, idx) => {
+      const hr = (idx + 1) % 24;
+      return `${String(hr).padStart(2, "0")}:00`;
+    });
+
+    const HOUR_LABELS_12H = Array.from({ length: 24 }, (_, idx) => {
+      const hr = (idx + 1) % 24;
+      if (hr === 0) return "12:00 AM (00:00)";
+      if (hr === 12) return "12:00 PM (12:00)";
+      return hr < 12 ? `${hr}:00 AM (${String(hr).padStart(2, "0")}:00)` : `${hr - 12}:00 PM (${String(hr).padStart(2, "0")}:00)`;
+    });
+
+    /**
+     * Precompute daily summaries (peak, mean, min) for all 31 days
+     */
+    const DAILY_STATS = HAZE_DATA.map(([day, hours]) => {
+      let maxVal = -Infinity;
+      let minVal = Infinity;
+      let sum = 0;
+      let count = 0;
+      let peakRegionIdx = 0;
+      let peakHourIdx = 0;
+
+      hours.forEach((vals, hIdx) => {
+        vals.forEach((v, rIdx) => {
+          if (v > maxVal) {
+            maxVal = v;
+            peakRegionIdx = rIdx;
+            peakHourIdx = hIdx;
+          }
+          if (v < minVal) minVal = v;
+          sum += v;
+          count++;
+        });
+      });
+
+      return {
+        day,
+        peak: maxVal,
+        min: minVal,
+        mean: sum / count,
+        peakRegion: REGIONS[peakRegionIdx].name,
+        peakHourLabel: HOUR_LABELS[peakHourIdx]
+      };
+    });
+
+    /**
+     * Application State
+     */
+    const state = {
+      day: 18,               // 1..31 (Defaults to dramatic Oct 18 Peak)
+      hourIdx: 9,            // 0..23 (9 => 10:00 AM, exact moment of 230 PSI peak)
+      viewMode: "clock",     // "clock" (24h radar) | "compass" (5-region compass radar)
+      progressive: false,    // false = Full 24h Day Shape, true = Progressive Sweep (01:00 -> Selected Hour)
+      ghostMode: "peak18",   // "none" | "peak18" | "prevDay"
+      visibleRegions: [true, true, true, true, true],
+      isolatedRegion: null,  // null or 0..4 when hovering a region pill
+      hoveredHourIdx: null,  // hovered spoke on 24h clock
+      isPlaying: false,
+      speed: 1,              // 1, 2, 4
+      loopSingleDay: false,  // false = advance across Oct 1..31, true = loop current day
+      lastTickTime: 0,
+      isDraggingStrip: false
+    };
+
+    /* ==========================================================================
+       SOCIAL SHARING ACTIONS & TOAST NOTIFICATION
+       ========================================================================== */
+    let toastTimeout = null;
+    function showCopyToast(message = "Link copied to clipboard") {
+      const toast = document.getElementById("copyToast");
+      if (!toast) return;
+      toast.querySelector("span").textContent = message;
+      toast.classList.remove("opacity-0", "translate-y-1");
+      toast.classList.add("opacity-100", "translate-y-0");
+      clearTimeout(toastTimeout);
+      toastTimeout = setTimeout(() => {
+        toast.classList.add("opacity-0", "translate-y-1");
+        toast.classList.remove("opacity-100", "translate-y-0");
+      }, 2400);
+    }
+
+    function copyTextFallback(text) {
+      const ta = document.createElement("textarea");
+      ta.value = text;
+      ta.style.position = "fixed";
+      ta.style.left = "-9999px";
+      document.body.appendChild(ta);
+      ta.select();
+      try {
+        document.execCommand("copy");
+        showCopyToast("Link copied to clipboard");
+      } catch (err) {
+        showCopyToast("Unable to copy link");
+      }
+      document.body.removeChild(ta);
+    }
+
+    document.querySelectorAll(".share-btn").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const platform = btn.dataset.share;
+        const pageUrl = window.location.href;
+        const shareTitle = encodeURIComponent("A Month in the Smog: Tracking Singapore’s October Haze Hour by Hour — The Business Times");
+        const encodedUrl = encodeURIComponent(pageUrl);
+
+        if (platform === "facebook") {
+          window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`, "_blank", "noopener,noreferrer,width=600,height=500");
+        } else if (platform === "twitter") {
+          window.open(`https://twitter.com/intent/tweet?text=${shareTitle}&url=${encodedUrl}`, "_blank", "noopener,noreferrer,width=600,height=450");
+        } else if (platform === "linkedin") {
+          window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${encodedUrl}`, "_blank", "noopener,noreferrer,width=600,height=550");
+        } else if (platform === "whatsapp") {
+          window.open(`https://api.whatsapp.com/send?text=${shareTitle}%20${encodedUrl}`, "_blank", "noopener,noreferrer");
+        } else if (platform === "email") {
+          window.location.href = `mailto:?subject=${shareTitle}&body=Explore%20Singapore's%20hourly%20October%20haze%20evolution:%20${encodedUrl}`;
+        } else if (platform === "copy") {
+          if (navigator.clipboard && window.isSecureContext) {
+            navigator.clipboard.writeText(pageUrl)
+              .then(() => showCopyToast("Link copied to clipboard"))
+              .catch(() => copyTextFallback(pageUrl));
+          } else {
+            copyTextFallback(pageUrl);
+          }
+        }
+      });
+    });
+
+    /**
+     * Helper: NEA Air Quality Classification
+     */
+    function getNeaCategory(psi) {
+      if (psi <= 50) {
+        return {
+          label: "Good",
+          pillBg: "bg-emerald-100",
+          pillText: "text-emerald-800",
+          pillBorder: "border-emerald-200",
+          hex: "#10B981"
+        };
+      }
+      if (psi <= 100) {
+        return {
+          label: "Moderate",
+          pillBg: "bg-sky-100",
+          pillText: "text-sky-800",
+          pillBorder: "border-sky-200",
+          hex: "#0EA5E9"
+        };
+      }
+      if (psi <= 200) {
+        return {
+          label: "Unhealthy",
+          pillBg: "bg-amber-100",
+          pillText: "text-amber-900",
+          pillBorder: "border-amber-300",
+          hex: "#F59E0B"
+        };
+      }
+      return {
+        label: "Very Unhealthy",
+        pillBg: "bg-red-100",
+        pillText: "text-red-800",
+        pillBorder: "border-red-300",
+        hex: "#EF4444"
+      };
+    }
+
+    /**
+     * Helper: Fetch readings for (day, hourIdx) and previous hour for delta calculation
+     */
+    function getReadingsAt(day, hourIdx) {
+      const dayEntry = HAZE_DATA[day - 1][1];
+      const current = dayEntry[hourIdx];
+
+      let prev = null;
+      if (hourIdx > 0) {
+        prev = dayEntry[hourIdx - 1];
+      } else if (day > 1) {
+        prev = HAZE_DATA[day - 2][1][23];
+      }
+      return { current, prev };
+    }
+
+    /* ==========================================================================
+       1. HERO ATMOSPHERIC SINGAPORE SKYLINE ILLUSTRATION (CANVAS)
+       ========================================================================== */
+    function renderHeroSkyline() {
+      const canvas = document.getElementById("heroSkylineCanvas");
+      if (!canvas) return;
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      const rect = canvas.getBoundingClientRect();
+      if (rect.width === 0 || rect.height === 0) return;
+
+      canvas.width = Math.round(rect.width * dpr);
+      canvas.height = Math.round(rect.height * dpr);
+      const ctx = canvas.getContext("2d");
+      ctx.scale(dpr, dpr);
+
+      const w = rect.width;
+      const h = rect.height;
+
+      // 1. Warm Golden-Amber Transboundary Haze Sky Gradient
+      const skyGrad = ctx.createLinearGradient(0, 0, 0, h);
+      skyGrad.addColorStop(0.00, "#78350F"); // Deep amber-ochre zenith
+      skyGrad.addColorStop(0.26, "#B45309"); // Burnt ochre smog
+      skyGrad.addColorStop(0.54, "#D97706"); // Warm golden particulate haze
+      skyGrad.addColorStop(0.80, "#FBBF24"); // Diffused sun glow
+      skyGrad.addColorStop(1.00, "#FEF3C7"); // Pale horizon mist
+      ctx.fillStyle = skyGrad;
+      ctx.fillRect(0, 0, w, h);
+
+      // 2. Hazy Burnt-Ochre / Pale Amber Sun Disc
+      const sunX = w * 0.67;
+      const sunY = h * 0.34;
+      const sunRadius = Math.min(w, h) * 0.25;
+      const sunGlow = ctx.createRadialGradient(sunX, sunY, sunRadius * 0.06, sunX, sunY, sunRadius * 1.95);
+      sunGlow.addColorStop(0.0, "rgba(255, 251, 235, 0.94)");
+      sunGlow.addColorStop(0.20, "rgba(254, 240, 138, 0.68)");
+      sunGlow.addColorStop(0.52, "rgba(245, 158, 11, 0.26)");
+      sunGlow.addColorStop(1.0, "rgba(217, 119, 6, 0)");
+      ctx.fillStyle = sunGlow;
+      ctx.beginPath();
+      ctx.arc(sunX, sunY, sunRadius * 1.95, 0, Math.PI * 2);
+      ctx.fill();
+
+      // 3. Distant Shrouded Horizon Ridge
+      const horizonY = h * 0.76;
+      ctx.fillStyle = "rgba(120, 53, 15, 0.30)";
+      ctx.beginPath();
+      ctx.moveTo(0, horizonY);
+      const bgStep = Math.max(24, w / 36);
+      for (let x = 0; x <= w + bgStep; x += bgStep) {
+        const bHeight = 26 + Math.sin(x * 0.015) * 18 + Math.cos(x * 0.043) * 14;
+        ctx.rect(x, horizonY - bHeight, bgStep * 0.78, bHeight);
+      }
+      ctx.fill();
+
+      // 4. Midground Financial District & Marina Bay Towers Silhouette
+      ctx.fillStyle = "rgba(69, 26, 3, 0.56)";
+      const center = w * 0.48;
+      const scale = Math.min(w / 1100, h / 460);
+
+      function drawTower(offsetX, width, height, crownType = "flat") {
+        const bx = center + offsetX * scale;
+        const bw = width * scale;
+        const bh = height * scale;
+        const by = horizonY - bh;
+
+        ctx.beginPath();
+        if (crownType === "spire") {
+          ctx.moveTo(bx, horizonY);
+          ctx.lineTo(bx, by + 16 * scale);
+          ctx.lineTo(bx + bw * 0.5, by);
+          ctx.lineTo(bx + bw, by + 16 * scale);
+          ctx.lineTo(bx + bw, horizonY);
+        } else if (crownType === "slant") {
+          ctx.moveTo(bx, horizonY);
+          ctx.lineTo(bx, by + 14 * scale);
+          ctx.lineTo(bx + bw, by);
+          ctx.lineTo(bx + bw, horizonY);
+        } else {
+          ctx.rect(bx, by, bw, bh);
+        }
+        ctx.closePath();
+        ctx.fill();
+      }
+
+      // Raffles Place & Marina Bay Financial Centre Towers
+      drawTower(-380, 34, 105, "flat");
+      drawTower(-335, 28, 132, "slant");
+      drawTower(-290, 40, 158, "spire");
+      drawTower(-235, 36, 175, "flat");
+      drawTower(-185, 30, 148, "flat");
+      drawTower(-140, 42, 195, "spire");
+      drawTower(-85,  38, 168, "slant");
+      drawTower(-35,  32, 142, "flat");
+      drawTower(210,  34, 128, "flat");
+      drawTower(260,  38, 150, "slant");
+      drawTower(315,  30, 112, "flat");
+
+      // 5. Haze Veil Between Midground & Iconic Foreground Landmarks
+      const midMist = ctx.createLinearGradient(0, horizonY - 190 * scale, 0, horizonY + 15);
+      midMist.addColorStop(0, "rgba(253, 230, 138, 0.08)");
+      midMist.addColorStop(0.6, "rgba(254, 243, 199, 0.36)");
+      midMist.addColorStop(1, "rgba(254, 243, 199, 0.52)");
+      ctx.fillStyle = midMist;
+      ctx.fillRect(0, horizonY - 210 * scale, w, 225 * scale);
+
+      // 6. Iconic Marina Bay Sands 3-Tower + SkyPark Silhouette
+      ctx.fillStyle = "rgba(41, 17, 4, 0.80)";
+      const mbsBaseX = center + 25 * scale;
+      const mbsH = 148 * scale;
+      const legW = 19 * scale;
+      const legGap = 36 * scale;
+
+      for (let i = 0; i < 3; i++) {
+        const lx = mbsBaseX + i * legGap;
+        ctx.beginPath();
+        ctx.moveTo(lx, horizonY);
+        ctx.lineTo(lx + 4 * scale, horizonY - mbsH);
+        ctx.lineTo(lx + legW - 4 * scale, horizonY - mbsH);
+        ctx.lineTo(lx + legW, horizonY);
+        ctx.closePath();
+        ctx.fill();
+      }
+
+      // SkyPark Cantilevered Deck
+      ctx.beginPath();
+      const deckY = horizonY - mbsH - 8 * scale;
+      const deckW = legGap * 2 + legW + 46 * scale;
+      const deckX = mbsBaseX - 16 * scale;
+      ctx.moveTo(deckX, deckY + 8 * scale);
+      ctx.quadraticCurveTo(deckX + deckW * 0.5, deckY + 12 * scale, deckX + deckW + 14 * scale, deckY - 3 * scale);
+      ctx.lineTo(deckX + deckW + 10 * scale, deckY - 10 * scale);
+      ctx.quadraticCurveTo(deckX + deckW * 0.5, deckY + 3 * scale, deckX - 4 * scale, deckY);
+      ctx.closePath();
+      ctx.fill();
+
+      // ArtScience Museum Lotus Silhouette
+      const lotusX = center - 38 * scale;
+      ctx.beginPath();
+      ctx.moveTo(lotusX, horizonY);
+      ctx.quadraticCurveTo(lotusX - 18 * scale, horizonY - 32 * scale, lotusX - 24 * scale, horizonY - 36 * scale);
+      ctx.quadraticCurveTo(lotusX - 6 * scale, horizonY - 20 * scale, lotusX + 4 * scale, horizonY - 40 * scale);
+      ctx.quadraticCurveTo(lotusX + 12 * scale, horizonY - 20 * scale, lotusX + 26 * scale, horizonY - 34 * scale);
+      ctx.quadraticCurveTo(lotusX + 20 * scale, horizonY - 22 * scale, lotusX + 16 * scale, horizonY);
+      ctx.closePath();
+      ctx.fill();
+
+      // Singapore Flyer Observation Wheel Silhouette
+      const flyerX = center + 215 * scale;
+      const flyerY = horizonY - 78 * scale;
+      const flyerR = 56 * scale;
+      ctx.strokeStyle = "rgba(41, 17, 4, 0.74)";
+      ctx.lineWidth = Math.max(1.5, 2.5 * scale);
+      ctx.beginPath();
+      ctx.arc(flyerX, flyerY, flyerR, 0, Math.PI * 2);
+      ctx.stroke();
+      ctx.lineWidth = Math.max(1, 1.2 * scale);
+      ctx.beginPath();
+      ctx.arc(flyerX, flyerY, flyerR * 0.86, 0, Math.PI * 2);
+      ctx.stroke();
+      ctx.lineWidth = Math.max(1.5, 2.6 * scale);
+      ctx.beginPath();
+      ctx.moveTo(flyerX, flyerY);
+      ctx.lineTo(flyerX - 20 * scale, horizonY);
+      ctx.moveTo(flyerX, flyerY);
+      ctx.lineTo(flyerX + 20 * scale, horizonY);
+      ctx.stroke();
+
+      // 7. Marina Bay Water Reflection & Smooth White Editorial Fade
+      const waterGrad = ctx.createLinearGradient(0, horizonY, 0, h);
+      waterGrad.addColorStop(0.0, "rgba(180, 83, 9, 0.45)");
+      waterGrad.addColorStop(0.45, "rgba(253, 230, 138, 0.65)");
+      waterGrad.addColorStop(1.0, "#FFFFFF");
+      ctx.fillStyle = waterGrad;
+      ctx.fillRect(0, horizonY, w, h - horizonY);
+
+      ctx.strokeStyle = "rgba(255, 255, 255, 0.35)";
+      ctx.lineWidth = 1;
+      for (let i = 0; i < 14; i++) {
+        const ry = horizonY + 8 + i * ((h - horizonY) / 16);
+        const rw = (40 + (i * 29) % 140) * scale;
+        const rx = sunX - rw * 0.5 + Math.sin(i * 2.1) * 35;
+        ctx.beginPath();
+        ctx.moveTo(rx, ry);
+        ctx.lineTo(rx + rw, ry);
+        ctx.stroke();
+      }
+    }
+
+    /* ==========================================================================
+       2. INTERACTIVE RADAR VISUALIZATION RENDERER (24H CLOCK & 5-REGION COMPASS)
+       ========================================================================== */
+    const radarCanvas = document.getElementById("radarCanvas");
+    const radarTooltip = document.getElementById("radarTooltip");
+    let radarGeometryCache = null;
+
+    function renderRadarChart() {
+      if (!radarCanvas) return;
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      const rect = radarCanvas.getBoundingClientRect();
+      if (rect.width === 0 || rect.height === 0) return;
+
+      radarCanvas.width = Math.round(rect.width * dpr);
+      radarCanvas.height = Math.round(rect.height * dpr);
+
+      const ctx = radarCanvas.getContext("2d");
+      ctx.scale(dpr, dpr);
+
+      const w = rect.width;
+      const h = rect.height;
+      ctx.clearRect(0, 0, w, h);
+
+      const cx = w / 2;
+      const cy = h / 2;
+      const outerMargin = w < 520 ? 44 : 62;
+      const maxRadius = Math.max(90, Math.min(cx, cy) - outerMargin);
+      const maxPSI = 250; // Dataset peaks at 230 PSI; 250 provides clean 50-unit rings
+
+      const psiToRadius = (psi) => Math.max(0, Math.min(1.05, psi / maxPSI)) * maxRadius;
+
+      // Concentric NEA Air Quality Band Tints (from outside in)
+      const bands = [
+        { max: 250, fill: "rgba(220, 38, 38, 0.055)" },  // 201-300 Very Unhealthy
+        { max: 200, fill: "rgba(245, 158, 11, 0.065)" }, // 101-200 Unhealthy
+        { max: 100, fill: "rgba(14, 165, 233, 0.055)" }, // 51-100 Moderate
+        { max: 50,  fill: "rgba(16, 185, 129, 0.075)" }  // 0-50 Good
+      ];
+
+      bands.forEach((b) => {
+        ctx.beginPath();
+        ctx.arc(cx, cy, psiToRadius(b.max), 0, Math.PI * 2);
+        ctx.fillStyle = b.fill;
+        ctx.fill();
+      });
+
+      // Concentric PSI Grid Rings (50, 100, 150, 200, 250)
+      const ringValues = [50, 100, 150, 200, 250];
+      ringValues.forEach((val) => {
+        const r = psiToRadius(val);
+        ctx.beginPath();
+        ctx.arc(cx, cy, r, 0, Math.PI * 2);
+        if (val === 100) {
+          ctx.strokeStyle = "rgba(217, 119, 6, 0.55)";
+          ctx.lineWidth = 1.4;
+          ctx.setLineDash([4, 4]);
+        } else if (val === 200) {
+          ctx.strokeStyle = "rgba(220, 38, 38, 0.45)";
+          ctx.lineWidth = 1.2;
+          ctx.setLineDash([4, 4]);
+        } else {
+          ctx.strokeStyle = "rgba(156, 163, 175, 0.35)";
+          ctx.lineWidth = 1;
+          ctx.setLineDash([]);
+        }
+        ctx.stroke();
+        ctx.setLineDash([]);
+
+        // Ring numeric label along top-right diagonal
+        const labelAngle = -Math.PI / 2 + (Math.PI / 24);
+        const lx = cx + Math.cos(labelAngle) * r;
+        const ly = cy + Math.sin(labelAngle) * r;
+        ctx.font = "600 10px 'Public Sans', sans-serif";
+        ctx.fillStyle = val === 100 ? "#B45309" : (val === 200 ? "#991B1B" : "#6B7280");
+        ctx.textAlign = "left";
+        ctx.textBaseline = "middle";
+        ctx.fillText(String(val), lx + 3, ly);
+      });
+
+      if (state.viewMode === "clock") {
+        render24HourClockRadar(ctx, cx, cy, maxRadius, psiToRadius);
+      } else {
+        render5RegionCompassRadar(ctx, cx, cy, maxRadius, psiToRadius);
+      }
+    }
+
+    /**
+     * PRIMARY VIEW: 24-Hour Clock Radar (24 hourly spokes clockwise from 01:00 to 00:00)
+     */
+    function render24HourClockRadar(ctx, cx, cy, maxRadius, psiToRadius) {
+      const spokeCount = 24;
+      // Spoke 0 = 01:00 at -75°, Spoke 11 = 12:00 at bottom (+90°), Spoke 23 = 00:00 at 12 o'clock top (-90°)
+      const getSpokeAngle = (idx) => -Math.PI / 2 + ((idx + 1) / spokeCount) * (Math.PI * 2);
+
+      radarGeometryCache = {
+        mode: "clock",
+        cx,
+        cy,
+        maxRadius,
+        getSpokeAngle
+      };
+
+      const activeHour = state.hourIdx;
+      const inspectedHour = state.hoveredHourIdx !== null ? state.hoveredHourIdx : activeHour;
+
+      // 1. Draw 24 Hourly Radial Spokes & Perimeter Clock Labels
+      for (let i = 0; i < spokeCount; i++) {
+        const angle = getSpokeAngle(i);
+        const cosA = Math.cos(angle);
+        const sinA = Math.sin(angle);
+        const isMajor = (i + 1) % 3 === 0;
+        const isActive = i === activeHour;
+        const isHovered = i === state.hoveredHourIdx;
+
+        ctx.beginPath();
+        ctx.moveTo(cx, cy);
+        ctx.lineTo(cx + cosA * maxRadius, cy + sinA * maxRadius);
+        if (isActive) {
+          ctx.strokeStyle = "rgba(180, 83, 9, 0.85)";
+          ctx.lineWidth = 2.2;
+        } else if (isHovered) {
+          ctx.strokeStyle = "rgba(17, 24, 39, 0.55)";
+          ctx.lineWidth = 1.6;
+        } else {
+          ctx.strokeStyle = isMajor ? "rgba(107, 114, 128, 0.34)" : "rgba(156, 163, 175, 0.20)";
+          ctx.lineWidth = isMajor ? 1.1 : 0.8;
+        }
+        ctx.stroke();
+
+        // Outer Hour Label
+        const labelRadius = maxRadius + (cx * 2 < 460 ? 18 : 25);
+        const lx = cx + cosA * labelRadius;
+        const ly = cy + sinA * labelRadius;
+
+        const showLabel = cx * 2 >= 460 || (i % 2 === 1) || isActive || isHovered;
+        if (showLabel) {
+          ctx.font = (isActive || isHovered)
+            ? "700 11px 'Public Sans', sans-serif"
+            : (isMajor ? "600 10.5px 'Public Sans', sans-serif" : "400 9.5px 'Public Sans', sans-serif");
+          ctx.fillStyle = isActive ? "#991B1B" : (isHovered ? "#111827" : (isMajor ? "#374151" : "#9CA3AF"));
+          ctx.textAlign = "center";
+          ctx.textBaseline = "middle";
+          ctx.fillText(HOUR_LABELS[i], lx, ly);
+        }
+      }
+
+      // 2. Optional Ghost Comparison Overlay Polygon (Oct 18 Peak Day or Previous Day)
+      let ghostHours = null;
+      if (state.ghostMode === "peak18" && state.day !== 18) {
+        ghostHours = HAZE_DATA[17][1];
+      } else if (state.ghostMode === "prevDay" && state.day > 1) {
+        ghostHours = HAZE_DATA[state.day - 2][1];
+      }
+
+      if (ghostHours) {
+        ctx.beginPath();
+        for (let hIdx = 0; hIdx < spokeCount; hIdx++) {
+          let maxVisiblePsi = 0;
+          REGIONS.forEach((reg, rIdx) => {
+            if (state.visibleRegions[rIdx]) {
+              maxVisiblePsi = Math.max(maxVisiblePsi, ghostHours[hIdx][rIdx]);
+            }
+          });
+          if (maxVisiblePsi === 0) maxVisiblePsi = Math.max(...ghostHours[hIdx]);
+          const r = psiToRadius(maxVisiblePsi);
+          const angle = getSpokeAngle(hIdx);
+          const px = cx + Math.cos(angle) * r;
+          const py = cy + Math.sin(angle) * r;
+          if (hIdx === 0) ctx.moveTo(px, py);
+          else ctx.lineTo(px, py);
+        }
+        ctx.closePath();
+        ctx.strokeStyle = "rgba(107, 114, 128, 0.55)";
+        ctx.lineWidth = 1.5;
+        ctx.setLineDash([5, 4]);
+        ctx.stroke();
+        ctx.setLineDash([]);
+      }
+
+      // 3. Draw 5 Regional Radar Polygons
+      const dayHours = HAZE_DATA[state.day - 1][1];
+      const maxDrawHourIdx = state.progressive ? activeHour : 23;
+
+      REGIONS.forEach((reg, rIdx) => {
+        if (!state.visibleRegions[rIdx]) return;
+
+        const isIsolated = state.isolatedRegion !== null && state.isolatedRegion !== rIdx;
+        const strokeAlpha = isIsolated ? 0.16 : 0.94;
+        const fillAlpha = isIsolated ? 0.02 : (state.isolatedRegion === rIdx ? 0.22 : 0.085);
+
+        ctx.beginPath();
+        for (let hIdx = 0; hIdx <= maxDrawHourIdx; hIdx++) {
+          const val = dayHours[hIdx][rIdx];
+          const r = psiToRadius(val);
+          const angle = getSpokeAngle(hIdx);
+          const px = cx + Math.cos(angle) * r;
+          const py = cy + Math.sin(angle) * r;
+          if (hIdx === 0) ctx.moveTo(px, py);
+          else ctx.lineTo(px, py);
+        }
+
+        if (!state.progressive) {
+          ctx.closePath();
+          ctx.fillStyle = hexToRgba(reg.color, fillAlpha);
+          ctx.fill();
+        }
+
+        ctx.strokeStyle = hexToRgba(reg.color, strokeAlpha);
+        ctx.lineWidth = state.isolatedRegion === rIdx ? 3 : 2;
+        ctx.lineJoin = "round";
+        ctx.stroke();
+
+        // Vertex dots along plotted hours
+        if (!isIsolated) {
+          for (let hIdx = 0; hIdx <= maxDrawHourIdx; hIdx++) {
+            const val = dayHours[hIdx][rIdx];
+            const r = psiToRadius(val);
+            const angle = getSpokeAngle(hIdx);
+            const px = cx + Math.cos(angle) * r;
+            const py = cy + Math.sin(angle) * r;
+            const isHighlighted = hIdx === inspectedHour;
+
+            ctx.beginPath();
+            ctx.arc(px, py, isHighlighted ? 5.5 : 2.3, 0, Math.PI * 2);
+            ctx.fillStyle = isHighlighted ? reg.color : "#FFFFFF";
+            ctx.fill();
+            ctx.lineWidth = isHighlighted ? 2 : 1.5;
+            ctx.strokeStyle = isHighlighted ? "#FFFFFF" : reg.color;
+            ctx.stroke();
+          }
+        }
+      });
+
+      // 4. Glowing Radial Clock-Hand Beam on Active Hour
+      const beamAngle = getSpokeAngle(activeHour);
+      ctx.save();
+      ctx.beginPath();
+      ctx.moveTo(cx, cy);
+      ctx.lineTo(cx + Math.cos(beamAngle) * maxRadius, cy + Math.sin(beamAngle) * maxRadius);
+      ctx.strokeStyle = "rgba(180, 83, 9, 0.28)";
+      ctx.lineWidth = 8;
+      ctx.lineCap = "round";
+      ctx.stroke();
+      ctx.restore();
+
+      // Center Hub Dot
+      ctx.beginPath();
+      ctx.arc(cx, cy, 4.5, 0, Math.PI * 2);
+      ctx.fillStyle = "#111827";
+      ctx.fill();
+    }
+
+    /**
+     * SECONDARY VIEW: 5-Region Geographical Compass Radar (North, East, South, West, Central)
+     */
+    function render5RegionCompassRadar(ctx, cx, cy, maxRadius, psiToRadius) {
+      const axisOrder = [
+        { regIdx: 0, label: "NORTH",   angle: -Math.PI / 2 },
+        { regIdx: 2, label: "EAST",    angle: -Math.PI / 2 + (2 * Math.PI) / 5 },
+        { regIdx: 1, label: "SOUTH",   angle: -Math.PI / 2 + (4 * Math.PI) / 5 },
+        { regIdx: 3, label: "WEST",    angle: -Math.PI / 2 + (6 * Math.PI) / 5 },
+        { regIdx: 4, label: "CENTRAL", angle: -Math.PI / 2 + (8 * Math.PI) / 5 }
+      ];
+
+      radarGeometryCache = {
+        mode: "compass",
+        cx,
+        cy,
+        maxRadius,
+        axisOrder
+      };
+
+      const dayHours = HAZE_DATA[state.day - 1][1];
+      const currentVals = dayHours[state.hourIdx];
+
+      const dailyPeakVals = [0, 0, 0, 0, 0];
+      const dailyAvgVals = [0, 0, 0, 0, 0];
+      dayHours.forEach((hVals) => {
+        hVals.forEach((v, idx) => {
+          if (v > dailyPeakVals[idx]) dailyPeakVals[idx] = v;
+          dailyAvgVals[idx] += v / 24;
+        });
+      });
+
+      // 1. Draw 5 Compass Axes & Labels
+      axisOrder.forEach((axis) => {
+        const reg = REGIONS[axis.regIdx];
+        const cosA = Math.cos(axis.angle);
+        const sinA = Math.sin(axis.angle);
+
+        ctx.beginPath();
+        ctx.moveTo(cx, cy);
+        ctx.lineTo(cx + cosA * maxRadius, cy + sinA * maxRadius);
+        ctx.strokeStyle = "rgba(107, 114, 128, 0.35)";
+        ctx.lineWidth = 1.2;
+        ctx.stroke();
+
+        const labelR = maxRadius + 28;
+        const lx = cx + cosA * labelR;
+        const ly = cy + sinA * labelR;
+
+        ctx.font = "700 12px 'Public Sans', sans-serif";
+        ctx.fillStyle = reg.color;
+        ctx.textAlign = "center";
+        ctx.textBaseline = "middle";
+        ctx.fillText(`${axis.label} (${currentVals[axis.regIdx]})`, lx, ly);
+      });
+
+      // 2. Daily Peak Envelope Polygon (Dashed)
+      ctx.beginPath();
+      axisOrder.forEach((axis, i) => {
+        const r = psiToRadius(dailyPeakVals[axis.regIdx]);
+        const px = cx + Math.cos(axis.angle) * r;
+        const py = cy + Math.sin(axis.angle) * r;
+        if (i === 0) ctx.moveTo(px, py);
+        else ctx.lineTo(px, py);
+      });
+      ctx.closePath();
+      ctx.strokeStyle = "rgba(107, 114, 128, 0.65)";
+      ctx.lineWidth = 1.5;
+      ctx.setLineDash([5, 4]);
+      ctx.stroke();
+      ctx.setLineDash([]);
+
+      // 3. Daily Average Polygon
+      ctx.beginPath();
+      axisOrder.forEach((axis, i) => {
+        const r = psiToRadius(dailyAvgVals[axis.regIdx]);
+        const px = cx + Math.cos(axis.angle) * r;
+        const py = cy + Math.sin(axis.angle) * r;
+        if (i === 0) ctx.moveTo(px, py);
+        else ctx.lineTo(px, py);
+      });
+      ctx.closePath();
+      ctx.fillStyle = "rgba(17, 24, 39, 0.06)";
+      ctx.fill();
+      ctx.strokeStyle = "rgba(17, 24, 39, 0.45)";
+      ctx.lineWidth = 1.5;
+      ctx.stroke();
+
+      // 4. Active Hour Regional Pentagon
+      ctx.beginPath();
+      axisOrder.forEach((axis, i) => {
+        const r = psiToRadius(currentVals[axis.regIdx]);
+        const px = cx + Math.cos(axis.angle) * r;
+        const py = cy + Math.sin(axis.angle) * r;
+        if (i === 0) ctx.moveTo(px, py);
+        else ctx.lineTo(px, py);
+      });
+      ctx.closePath();
+      ctx.fillStyle = "rgba(180, 83, 9, 0.22)";
+      ctx.fill();
+      ctx.strokeStyle = "#B45309";
+      ctx.lineWidth = 2.8;
+      ctx.stroke();
+
+      // Vertex markers colored by region
+      axisOrder.forEach((axis) => {
+        const reg = REGIONS[axis.regIdx];
+        const r = psiToRadius(currentVals[axis.regIdx]);
+        const px = cx + Math.cos(axis.angle) * r;
+        const py = cy + Math.sin(axis.angle) * r;
+
+        ctx.beginPath();
+        ctx.arc(px, py, 6.5, 0, Math.PI * 2);
+        ctx.fillStyle = reg.color;
+        ctx.fill();
+        ctx.lineWidth = 2.2;
+        ctx.strokeStyle = "#FFFFFF";
+        ctx.stroke();
+      });
+    }
+
+    function hexToRgba(hex, alpha) {
+      const clean = hex.replace("#", "");
+      const bigint = parseInt(clean, 16);
+      const r = (bigint >> 16) & 255;
+      const g = (bigint >> 8) & 255;
+      const b = bigint & 255;
+      return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+    }
+
+    /* ==========================================================================
+       3. 31-DAY OVERVIEW SCRUBBER STRIP (OCT 01 – OCT 31)
+       ========================================================================== */
+    const dailyStripCanvas = document.getElementById("dailyStripCanvas");
+
+    function renderDailyStrip() {
+      if (!dailyStripCanvas) return;
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      const rect = dailyStripCanvas.getBoundingClientRect();
+      if (rect.width === 0 || rect.height === 0) return;
+
+      dailyStripCanvas.width = Math.round(rect.width * dpr);
+      dailyStripCanvas.height = Math.round(rect.height * dpr);
+      const ctx = dailyStripCanvas.getContext("2d");
+      ctx.scale(dpr, dpr);
+
+      const w = rect.width;
+      const h = rect.height;
+      ctx.clearRect(0, 0, w, h);
+
+      const padLeft = 8;
+      const padRight = 8;
+      const padTop = 10;
+      const padBottom = 22;
+      const plotW = w - padLeft - padRight;
+      const plotH = h - padTop - padBottom;
+      const maxPSI = 250;
+
+      const yForPsi = (psi) => padTop + plotH * (1 - psi / maxPSI);
+
+      // Horizontal 100 PSI Unhealthy Reference Line
+      const y100 = yForPsi(100);
+      ctx.beginPath();
+      ctx.moveTo(padLeft, y100);
+      ctx.lineTo(w - padRight, y100);
+      ctx.strokeStyle = "rgba(153, 27, 27, 0.35)";
+      ctx.lineWidth = 1;
+      ctx.setLineDash([4, 3]);
+      ctx.stroke();
+      ctx.setLineDash([]);
+
+      const colW = plotW / 31;
+      const barW = Math.max(4, colW * 0.64);
+
+      DAILY_STATS.forEach((stat, idx) => {
+        const xCenter = padLeft + colW * (idx + 0.5);
+        const xBar = xCenter - barW / 2;
+        const isSelected = stat.day === state.day;
+
+        if (isSelected) {
+          ctx.fillStyle = "rgba(180, 83, 9, 0.14)";
+          ctx.beginPath();
+          ctx.roundRect(padLeft + colW * idx + 1, 2, colW - 2, h - 4, 6);
+          ctx.fill();
+        }
+
+        const yPeak = yForPsi(stat.peak);
+        const peakH = padTop + plotH - yPeak;
+
+        // Color-coded by NEA Band
+        ctx.fillStyle = isSelected
+          ? "#991B1B"
+          : (stat.peak > 200 ? "rgba(220, 38, 38, 0.78)" : (stat.peak > 100 ? "rgba(245, 158, 11, 0.68)" : "rgba(14, 165, 233, 0.60)"));
+        ctx.beginPath();
+        ctx.roundRect(xBar, yPeak, barW, peakH, [3, 3, 0, 0]);
+        ctx.fill();
+
+        // Daily Mean Dot
+        const yMean = yForPsi(stat.mean);
+        ctx.beginPath();
+        ctx.arc(xCenter, yMean, isSelected ? 3.6 : 2.2, 0, Math.PI * 2);
+        ctx.fillStyle = isSelected ? "#111827" : "#374151";
+        ctx.fill();
+
+        const showDayLabel = w >= 680 || stat.day === 1 || stat.day % 5 === 0 || stat.day === 31 || isSelected;
+        if (showDayLabel) {
+          ctx.font = isSelected ? "700 10.5px 'Public Sans', sans-serif" : "500 9.5px 'Public Sans', sans-serif";
+          ctx.fillStyle = isSelected ? "#991B1B" : "#6B7280";
+          ctx.textAlign = "center";
+          ctx.textBaseline = "bottom";
+          ctx.fillText(String(stat.day).padStart(2, "0"), xCenter, h - 3);
+        }
+      });
+    }
+
+    /* ==========================================================================
+       4. SYNCHRONIZED UI UPDATES (KPI CARDS, REGION PILLS, BREAKDOWN TABLE)
+       ========================================================================== */
+    function initRegionPills() {
+      const container = document.getElementById("regionPillsContainer");
+      if (!container) return;
+
+      REGIONS.forEach((reg, idx) => {
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.dataset.regionIdx = String(idx);
+        btn.className = "region-pill inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-semibold border transition-all bg-white border-gray-200 text-gray-800 hover:border-gray-400 shadow-2xs";
+        btn.innerHTML = `
+          <span class="w-2.5 h-2.5 rounded-full shrink-0" style="background-color: ${reg.color}"></span>
+          <span>${reg.name}</span>
+          <span class="font-mono text-[10px] text-gray-400">avg ${reg.monthAvg}</span>
+        `;
+
+        // Single click: toggle region visibility
+        btn.addEventListener("click", () => {
+          const activeCount = state.visibleRegions.filter(Boolean).length;
+          if (state.visibleRegions[idx] && activeCount === 1) return;
+          state.visibleRegions[idx] = !state.visibleRegions[idx];
+          updateRegionPillsVisuals();
+          updateAllUI();
+        });
+
+        // Double click: solo this region (or restore all if already soloed)
+        btn.addEventListener("dblclick", () => {
+          const isAlreadySolo = state.visibleRegions[idx] && state.visibleRegions.filter(Boolean).length === 1;
+          if (isAlreadySolo) {
+            state.visibleRegions = [true, true, true, true, true];
+          } else {
+            state.visibleRegions = REGIONS.map((_, rI) => rI === idx);
+          }
+          updateRegionPillsVisuals();
+          updateAllUI();
+        });
+
+        // Hover: temporarily isolate/highlight region polygon
+        btn.addEventListener("mouseenter", () => {
+          if (state.visibleRegions[idx]) {
+            state.isolatedRegion = idx;
+            renderRadarChart();
+          }
+        });
+        btn.addEventListener("mouseleave", () => {
+          state.isolatedRegion = null;
+          renderRadarChart();
+        });
+
+        container.appendChild(btn);
+      });
+    }
+
+    function updateRegionPillsVisuals() {
+      const pills = document.querySelectorAll(".region-pill");
+      pills.forEach((pill, idx) => {
+        if (state.visibleRegions[idx]) {
+          pill.classList.remove("opacity-40", "line-through", "bg-gray-100");
+          pill.classList.add("bg-white");
+        } else {
+          pill.classList.add("opacity-40", "line-through", "bg-gray-100");
+          pill.classList.remove("bg-white");
+        }
+      });
+    }
+
+    function updateAllUI() {
+      const { current, prev } = getReadingsAt(state.day, state.hourIdx);
+      const dayStr = `Oct ${String(state.day).padStart(2, "0")}`;
+      const hourStr = HOUR_LABELS[state.hourIdx];
+      const hour12Str = HOUR_LABELS_12H[state.hourIdx];
+
+      const maxPsi = Math.max(...current);
+      const minPsi = Math.min(...current);
+      const meanPsi = (current.reduce((a, b) => a + b, 0) / 5).toFixed(1);
+      const maxRegIdx = current.indexOf(maxPsi);
+      const dayStat = DAILY_STATS[state.day - 1];
+      const nea = getNeaCategory(maxPsi);
+
+      // Update Header & Sliders
+      document.getElementById("headerSubtitleDate").textContent = `${dayStr} · ${hour12Str}`;
+      document.getElementById("hourSlider").value = String(state.hourIdx);
+      document.getElementById("daySlider").value = String(state.day);
+      document.getElementById("hourSliderReadout").textContent = hour12Str;
+      document.getElementById("daySliderReadout").textContent = dayStr;
+
+      // Update Radar Titles
+      if (state.viewMode === "clock") {
+        document.getElementById("radarChartTitle").textContent = `24-Hour Diurnal PSI Clock · October ${state.day}`;
+        document.getElementById("radarChartSubtitle").textContent = "Clockwise spokes from 01:00 to 00:00 · Rings at 50, 100, 150, 200 & 250 PSI · Hover or tap any spoke";
+        document.getElementById("radarModeBadge").textContent = "24-HOUR CLOCK RADAR";
+      } else {
+        document.getElementById("radarChartTitle").textContent = `5-Region Geographical Compass · October ${state.day} at ${hourStr}`;
+        document.getElementById("radarChartSubtitle").textContent = "Active hour (amber) vs. daily mean (solid slate) and daily peak envelope (dashed)";
+        document.getElementById("radarModeBadge").textContent = "5-REGION COMPASS";
+      }
+
+      // Update KPI Summary Card
+      document.getElementById("kpiDate").textContent = dayStr;
+      document.getElementById("kpiHour").textContent = hourStr;
+      document.getElementById("kpiRange").textContent = `${minPsi}–${maxPsi}`;
+      document.getElementById("kpiHighestRegion").textContent = `${REGIONS[maxRegIdx].name} (${maxPsi})`;
+      document.getElementById("kpiMean").textContent = meanPsi;
+
+      const statusPill = document.getElementById("kpiStatusPill");
+      statusPill.textContent = nea.label;
+      statusPill.className = `px-3 py-1.5 rounded-full text-xs font-bold tracking-wide uppercase border ${nea.pillBg} ${nea.pillText} ${nea.pillBorder}`;
+
+      // Update 5-Region Breakdown Cards
+      const listEl = document.getElementById("regionalCardsList");
+      listEl.innerHTML = REGIONS.map((reg, idx) => {
+        const val = current[idx];
+        const delta = prev ? val - prev[idx] : 0;
+        const deltaStr = delta > 0 ? `+${delta}` : (delta < 0 ? `${delta}` : "0");
+        const deltaColor = delta > 0 ? "text-red-600" : (delta < 0 ? "text-emerald-600" : "text-gray-400");
+        const pct = Math.min(100, Math.round((val / 250) * 100));
+        const isHidden = !state.visibleRegions[idx];
+
+        return `
+          <div class="p-3 rounded-xl border border-gray-100 bg-gray-50/75 transition-opacity ${isHidden ? "opacity-40" : ""}">
+            <div class="flex items-center justify-between mb-1.5">
+              <div class="flex items-center gap-2">
+                <span class="w-2.5 h-2.5 rounded-full" style="background-color: ${reg.color}"></span>
+                <span class="text-sm font-semibold text-gray-800">${reg.name}</span>
+              </div>
+              <div class="flex items-baseline gap-2.5 font-mono">
+                <span class="text-base font-bold text-gray-950 tabular-nums">${val}</span>
+                <span class="text-xs font-semibold ${deltaColor} tabular-nums w-8 text-right">${deltaStr}</span>
+              </div>
+            </div>
+            <div class="w-full h-1.5 bg-gray-200/80 rounded-full overflow-hidden">
+              <div class="h-full rounded-full transition-all duration-150" style="width: ${pct}%; background-color: ${reg.color}"></div>
+            </div>
+          </div>
+        `;
+      }).join("");
+
+      // Update Daily Summary Insight Box
+      const insightEl = document.getElementById("dailyInsightBox");
+      insightEl.innerHTML = `
+        <strong class="text-amber-950 font-semibold">${dayStr} Daily Profile:</strong>
+        Overall Singapore PSI ranged from <strong>${dayStat.min}</strong> to a peak of <strong>${dayStat.peak} PSI</strong>
+        (<strong>${dayStat.peakRegion}</strong> at <strong>${dayStat.peakHourLabel}</strong>),
+        with a 24-hour island mean of <strong>${dayStat.mean.toFixed(1)} PSI</strong>.
+      `;
+
+      renderRadarChart();
+      renderDailyStrip();
+    }
+
+    /* ==========================================================================
+       5. INTERACTIVE POINTER / TOUCH HIT-TESTING & TOOLTIP
+       ========================================================================== */
+    function handleRadarPointerMove(clientX, clientY) {
+      if (!radarGeometryCache || radarGeometryCache.mode !== "clock") {
+        radarTooltip.classList.add("hidden");
+        return;
+      }
+
+      const rect = radarCanvas.getBoundingClientRect();
+      const x = clientX - rect.left;
+      const y = clientY - rect.top;
+      const dx = x - radarGeometryCache.cx;
+      const dy = y - radarGeometryCache.cy;
+      const dist = Math.hypot(dx, dy);
+
+      if (dist > radarGeometryCache.maxRadius + 28 || dist < 10) {
+        if (state.hoveredHourIdx !== null) {
+          state.hoveredHourIdx = null;
+          renderRadarChart();
+        }
+        radarTooltip.classList.add("hidden");
+        return;
+      }
+
+      let theta = Math.atan2(dy, dx) + Math.PI / 2;
+      if (theta < 0) theta += Math.PI * 2;
+
+      const rawStep = Math.round((theta / (Math.PI * 2)) * 24);
+      const spokeIdx = (rawStep === 0 ? 23 : rawStep - 1) % 24;
+
+      if (state.hoveredHourIdx !== spokeIdx) {
+        state.hoveredHourIdx = spokeIdx;
+        renderRadarChart();
+      }
+
+      const vals = HAZE_DATA[state.day - 1][1][spokeIdx];
+      const maxVal = Math.max(...vals);
+      const minVal = Math.min(...vals);
+      const cat = getNeaCategory(maxVal);
+
+      document.getElementById("ttHeader").textContent = `Oct ${String(state.day).padStart(2, "0")} · ${HOUR_LABELS[spokeIdx]}`;
+      document.getElementById("ttStatus").textContent = cat.label;
+      document.getElementById("ttRangeVal").textContent = `${minVal}–${maxVal}`;
+
+      document.getElementById("ttRows").innerHTML = REGIONS.map((reg, rIdx) => `
+        <div class="flex items-center justify-between ${state.visibleRegions[rIdx] ? "" : "opacity-40"}">
+          <span class="flex items-center gap-1.5 text-gray-300">
+            <span class="w-2 h-2 rounded-full" style="background:${reg.color}"></span>
+            ${reg.name}
+          </span>
+          <span class="font-bold text-white tabular-nums">${vals[rIdx]}</span>
+        </div>
+      `).join("");
+
+      radarTooltip.classList.remove("hidden");
+      const ttW = 240;
+      const ttH = 190;
+      let leftPos = x + 16;
+      let topPos = y - 20;
+      if (leftPos + ttW > rect.width) leftPos = x - ttW - 16;
+      if (topPos + ttH > rect.height) topPos = rect.height - ttH - 8;
+      if (topPos < 8) topPos = 8;
+
+      radarTooltip.style.left = `${leftPos}px`;
+      radarTooltip.style.top = `${topPos}px`;
+    }
+
+    radarCanvas.addEventListener("mousemove", (e) => handleRadarPointerMove(e.clientX, e.clientY));
+    radarCanvas.addEventListener("mouseleave", () => {
+      state.hoveredHourIdx = null;
+      radarTooltip.classList.add("hidden");
+      renderRadarChart();
+    });
+
+    radarCanvas.addEventListener("click", (e) => {
+      handleRadarPointerMove(e.clientX, e.clientY);
+      if (state.hoveredHourIdx !== null) {
+        stopPlayback();
+        state.hourIdx = state.hoveredHourIdx;
+        updateAllUI();
+      }
+    });
+
+    radarCanvas.addEventListener("touchstart", (e) => {
+      if (e.touches.length > 0) {
+        const t = e.touches[0];
+        handleRadarPointerMove(t.clientX, t.clientY);
+        if (state.hoveredHourIdx !== null) {
+          stopPlayback();
+          state.hourIdx = state.hoveredHourIdx;
+          updateAllUI();
+        }
+      }
+    }, { passive: true });
+
+    /* ==========================================================================
+       6. DAILY TIMELINE STRIP POINTER / TOUCH SCRUBBING
+       ========================================================================== */
+    function selectDayFromStripX(clientX) {
+      const rect = dailyStripCanvas.getBoundingClientRect();
+      const relX = Math.max(0, Math.min(rect.width - 1, clientX - rect.left));
+      const day = Math.min(31, Math.max(1, Math.floor((relX / rect.width) * 31) + 1));
+      if (day !== state.day) {
+        state.day = day;
+        updateAllUI();
+      }
+    }
+
+    dailyStripCanvas.addEventListener("mousedown", (e) => {
+      stopPlayback();
+      state.isDraggingStrip = true;
+      selectDayFromStripX(e.clientX);
+    });
+    window.addEventListener("mousemove", (e) => {
+      if (state.isDraggingStrip) selectDayFromStripX(e.clientX);
+    });
+    window.addEventListener("mouseup", () => {
+      state.isDraggingStrip = false;
+    });
+
+    dailyStripCanvas.addEventListener("touchstart", (e) => {
+      stopPlayback();
+      if (e.touches.length > 0) selectDayFromStripX(e.touches[0].clientX);
+    }, { passive: true });
+    dailyStripCanvas.addEventListener("touchmove", (e) => {
+      if (e.touches.length > 0) selectDayFromStripX(e.touches[0].clientX);
+    }, { passive: true });
+
+    /* ==========================================================================
+       7. PLAYBACK ENGINE & UI EVENT LISTENERS
+       ========================================================================== */
+    function startPlayback() {
+      state.isPlaying = true;
+      state.lastTickTime = performance.now();
+      document.getElementById("iconPlay").classList.add("hidden");
+      document.getElementById("iconPause").classList.remove("hidden");
+      document.getElementById("playLabel").textContent = "Pause";
+    }
+
+    function stopPlayback() {
+      state.isPlaying = false;
+      document.getElementById("iconPlay").classList.remove("hidden");
+      document.getElementById("iconPause").classList.add("hidden");
+      document.getElementById("playLabel").textContent = "Play";
+    }
+
+    function stepForwardHour() {
+      if (state.hourIdx < 23) {
+        state.hourIdx++;
+      } else {
+        state.hourIdx = 0;
+        if (!state.loopSingleDay) {
+          state.day = state.day < 31 ? state.day + 1 : 1;
+        }
+      }
+      updateAllUI();
+    }
+
+    function stepBackwardHour() {
+      if (state.hourIdx > 0) {
+        state.hourIdx--;
+      } else {
+        state.hourIdx = 23;
+        if (!state.loopSingleDay) {
+          state.day = state.day > 1 ? state.day - 1 : 31;
+        }
+      }
+      updateAllUI();
+    }
+
+    function animationLoop(now) {
+      if (state.isPlaying) {
+        const intervalMs = 420 / state.speed;
+        if (now - state.lastTickTime >= intervalMs) {
+          state.lastTickTime = now;
+          stepForwardHour();
+        }
+      }
+      requestAnimationFrame(animationLoop);
+    }
+
+    document.getElementById("btnPlayPause").addEventListener("click", () => {
+      if (state.isPlaying) stopPlayback();
+      else startPlayback();
+    });
+
+    document.getElementById("btnPrevHour").addEventListener("click", () => {
+      stopPlayback();
+      stepBackwardHour();
+    });
+
+    document.getElementById("btnNextHour").addEventListener("click", () => {
+      stopPlayback();
+      stepForwardHour();
+    });
+
+    document.getElementById("btnPrevDay").addEventListener("click", () => {
+      stopPlayback();
+      state.day = state.day > 1 ? state.day - 1 : 31;
+      updateAllUI();
+    });
+
+    document.getElementById("btnNextDay").addEventListener("click", () => {
+      stopPlayback();
+      state.day = state.day < 31 ? state.day + 1 : 1;
+      updateAllUI();
+    });
+
+    document.querySelectorAll(".speed-btn").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        state.speed = Number(btn.dataset.speed);
+        document.querySelectorAll(".speed-btn").forEach((b) => {
+          b.classList.remove("bg-white", "text-gray-900", "font-semibold", "shadow-2xs");
+          b.classList.add("text-gray-600");
+        });
+        btn.classList.add("bg-white", "text-gray-900", "font-semibold", "shadow-2xs");
+        btn.classList.remove("text-gray-600");
+      });
+    });
+
+    document.getElementById("btnLoopScope").addEventListener("click", () => {
+      state.loopSingleDay = !state.loopSingleDay;
+      document.getElementById("loopScopeLabel").textContent = state.loopSingleDay ? "Single Day Loop" : "Oct 1–31";
+    });
+
+    document.getElementById("hourSlider").addEventListener("input", (e) => {
+      stopPlayback();
+      state.hourIdx = Number(e.target.value);
+      updateAllUI();
+    });
+
+    document.getElementById("daySlider").addEventListener("input", (e) => {
+      stopPlayback();
+      state.day = Number(e.target.value);
+      updateAllUI();
+    });
+
+    document.getElementById("btnJumpPeak").addEventListener("click", () => {
+      stopPlayback();
+      state.day = 18;
+      state.hourIdx = 9; // 10:00 AM -> 230 PSI West peak
+      updateAllUI();
+    });
+
+    // Radar Geometry Mode Toggle
+    const btnModeClock = document.getElementById("btnModeClock");
+    const btnModeCompass = document.getElementById("btnModeCompass");
+
+    btnModeClock.addEventListener("click", () => {
+      state.viewMode = "clock";
+      btnModeClock.className = "px-3.5 py-2 rounded-lg text-xs sm:text-sm font-semibold transition-all bg-gray-900 text-white shadow-2xs";
+      btnModeCompass.className = "px-3.5 py-2 rounded-lg text-xs sm:text-sm font-semibold transition-all text-gray-600 hover:text-gray-900";
+      document.getElementById("btnProgressiveMode").classList.remove("hidden");
+      updateAllUI();
+    });
+
+    btnModeCompass.addEventListener("click", () => {
+      state.viewMode = "compass";
+      btnModeCompass.className = "px-3.5 py-2 rounded-lg text-xs sm:text-sm font-semibold transition-all bg-gray-900 text-white shadow-2xs";
+      btnModeClock.className = "px-3.5 py-2 rounded-lg text-xs sm:text-sm font-semibold transition-all text-gray-600 hover:text-gray-900";
+      document.getElementById("btnProgressiveMode").classList.add("hidden");
+      radarTooltip.classList.add("hidden");
+      updateAllUI();
+    });
+
+    // Progressive Sweep vs Full 24h Day Shape Toggle
+    document.getElementById("btnProgressiveMode").addEventListener("click", () => {
+      state.progressive = !state.progressive;
+      const dot = document.getElementById("progressiveDot");
+      const btn = document.getElementById("btnProgressiveMode");
+      const label = document.getElementById("progressiveLabel");
+      if (state.progressive) {
+        dot.classList.remove("bg-gray-300");
+        dot.classList.add("bg-[#B45309]");
+        btn.classList.add("border-amber-400", "bg-amber-50/60");
+        label.textContent = "Progressive Sweep (01:00 → Hr)";
+      } else {
+        dot.classList.add("bg-gray-300");
+        dot.classList.remove("bg-[#B45309]");
+        btn.classList.remove("border-amber-400", "bg-amber-50/60");
+        label.textContent = "Full 24h Day Shape";
+      }
+      renderRadarChart();
+    });
+
+    // Ghost Overlay Selector
+    document.getElementById("ghostSelect").addEventListener("change", (e) => {
+      state.ghostMode = e.target.value;
+      renderRadarChart();
+    });
+
+    // Keyboard Shortcuts
+    window.addEventListener("keydown", (e) => {
+      if (["INPUT", "SELECT", "TEXTAREA"].includes(document.activeElement.tagName)) return;
+      if (e.key === "ArrowRight") {
+        e.preventDefault();
+        stopPlayback();
+        stepForwardHour();
+      } else if (e.key === "ArrowLeft") {
+        e.preventDefault();
+        stopPlayback();
+        stepBackwardHour();
+      } else if (e.key === "ArrowUp") {
+        e.preventDefault();
+        stopPlayback();
+        state.day = state.day > 1 ? state.day - 1 : 31;
+        updateAllUI();
+      } else if (e.key === "ArrowDown") {
+        e.preventDefault();
+        stopPlayback();
+        state.day = state.day < 31 ? state.day + 1 : 1;
+        updateAllUI();
+      } else if (e.code === "Space") {
+        e.preventDefault();
+        if (state.isPlaying) stopPlayback();
+        else startPlayback();
+      }
+    });
+
+    // Responsive Resize Observer
+    let resizeTimer = null;
+    window.addEventListener("resize", () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => {
+        renderHeroSkyline();
+        renderRadarChart();
+        renderDailyStrip();
+      }, 60);
+    });
+
+    // Initialize on Window Load
+    window.onload = function () {
+      initRegionPills();
+      renderHeroSkyline();
+      updateAllUI();
+      requestAnimationFrame(animationLoop);
+    };
+  </script>
+</body>
+</html>
