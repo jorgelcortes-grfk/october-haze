@@ -1,2 +1,2 @@
-# ocober-haze
+# october-haze
 Singapore
